@@ -1,0 +1,27 @@
+dictionaries:
+  - companies
+  - css
+  - en_us
+  - en-gb
+  - fullstack
+  - html
+  - lorem-ipsum
+  - sql
+  - typescript
+ignorePaths:
+  - pnpm-lock.yaml
+ignoreRegExpList:
+  - /.*[0-9].*/
+  - CStyleComment
+language: en
+minWordLength: 5
+version: "0.2"
+words:
+  - booped
+  - Dematerializer
+  - FAMAS
+  - headshot
+  - lmulvey
+  - nerfed
+  - Overwatch
+  - zipline
