@@ -14,7 +14,7 @@ export const lightClass: ContestantClass = {
   type: 'light',
 };
 
-export const lightWeapons: Array<ContestantWeapon<'light'>> = [
+export const lightWeapons: ContestantWeapon[] = [
   {
     classType: 'light',
     damageBodyMax: 28,
@@ -172,7 +172,7 @@ export const lightWeapons: Array<ContestantWeapon<'light'>> = [
   },
 ];
 
-export const lightSpecializations: Array<ContestantSpecialization<'light'>> = [
+export const lightSpecializations: ContestantSpecialization[] = [
   {
     classType: 'light',
     description:

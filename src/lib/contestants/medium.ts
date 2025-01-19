@@ -13,7 +13,7 @@ export const mediumClass: ContestantClass = {
   type: 'medium',
 };
 
-export const mediumWeapons: Array<ContestantWeapon<'medium'>> = [
+export const mediumWeapons: ContestantWeapon[] = [
   {
     classType: 'medium',
     damageBodyMax: 20,
@@ -145,29 +145,27 @@ export const mediumWeapons: Array<ContestantWeapon<'medium'>> = [
   },
 ];
 
-export const mediumSpecializations: Array<ContestantSpecialization<'medium'>> =
-  [
-    {
-      classType: 'medium',
-      description:
-        'Turret that shoots targets automatically and has a ton of health',
-      id: 'guardian-turret',
-      imageUrl: '/images/specializations/guardian-turret.png',
-      label: 'Guardian Turret',
-    },
-    {
-      classType: 'medium',
-      description:
-        'Use to make floors and walls disappear as well as re-appear.',
-      id: 'dematerializer',
-      imageUrl: '/images/specializations/dematerializer.png',
-      label: 'Dematerializer',
-    },
-    {
-      classType: 'medium',
-      description: 'Heals targets.',
-      id: 'healing-beam',
-      imageUrl: '/images/specializations/healing-beam.png',
-      label: 'Healing Beam',
-    },
-  ];
+export const mediumSpecializations: ContestantSpecialization[] = [
+  {
+    classType: 'medium',
+    description:
+      'Turret that shoots targets automatically and has a ton of health',
+    id: 'guardian-turret',
+    imageUrl: '/images/specializations/guardian-turret.png',
+    label: 'Guardian Turret',
+  },
+  {
+    classType: 'medium',
+    description: 'Use to make floors and walls disappear as well as re-appear.',
+    id: 'dematerializer',
+    imageUrl: '/images/specializations/dematerializer.png',
+    label: 'Dematerializer',
+  },
+  {
+    classType: 'medium',
+    description: 'Heals targets.',
+    id: 'healing-beam',
+    imageUrl: '/images/specializations/healing-beam.png',
+    label: 'Healing Beam',
+  },
+];

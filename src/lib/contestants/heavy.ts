@@ -14,7 +14,7 @@ export const heavyClass: ContestantClass = {
   type: 'heavy',
 };
 
-export const heavyWeapons: Array<ContestantWeapon<'heavy'>> = [
+export const heavyWeapons: ContestantWeapon[] = [
   {
     classType: 'heavy',
     damageBodyMax: 44,
@@ -140,7 +140,7 @@ export const heavyWeapons: Array<ContestantWeapon<'heavy'>> = [
   },
 ];
 
-export const heavySpecializations: Array<ContestantSpecialization<'heavy'>> = [
+export const heavySpecializations: ContestantSpecialization[] = [
   {
     classType: 'heavy',
     description: 'Run around in a circle around your opponents',
@@ -169,6 +169,6 @@ export const heavySpecializations: Array<ContestantSpecialization<'heavy'>> = [
       "Roadhog's specialization from the formerly acclaimed video game Overwatch",
     id: 'winch-claw',
     imageUrl: '/images/specializations/winch-claw.png',
-    label: 'winch-claw',
+    label: 'Winch Claw',
   },
 ];

@@ -1,3 +1,5 @@
+export type ClassType = 'heavy' | 'light' | 'medium';
+
 export type ContestantClass = {
   description: string;
   healthPoints: number;
@@ -14,16 +16,15 @@ export type ContestantGadget = BaseItemType & {
   label: string;
 };
 
-export type ContestantSpecialization<TClassType extends ClassType> =
-  BaseItemType & {
-    classType: TClassType;
-    description: string;
-    imageUrl?: string;
-    label: string;
-  };
+export type ContestantSpecialization = BaseItemType & {
+  classType: ClassType;
+  description: string;
+  imageUrl?: string;
+  label: string;
+};
 
-export type ContestantWeapon<TClassType extends ClassType> = BaseItemType & {
-  classType: TClassType;
+export type ContestantWeapon = BaseItemType & {
+  classType: ClassType;
   damageBodyMax: number;
   damageBodyMin: number;
   damageCriticalMultiplier: number;
@@ -38,8 +39,6 @@ type BaseItemType = {
   id: string;
   recentlyBuffed?: boolean;
 };
-
-type ClassType = 'heavy' | 'light' | 'medium';
 
 type DamageCriticalType = 'alt' | 'headshot' | 'none';
 

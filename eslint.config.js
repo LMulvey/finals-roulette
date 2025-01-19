@@ -26,6 +26,7 @@ export default tseslint.config(
     },
     rules: {
       'canonical/filename-match-exported': 0,
+      'canonical/filename-match-regex': 'off',
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
