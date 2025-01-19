@@ -21,7 +21,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 44,
     damageCriticalMultiplier: 2,
     damageCriticalType: 'headshot',
-    description: 'Dual pistols also used as snipers',
+    description: 'Dual pistols that can also be used as snipers.',
     id: '50-akimbo',
     imageUrl: '/images/weapons/50-akimbo.png',
     label: '.50 Akimbo',
@@ -34,7 +34,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'Flamethrower that is always more effective when used by your enemies',
+      'A flamethrower that is always more effective when used by your enemies.',
     id: 'flamethrower',
     imageUrl: '/images/weapons/flamethrower.png',
     label: 'Flamethrower',
@@ -47,7 +47,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'A shotgun with slugs that can destroy walls/floors in four shots.',
+      'A shotgun with slugs that can destroy walls and floors in four shots.',
     id: 'ks-23',
     imageUrl: '/images/weapons/ks-23.png',
     label: 'KS-23',
@@ -59,7 +59,8 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 22,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
-    description: 'Like the M60 but with more accuracy and a smaller clip size',
+    description:
+      'Similar to the M60 but with more accuracy and a smaller clip size.',
     id: 'lewis-gun',
     imageUrl: '/images/weapons/lewis-gun.png',
     label: 'Lewis Gun',
@@ -71,7 +72,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 83,
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
-    description: 'A grenade launcher that has boing-y grenades',
+    description: 'A grenade launcher with bouncy grenades.',
     id: 'm32gl',
     imageUrl: '/images/weapons/m32gl.png',
     label: 'M32GL',
@@ -83,7 +84,8 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 19,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
-    description: 'Like the Lewis Gun but less accurate and bigger clip size',
+    description:
+      'Less accurate than the Lewis Gun but with a larger clip size.',
     id: 'm60',
     imageUrl: '/images/weapons/m60.png',
     label: 'M60',
@@ -96,7 +98,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'One of those mysterious guns that is typically ass except for some people who have figured it out. You can be one of the ones to figure it out!',
+      'A mysterious gun that is typically ineffective but can excel in the right hands.',
     id: 'sa1216',
     imageUrl: '/images/weapons/sa1216.png',
     label: 'SA1216',
@@ -108,7 +110,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 30,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
-    description: 'I like this gun. Thanks!',
+    description: 'A highly enjoyable weapon with excellent performance.',
     id: 'shak-50',
     imageUrl: '/images/weapons/shak-50.png',
     label: 'ShAk-50',
@@ -120,7 +122,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 115,
     damageCriticalMultiplier: 1.74,
     damageCriticalType: 'alt',
-    description: 'Beeg hammer for beeg smash kaboom',
+    description: 'A massive hammer designed for delivering powerful strikes.',
     id: 'sledgehammer',
     imageUrl: '/images/weapons/sledgehammer.png',
     label: 'Sledgehammer',
@@ -132,7 +134,7 @@ export const heavyWeapons: ContestantWeapon[] = [
     damageBodyMin: 65,
     damageCriticalMultiplier: 1.62,
     damageCriticalType: 'alt',
-    description: 'Beeg spear for beeg swing and spin wahoo',
+    description: 'A large spear capable of wide swings and spinning attacks.',
     id: 'spear',
     imageUrl: '/images/weapons/spear.png',
     label: 'Spear',
@@ -143,14 +145,15 @@ export const heavyWeapons: ContestantWeapon[] = [
 export const heavySpecializations: ContestantSpecialization[] = [
   {
     classType: 'heavy',
-    description: 'Run around in a circle around your opponents',
+    description: 'Enables the user to run circles around opponents.',
     id: 'charge-n-slam',
     imageUrl: '/images/specializations/charge-n-slam.png',
     label: "Charge 'N' Slam",
   },
   {
     classType: 'heavy',
-    description: 'Shoot goo and be super fucking annoying',
+    description:
+      'Shoots goo to impair enemies, making it highly frustrating for them.',
     id: 'goo-gun',
     imageUrl: '/images/specializations/goo-gun.png',
     label: 'Goo Gun',
@@ -158,15 +161,14 @@ export const heavySpecializations: ContestantSpecialization[] = [
   {
     classType: 'heavy',
     description:
-      'Hold a shield up - this gets nerfed or buffed depending on how Embark is feeling at patch time.',
+      'Deploys a shield, which is adjusted regularly based on patch updates.',
     id: 'mesh-shield',
     imageUrl: '/images/specializations/mesh-shield.png',
     label: 'Mesh Shield',
   },
   {
     classType: 'heavy',
-    description:
-      "Roadhog's specialization from the formerly acclaimed video game Overwatch",
+    description: 'Inspired by Roadhog’s ability from the video game Overwatch.',
     id: 'winch-claw',
     imageUrl: '/images/specializations/winch-claw.png',
     label: 'Winch Claw',

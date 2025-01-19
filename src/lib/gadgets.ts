@@ -3,7 +3,7 @@ import { type ContestantGadget } from './schema';
 export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
-    description: 'A lower-powered version of C4',
+    description: 'A lower-powered version of C4.',
     id: 'breach-charge',
     imageUrl: '/images/gadgets/breach-charge.png',
     label: 'Breach Charge',
@@ -11,7 +11,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description:
-      'A throwable two-way portal for contestants and other throwables',
+      'A throwable two-way portal for contestants and other throwable.s',
     id: 'gateway',
     imageUrl: '/images/gadgets/gateway.png',
     label: 'Gateway',
@@ -19,7 +19,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description:
-      'A throwable for temporarily disabling gadgets and specializations within vicinity',
+      'A throwable for temporarily disabling gadgets and specializations within vicinity.',
     id: 'glitch-grenade',
     imageUrl: '/images/gadgets/glitch-grenade.png',
     label: 'Glitch Grenade',
@@ -27,7 +27,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description:
-      'Creates a small vortex that sucks all contestants and items towards it for a brief duration',
+      'Creates a small vortex that sucks all contestants and items towards it for a brief duration.',
     id: 'gravity-vortex',
     imageUrl: '/images/gadgets/gravity-vortex.png',
     label: 'Gravity Vortex',
@@ -35,7 +35,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description:
-      'A grenade that pings every few seconds and detects/marks enemy contestants',
+      'A grenade that pings every few seconds and detects/marks enemy contestants.',
     id: 'sonar-grenade',
     imageUrl: '/images/gadgets/sonar-grenade.png',
     label: 'Sonar Grenade',
@@ -43,7 +43,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description:
-      'Fires a stunning projectile that reduces movement speed and disables specializations and gadgets on the target for a brief duration',
+      'Fires a stunning projectile that reduces movement speed and disables specializations and gadgets on the target for a brief duration.',
     id: 'stun-gun',
     imageUrl: '/images/gadgets/stun-gun.png',
     label: 'Stun Gun',
@@ -107,7 +107,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['medium', 'heavy'],
     description:
-      'A deployable mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions',
+      'A deployable mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions.',
     id: 'explosive-mine',
     imageUrl: '/images/gadgets/explosive-mine.png',
     label: 'Explosive Mine',
@@ -115,7 +115,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['medium'],
     description:
-      'A deployable gas mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions',
+      'A deployable gas mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions.',
     id: 'gas-mine',
     imageUrl: '/images/gadgets/gas-mine.png',
     label: 'Gas Mine',
@@ -147,7 +147,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['medium', 'heavy'],
     description:
-      'A deployable object that pings and tracks nearby opponents through walls within range',
+      'A deployable object that pings and tracks nearby opponents through walls within range.',
     id: 'proximity-sensor',
     imageUrl: '/images/gadgets/proximity-sensor.png',
     label: 'Proximity Sensor',
@@ -163,7 +163,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['heavy'],
     description:
-      'A deployable metal barricade that blocks gunfire, projectiles, but allows things like the Flamethrower and Spear to pass through for reasons unbeknownst to players',
+      'A deployable metal barricade that blocks gunfire, projectiles, but allows things like the Flamethrower and Spear to pass through for reasons unbeknownst to players.',
     id: 'barricade',
     imageUrl: '/images/gadgets/barricade.png',
     label: 'Barricade',
@@ -194,7 +194,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['heavy'],
     description:
-      'A deployable fire mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions',
+      'A deployable fire mine that arms 1.5 seconds after landing on a flat surface and detonates via proximity or other explosions.',
     id: 'pyro-mine',
     imageUrl: '/images/gadgets/pyro-mine.png',
     label: 'Pyro Mine',
@@ -209,7 +209,7 @@ export const GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['light', 'medium', 'heavy'],
-    description: 'Use these on your teammates to be an annoying little shit',
+    description: 'Use these on your teammates to be an annoying little shit.',
     id: 'flashbang',
     imageUrl: '/images/gadgets/flashbang.png',
     label: 'Flashbang',

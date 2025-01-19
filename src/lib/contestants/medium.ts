@@ -21,7 +21,7 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description:
-      'A automatic assault rifle that is perpetually one bullet short.',
+      'An automatic assault rifle that is perpetually one bullet short.',
     id: 'akm',
     imageUrl: '/images/weapons/akm.png',
     label: 'AKM',
@@ -34,10 +34,10 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'A three-barrel shotgun that fires hot pellets that can light the target on fire',
+      'A three-barrel shotgun that fires hot pellets capable of lighting the target on fire.',
     id: 'cerberus',
     imageUrl: '/images/weapons/cerberus-12ga.png',
-    label: 'Ceberus 15GA',
+    label: 'Cerberus 15GA',
     type: 'shotgun',
   },
   {
@@ -47,7 +47,7 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'A grenade launcher that blasts targets and does a hilariously low amount of self-damage (fight me).',
+      'A grenade launcher that blasts targets and does a hilariously low amount of self-damage as long as you bunny hop.',
     id: 'cl-40',
     imageUrl: '/images/weapons/cl-40.png',
     label: 'CL-40',
@@ -72,8 +72,7 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageBodyMin: 24,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
-    description:
-      'A little burst-fire rifle - just a little guy that goes BLAP BLAP BLAP.',
+    description: 'A little burst-fire rifle that goes BLAP BLAP BLAP.',
     id: 'famas',
     imageUrl: '/images/weapons/famas.png',
     label: 'FAMAS',
@@ -123,8 +122,7 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageBodyMin: 74,
     damageCriticalMultiplier: 2,
     damageCriticalType: 'headshot',
-    description:
-      'A revolver-style handgun that needs to be buffed. Please buff. I want to be able to snipe with it. I want my bullets to auto-track targets. Please buff.',
+    description: 'A revolver-style handgun that doubles as a sniper rifle.',
     id: 'r-357',
     imageUrl: '/images/weapons/r-357.png',
     label: 'R.357',
@@ -149,14 +147,15 @@ export const mediumSpecializations: ContestantSpecialization[] = [
   {
     classType: 'medium',
     description:
-      'Turret that shoots targets automatically and has a ton of health',
+      'A turret that shoots targets automatically and has a ton of health.',
     id: 'guardian-turret',
     imageUrl: '/images/specializations/guardian-turret.png',
     label: 'Guardian Turret',
   },
   {
     classType: 'medium',
-    description: 'Use to make floors and walls disappear as well as re-appear.',
+    description:
+      'Allows users to make floors and walls disappear and reappear.',
     id: 'dematerializer',
     imageUrl: '/images/specializations/dematerializer.png',
     label: 'Dematerializer',

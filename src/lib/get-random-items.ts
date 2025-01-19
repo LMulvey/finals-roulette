@@ -16,6 +16,7 @@ import {
 import { getGadgetsForClass } from './get-gadgets-for-class';
 import {
   type ClassType,
+  type ContestantGadget,
   type ContestantSpecialization,
   type ContestantWeapon,
 } from './schema';
@@ -81,26 +82,31 @@ const getRandomContestant = () => {
   return getRandomItems(MERGED_CONTESTANTS, 1, false);
 };
 
-const getContestantMeta = (
+export const getContestantMeta = (
   classType: ClassType,
 ): {
+  gadgets: ContestantGadget[];
   specializations: ContestantSpecialization[];
   weapons: ContestantWeapon[];
 } => {
+  const gadgets = getGadgetsForClass(classType);
   switch (classType) {
     case 'heavy':
       return {
+        gadgets,
         specializations: heavySpecializations,
         weapons: heavyWeapons,
       };
     case 'medium':
       return {
+        gadgets,
         specializations: mediumSpecializations,
         weapons: mediumWeapons,
       };
     case 'light':
     default:
       return {
+        gadgets,
         specializations: lightSpecializations,
         weapons: lightWeapons,
       };
