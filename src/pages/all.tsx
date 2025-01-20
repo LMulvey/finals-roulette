@@ -3,6 +3,7 @@ import { heavyClass } from '@/lib/contestants/heavy';
 import { lightClass } from '@/lib/contestants/light';
 import { mediumClass } from '@/lib/contestants/medium';
 import { getContestantMeta } from '@/lib/get-random-items';
+import { Fire, MagicWand, Sword } from '@phosphor-icons/react';
 
 const CONTESTANTS = [lightClass, mediumClass, heavyClass];
 
@@ -27,6 +28,7 @@ export const AllPage = () => {
                 {/* Specializations */}
                 {meta.specializations.map((spec) => (
                   <ItemCard
+                    icon={<MagicWand size={16} />}
                     key={spec.id}
                     title="Specialization"
                     {...spec}
@@ -36,6 +38,7 @@ export const AllPage = () => {
                 {/* Gadgets */}
                 {meta.gadgets.map((gadget) => (
                   <ItemCard
+                    icon={<Fire size={16} />}
                     key={gadget.id}
                     title="Gadget"
                     {...gadget}
@@ -45,6 +48,7 @@ export const AllPage = () => {
                 {/* Weapons */}
                 {meta.weapons.map((weapon) => (
                   <ItemCard
+                    icon={<Sword size={16} />}
                     key={weapon.id}
                     title="Weapon"
                     {...weapon}

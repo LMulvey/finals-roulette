@@ -35,7 +35,7 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 6.4,
     damageCriticalType: 'alt',
     description:
-      'A melee weapon with the unique ability to deal extreme contact damage with a backstab attack, designed to assassinate opponents. The backstab is so good that sometimes it can backstab you from the front.',
+      'The backstab is so good that sometimes it can backstab you from the front.',
     id: 'dagger',
     imageUrl: '/images/weapons/dagger.png',
     label: 'Dagger',
@@ -61,7 +61,7 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description:
-      'A submachine gun designed to deal high close-distance rapid-fire damage. Incredibly high DPS. You will know if a little shit is using one because the only audio you will hear is the rapid fire *pfbt* sounds while you are being shredded and inevitably die.',
+      'The only audio you will hear is the rapid fire *pfbt* sounds while you are being shredded and inevitably die.',
     id: 'm11',
     imageUrl: '/images/weapons/m11.png',
     label: 'M11',
@@ -87,7 +87,7 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description:
-      'A marksman weapon with the unique ability to charge its shots. Lights who can use this, use it really well. Everyone else just cannot.',
+      'Lights who can use this, use it really well. Everyone else just cannot.',
     id: 'recurve-bow',
     imageUrl: '/images/weapons/recurve-bow.png',
     label: 'Recurve Bow',
@@ -113,7 +113,7 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 2,
     damageCriticalType: 'headshot',
     description:
-      'This is a sniper rifle designed for lights who want to stay away from the action. If you out-snipe them with a non-sniper rifle, a friendly bagging is encouraged to celebrate the moment.',
+      'Sniper rifle designed for lights who want to stay away from the action. Killing one earns a friendly bagging.',
     id: 'sr-84',
     imageUrl: '/images/weapons/sr-84.png',
     label: 'SR-84',
@@ -164,7 +164,7 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description:
-      'Otherwise known as the spoons, watch out when you hear the clanging of all the missed shots and the eventual two-tap. You miss 99.99% of the shots you take - thankfully you only need that 0.11% for it to count.',
+      'Sharp spoons. Clangs every time they miss a shot. Clangs constantly.',
     id: 'throwing-knives',
     imageUrl: '/images/weapons/throwing-knives.png',
     label: 'Throwing Knives',

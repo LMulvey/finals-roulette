@@ -42,16 +42,14 @@ export const GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['light'],
-    description:
-      'Fires a stunning projectile that reduces movement speed and disables specializations and gadgets on the target for a brief duration.',
+    description: "Don't taze me, bruh.",
     id: 'stun-gun',
     imageUrl: '/images/gadgets/stun-gun.png',
     label: 'Stun Gun',
   },
   {
     classType: ['light'],
-    description:
-      'A gadget that fires a small exploding bore for easily destroying walls and other environmental structures from a distance.',
+    description: 'Make walls go boom, but from far away.',
     id: 'thermal-bore',
     imageUrl: '/images/gadgets/thermal-bore.png',
     label: 'Thermal Bore',
@@ -90,8 +88,7 @@ export const GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['medium'],
-    description:
-      'A gadget that changes any deployed gadgets into arena throwables or other items – effectively removing enemy gadgets from the arena.',
+    description: 'Make that turret DISAPPEAR!',
     id: 'data-reshaper',
     imageUrl: '/images/gadgets/data-reshaper.png',
     label: 'Data Reshaper',
@@ -99,7 +96,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['medium'],
     description:
-      'A gadget that allows the user to revive enemy targets instantly after a short charge. Causes revive sickness in the target that disables their gadgets and specialization for 5 seconds after revive.',
+      'Revive teammates in the middle of the action. Use text chat to cuss them out when they die immediately, again.',
     id: 'defibrillator',
     imageUrl: '/images/gadgets/defibrillator.png',
     label: 'Defibrillator',
@@ -163,7 +160,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['heavy'],
     description:
-      'A deployable metal barricade that blocks gunfire, projectiles, but allows things like the Flamethrower and Spear to pass through for reasons unbeknownst to players.',
+      'Metal barricade that blocks gunfire, but allows things like the fire and the spear to pass through for some reason.',
     id: 'barricade',
     imageUrl: '/images/gadgets/barricade.png',
     label: 'Barricade',
@@ -185,8 +182,7 @@ export const GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['heavy'],
-    description:
-      "A deployable gadget that shoots a locking mechanism to the ground and traps nearby enemy contestants, kinda. It's more like a leash and contestants can drag it around.",
+    description: "It's like a leash and contestants can drag it around.",
     id: 'lockbolt-launcher',
     imageUrl: '/images/gadgets/lockbolt-launcher.png',
     label: 'Lockbolt Launcher',
@@ -202,7 +198,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['heavy'],
     description:
-      'A rocket-propelled grenade launcher that shoots a hilariously weak projectile that does little physical damage and even less environmental/structure damage.',
+      'Shoots a hilariously weak projectile that does little physical damage and even less environmental/structure damage.',
     id: 'rpg-7',
     imageUrl: '/images/gadgets/rpg-7.png',
     label: 'RPG-7',
@@ -217,7 +213,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light', 'medium', 'heavy'],
     description:
-      'A throwable frag grenade that explodes a few seconds after throwing. Cannot be cooked. Does not actually fire out shrapnel.',
+      'Explodes a few seconds after throwing. Cannot be cooked. If it lands at your feet, you are cooked.',
     id: 'frag-grenade',
     imageUrl: '/images/gadgets/frag-grenade.png',
     label: 'Frag Grenade',
@@ -240,16 +236,14 @@ export const GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['light', 'medium', 'heavy'],
-    description:
-      'A throwable that breaks and shoots fire and liquid gas in an area of effect, lighting nearby contestants and objects on fire for a short duration. Fire does damage over time.',
+    description: 'BURN, MOTHER FUCKER, BURN!',
     id: 'pyro-grenade',
     imageUrl: '/images/gadgets/pyro-grenade.png',
     label: 'Pyro Grenade',
   },
   {
     classType: ['light', 'medium', 'heavy'],
-    description:
-      'A throwable that creates a cloud of smoke. Most notably, smoke hides contestant outlines while inside it - great for disappearing temporarily.',
+    description: 'Masks contestant outlines. Lags old computers.',
     id: 'smoke-grenade',
     imageUrl: '/images/gadgets/smoke-grenade.png',
     label: 'Smoke Grenade',

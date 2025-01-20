@@ -6,6 +6,7 @@ import {
   type ContestantSpecialization,
   type ContestantWeapon,
 } from '@/lib/schema';
+import { Fire, MagicWand, Person, Sword } from '@phosphor-icons/react';
 import { useMemo, useState } from 'react';
 
 export const MainPage = () => {
@@ -34,6 +35,7 @@ export const MainPage = () => {
       [
         {
           description: contestantClass?.description,
+          icon: <Person size={16} />,
           id: 'contestant',
           imageUrl: contestantClass?.imageUrl,
           label: contestantClass?.label,
@@ -42,6 +44,7 @@ export const MainPage = () => {
         },
         {
           description: specialization?.description,
+          icon: <MagicWand size={16} />,
           id: 'specialization',
           imageUrl: specialization?.imageUrl,
           label: specialization?.label,
@@ -50,6 +53,7 @@ export const MainPage = () => {
         },
         {
           description: weapon?.description,
+          icon: <Sword size={16} />,
           id: 'weapon',
           imageUrl: weapon?.imageUrl,
           label: weapon?.label,
@@ -58,27 +62,30 @@ export const MainPage = () => {
         },
         {
           description: gadgetOne?.description,
+          icon: <Fire size={16} />,
           id: 'gadgetOne',
           imageUrl: gadgetOne?.imageUrl,
           label: gadgetOne?.label,
           ready: Boolean(gadgetOne),
-          title: 'Gadget #1',
+          title: 'Gadget',
         },
         {
           description: gadgetTwo?.description,
+          icon: <Fire size={16} />,
           id: 'gadgetTwo',
           imageUrl: gadgetTwo?.imageUrl,
           label: gadgetTwo?.label,
           ready: Boolean(gadgetTwo),
-          title: 'Gadget #2',
+          title: 'Gadget',
         },
         {
           description: gadgetThree?.description,
-          id: 'gadgetOne',
+          icon: <Fire size={16} />,
+          id: 'gadgetThree',
           imageUrl: gadgetThree?.imageUrl,
           label: gadgetThree?.label,
           ready: Boolean(gadgetThree),
-          title: 'Gadget #3',
+          title: 'Gadget',
         },
       ].filter((item) => item.ready),
     [
