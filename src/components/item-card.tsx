@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, type Ref } from 'react';
 
 type Item = {
   description?: string;
@@ -9,11 +9,12 @@ type Item = {
   title: string;
 };
 
-export const ItemCard = (item: Item) => {
+export const ItemCard = (item: Item & { ref?: Ref<HTMLDivElement> }) => {
   return (
     <div
       className="rounded-lg bg-gray-800 text-yellow-400 font-bold flex md:flex-col gap-4 items-center w-full md:w-60 h-60 bg-cover bg-no-repeat"
       key={item.id}
+      ref={item.ref}
       style={{ backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : '' }}
     >
       <div className="flex flex-col justify-between gap-1 p-6 bg-gray-800/70 h-full w-full">

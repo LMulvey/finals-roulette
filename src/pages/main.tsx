@@ -7,9 +7,10 @@ import {
   type ContestantWeapon,
 } from '@/lib/schema';
 import { Fire, MagicWand, Person, Sword } from '@phosphor-icons/react';
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 export const MainPage = () => {
+  const contestantElementRef = useRef<HTMLDivElement | null>(null);
   const [contestantClass, setContestantClass] =
     useState<ContestantClass | null>(null);
   const [weapon, setWeapon] = useState<ContestantWeapon | null>(null);
@@ -28,6 +29,18 @@ export const MainPage = () => {
     setGadgetOne(loadout.gadgets[0]);
     setGadgetTwo(loadout.gadgets[1]);
     setGadgetThree(loadout.gadgets[2]);
+
+    if (contestantElementRef.current) {
+      const stickyOffset = 100;
+      const elementTop =
+        contestantElementRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementTop + window.pageYOffset - stickyOffset;
+
+      window.scrollTo({
+        behavior: 'smooth',
+        top: offsetPosition,
+      });
+    }
   };
 
   const items = useMemo(
@@ -40,6 +53,7 @@ export const MainPage = () => {
           imageUrl: contestantClass?.imageUrl,
           label: contestantClass?.label,
           ready: Boolean(contestantClass),
+          ref: contestantElementRef,
           title: 'Contestant',
         },
         {
@@ -100,13 +114,15 @@ export const MainPage = () => {
 
   return (
     <main className="w-screen flex flex-col items-center justify-center mb-40">
-      <button
-        className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 py-4 rounded-lg"
-        onClick={onClickLoadout}
-        type="button"
-      >
-        Roll your loadout
-      </button>
+      <div className="py-4 w-full bg-finals-black flex items-center justify-center sticky top-0 left-0">
+        <button
+          className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 py-4 rounded-lg uppercase italic"
+          onClick={onClickLoadout}
+          type="button"
+        >
+          {items.length ? 'Roll another!' : 'Roll your loadout'}
+        </button>
+      </div>
 
       <div className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mt-10">
         {items.map((item) => (

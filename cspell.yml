@@ -17,14 +17,15 @@ language: en
 minWordLength: 5
 version: "0.2"
 words:
+  - Avenir
   - booped
   - Dematerializer
   - FAMAS
   - flashbang
   - headshot
-  - lmulvey
   - Loadouts
   - Lockbolt
   - nerfed
   - Overwatch
+  - Saira
   - zipline
