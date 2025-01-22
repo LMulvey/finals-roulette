@@ -1,4 +1,5 @@
 import { ItemCard } from '@/components/item-card';
+import { LoadoutMetaTags } from '@/components/loadout-metatags';
 import { useRouter } from '@/hooks/useRouter';
 import { cvu } from '@/lib/cvu';
 import { getRandomLoadout } from '@/lib/get-random-items';
@@ -116,6 +117,8 @@ export const MainPage = () => {
 
   return (
     <main className="w-screen flex flex-col items-center justify-center">
+      <LoadoutMetaTags loadout={loadout} />
+
       <div className={buttonContainer({ firstLoadout: items.length === 0 })}>
         <button
           className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 py-4 rounded-lg uppercase italic"
