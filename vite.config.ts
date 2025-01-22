@@ -1,9 +1,10 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import vike from 'vike/plugin'
+import vercel from 'vite-plugin-vercel';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tsconfigPaths(), react(), vike()],
+  plugins: [tsconfigPaths(), react(), vike(), vercel()],
 });
