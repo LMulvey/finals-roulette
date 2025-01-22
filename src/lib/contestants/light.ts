@@ -8,6 +8,7 @@ export const lightClass: ContestantClass = {
   description:
     'Fast and agile contestant specializing in mobility, stealth, and being an annoying little shit.',
   healthPoints: 150,
+  id: 'light-contestant',
   imageUrl: '/images/contestants/light.png',
   label: 'Light',
   regenerationSeconds: 7,

@@ -3,6 +3,7 @@ export type ClassType = 'heavy' | 'light' | 'medium';
 export type ContestantClass = {
   description: string;
   healthPoints: number;
+  id: string;
   imageUrl?: string;
   label: string;
   regenerationSeconds: number;

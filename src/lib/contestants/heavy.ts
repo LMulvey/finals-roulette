@@ -8,6 +8,7 @@ export const heavyClass: ContestantClass = {
   description:
     'Durable powerhouse specializing in area control and high damage output.',
   healthPoints: 350,
+  id: 'heavy-contestant',
   imageUrl: '/images/contestants/heavy.png',
   label: 'Heavy',
   regenerationSeconds: 10,

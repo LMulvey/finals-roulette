@@ -7,6 +7,7 @@ import {
 export const mediumClass: ContestantClass = {
   description: 'Versatile contestant balancing mobility and durability.',
   healthPoints: 250,
+  id: 'medium-contestant',
   imageUrl: '/images/contestants/medium.png',
   label: 'Medium',
   regenerationSeconds: 9,

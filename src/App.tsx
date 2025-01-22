@@ -1,3 +1,4 @@
+import { Footer } from './components/footer';
 import { Header } from './components/header';
 import { useRouter } from './hooks/useRouter';
 import { AllPage } from './pages/all';
@@ -7,10 +8,11 @@ const App = () => {
   const router = useRouter();
 
   return (
-    <main className="w-screen flex flex-col items-center justify-center">
+    <main className="w-screen min-h-screen relative">
       <Header />
       {router.pathname === '/all' ? <AllPage /> : null}
       {router.pathname === '/' ? <MainPage /> : null}
+      <Footer />
     </main>
   );
 };
