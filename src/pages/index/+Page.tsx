@@ -1,6 +1,4 @@
 import { ItemCard } from '@/components/item-card';
-import { LoadoutMetaTags } from '@/components/loadout-metatags';
-import { useRouter } from '@/hooks/useRouter';
 import { cvu } from '@/lib/cvu';
 import { getRandomLoadout } from '@/lib/get-random-items';
 import { type ContestantLoadout } from '@/lib/schema';
@@ -9,8 +7,10 @@ import { Fire, MagicWand, Person, Sword } from '@phosphor-icons/react';
 import { AnimatePresence } from 'motion/react';
 import * as motion from 'motion/react-client';
 import { useMemo, useRef, useState } from 'react';
+import { usePageContext } from 'vike-react/usePageContext';
+import { navigate } from 'vike/client/router';
 
-const LOADOUT_PARAMETER = 'l';
+const LOADOUT_PARAMETER = 'loadout';
 
 const buttonContainer = cvu(
   'py-4 w-full bg-finals-black flex items-center justify-center sticky top-0 left-0',
@@ -21,11 +21,11 @@ const buttonContainer = cvu(
   },
 );
 
-export const MainPage = () => {
-  const router = useRouter();
+export const Page = () => {
+  const pageContext = usePageContext();
   const contestantElementRef = useRef<HTMLDivElement | null>(null);
   const [loadout, setLoadout] = useState<ContestantLoadout | null>(() => {
-    const maybeLoadoutParameter = router.search.get(LOADOUT_PARAMETER);
+    const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
     const maybeLoadout = deserializeLoadout(maybeLoadoutParameter ?? '');
     return maybeLoadout;
   });
@@ -38,7 +38,7 @@ export const MainPage = () => {
     setLoadoutKey(newLoadoutKey);
     setLoadout(randomLoadout);
 
-    router.replace(`/?l=${newLoadoutKey}`);
+    navigate(`/${newLoadoutKey}`);
 
     const { matches: isSmallWindow } = window.matchMedia(
       'screen and (max-width: 674px)',
@@ -116,9 +116,7 @@ export const MainPage = () => {
   );
 
   return (
-    <main className="w-screen flex flex-col items-center justify-center">
-      <LoadoutMetaTags loadout={loadout} />
-
+    <div className="w-screen flex flex-col items-center justify-center">
       <div className={buttonContainer({ firstLoadout: items.length === 0 })}>
         <button
           className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 py-4 rounded-lg uppercase italic"
@@ -128,7 +126,6 @@ export const MainPage = () => {
           {items.length ? 'Roll another!' : 'Roll your loadout'}
         </button>
       </div>
-
       <div ref={contestantElementRef}>
         {items.length && loadout ? (
           <AnimatePresence mode="wait">
@@ -166,6 +163,6 @@ export const MainPage = () => {
           </AnimatePresence>
         ) : null}
       </div>
-    </main>
+    </div>
   );
 };

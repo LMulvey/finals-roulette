@@ -1,10 +1,9 @@
-import { type ContestantLoadout } from '@/lib/schema';
+import { deserializeLoadout } from '@/lib/serialize';
+import { usePageContext } from 'vike-react/usePageContext';
 
-export const LoadoutMetaTags = ({
-  loadout,
-}: {
-  readonly loadout: ContestantLoadout | null;
-}) => {
+export const Head = () => {
+  const pageContext = usePageContext();
+  const loadout = deserializeLoadout(pageContext.routeParams.loadout);
   const title = loadout?.loadoutName ?? 'Loadout Details';
   const titleWithTemplate = `${title} | THE FINALS Roulette`;
   const imageUrl =

@@ -1,6 +1,7 @@
-import { useRouter } from '@/hooks/useRouter';
 import { cvu } from '@/lib/cvu';
 import { Person, SelectionAll } from '@phosphor-icons/react';
+import { usePageContext } from 'vike-react/usePageContext';
+import { navigate } from 'vike/client/router';
 
 const NAV_ITEM_ICON_SIZE = 24;
 
@@ -14,14 +15,14 @@ const linkClasses = cvu(
 );
 
 export const Header = () => {
-  const router = useRouter();
+  const pageContext = usePageContext();
 
   return (
     <header className="w-full p-8">
       <div className=" w-full flex flex-col md:flex-row items-center gap-12 text-white">
         <button
           className="flex flex-col gap-2"
-          onClick={() => router.push('/')}
+          onClick={() => navigate('/')}
           type="button"
         >
           <img
@@ -35,16 +36,20 @@ export const Header = () => {
         </button>
         <div className="flex flex-col gap-2 md:flex-row md:gap-8 pt-8 border-t border-t-gray-500 md:pt-0 md:border-t-0 md:pl-12 md:border-l md:border-l-gray-500 w-full">
           <a
-            className={linkClasses({ active: router.pathname === '/' })}
-            onClick={() => router.push('/')}
+            className={linkClasses({
+              active: pageContext.urlPathname !== '/all',
+            })}
+            onClick={() => navigate('/')}
           >
             <Person size={NAV_ITEM_ICON_SIZE} />
             Loadouts
           </a>
           <div className="w-[1px] h-full bg-gray-500" />
           <a
-            className={linkClasses({ active: router.pathname === '/all' })}
-            onClick={() => router.push('/all')}
+            className={linkClasses({
+              active: pageContext.urlPathname === '/all',
+            })}
+            onClick={() => navigate('/all')}
           >
             <SelectionAll size={NAV_ITEM_ICON_SIZE} />
             All Builds

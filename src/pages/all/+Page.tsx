@@ -7,9 +7,7 @@ import { Fire, MagicWand, Sword } from '@phosphor-icons/react';
 
 const CONTESTANTS = [lightClass, mediumClass, heavyClass];
 
-// ... existing imports ...
-
-export const AllPage = () => {
+export const Page = () => {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-8">All Classes</h1>
