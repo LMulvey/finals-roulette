@@ -1,19 +1,22 @@
 {
   "dependencies": {
     "@phosphor-icons/react": "^2.1.7",
+    "@vite-plugin-vercel/vike": "^9.0.3",
     "cvu": "^1.0.0",
     "motion": "^12.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.6.0",
     "vike": "^0.4.218",
-    "vike-react": "^0.5.12"
+    "vike-react": "^0.5.12",
+    "vite": "^6.0.7",
+    "vite-plugin-vercel": "^9.0.4",
+    "vite-tsconfig-paths": "^5.1.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@vite-plugin-vercel/vike": "^9.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "cspell": "8.14.4",
     "eslint": "^9.17.0",
@@ -23,11 +26,9 @@
     "eslint-plugin-react-refresh": "^0.4.18",
     "tailwindcss": "^3.4.17",
     "typescript": "~5.6.2",
-    "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.7",
-    "vite-tsconfig-paths": "^5.1.4"
+    "typescript-eslint": "^8.18.2"
   },
-  "name": "lil-boilerplate",
+  "name": "finals-roulette",
   "private": true,
   "scripts": {
     "build": "tsc -b && vike build",
