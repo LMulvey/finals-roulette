@@ -13,10 +13,12 @@ import {
   mediumSpecializations,
   mediumWeapons,
 } from './contestants/medium';
+import { generateLoadoutName } from './generate-loadout-name';
 import { getGadgetsForClass } from './get-gadgets-for-class';
 import {
   type ClassType,
   type ContestantGadget,
+  type ContestantLoadout,
   type ContestantSpecialization,
   type ContestantWeapon,
 } from './schema';
@@ -113,7 +115,7 @@ export const getContestantMeta = (
   }
 };
 
-export const getRandomLoadout = () => {
+export const getRandomLoadout = (): ContestantLoadout => {
   const [contestant] = getRandomContestant();
   const meta = getContestantMeta(contestant.type);
   const possibleGadgets = getGadgetsForClass(contestant.type);
@@ -121,6 +123,8 @@ export const getRandomLoadout = () => {
   const gadgets = getRandomItems(possibleGadgets, 3, true);
   const [specialization] = getRandomItems(meta.specializations, 1, true);
   const [weapon] = getRandomItems(meta.weapons, 1, true);
+  const loadout = { contestant, gadgets, specialization, weapon };
+  const loadoutName = generateLoadoutName(loadout);
 
-  return { contestant, gadgets, specialization, weapon };
+  return { contestant, gadgets, loadoutName, specialization, weapon };
 };

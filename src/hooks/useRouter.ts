@@ -73,5 +73,6 @@ export const useRouter = () => {
     forward,
     push,
     replace,
+    search: new URLSearchParams(routerState.search),
   };
 };

@@ -1,4 +1,57 @@
+import {
+  heavyClass,
+  heavySpecializations,
+  heavyWeapons,
+} from '@/lib/contestants/heavy';
+import {
+  lightClass,
+  lightSpecializations,
+  lightWeapons,
+} from '@/lib/contestants/light';
+import {
+  mediumClass,
+  mediumSpecializations,
+  mediumWeapons,
+} from '@/lib/contestants/medium';
+import { GADGETS } from '@/lib/gadgets';
+
+const ALL_ITEMS = [
+  ...heavyWeapons,
+  ...mediumWeapons,
+  ...lightWeapons,
+  ...heavySpecializations,
+  ...mediumSpecializations,
+  ...lightSpecializations,
+  heavyClass,
+  mediumClass,
+  lightClass,
+  ...GADGETS,
+];
+
+const generateBalanceRequest = (type: 'BUFF' | 'NERF') => {
+  const randomItem = ALL_ITEMS[Math.floor(Math.random() * ALL_ITEMS.length)];
+  return `Love the game Embark but PLEASE ${type.toLowerCase()} the ${randomItem.label}`;
+};
+
 export const Footer = () => {
+  const embarkRequests = [
+    'Thanks Embark for making the game. Let us save outfits.',
+    'Embark please add more dance emotes.',
+    'Hey Embark, can I have a Twister event so I can be like Glenn Powell in Twisters but in THE FINALS?',
+    'Embark, please add an event that spawns a giant turtle that you can ride and flips over to reveal a whole island',
+    'EMBARK, ICE ZONE WHEN?',
+    'Embark, allow us to set more rules in private matches',
+    'Embark, add a replay system',
+    () => generateBalanceRequest('BUFF'),
+    () => generateBalanceRequest('NERF'),
+  ];
+
+  const randomRequest = (() => {
+    const request =
+      embarkRequests[Math.floor(Math.random() * embarkRequests.length)];
+    return typeof request === 'function' ? request() : request;
+  })();
+
   return (
     <footer className="w-full bg-black text-gray-300 py-4 align-end absolute bottom-0">
       <div className="container mx-auto px-4 text-sm text-center">
@@ -17,9 +70,7 @@ export const Footer = () => {
         <p className="text-gray-400">
           Created by jjjangus + <span className="line-through">yuri</span> yiru
         </p>
-        <p className="text-gray-400">
-          Thanks Embark for making the game. Let us save outfits.
-        </p>
+        <p className="text-gray-400">{randomRequest}</p>
       </div>
     </footer>
   );

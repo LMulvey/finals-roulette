@@ -17,6 +17,14 @@ export type ContestantGadget = BaseItemType & {
   label: string;
 };
 
+export type ContestantLoadout = {
+  contestant: ContestantClass;
+  gadgets: ContestantGadget[];
+  loadoutName: null | string;
+  specialization: ContestantSpecialization;
+  weapon: ContestantWeapon;
+};
+
 export type ContestantSpecialization = BaseItemType & {
   classType: ClassType;
   description: string;
