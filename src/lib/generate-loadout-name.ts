@@ -378,7 +378,6 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label}-enthusiast`,
     `${item.label} Shitter`,
     `${item.label} Sweat`,
-    `${item.label} Moment`,
     `${item.label} Expert`,
     `${item.label} Tryhard`,
     `${item.label} Sweat`,
