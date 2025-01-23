@@ -14,6 +14,7 @@ import {
   mediumWeapons,
 } from '@/lib/contestants/medium';
 import { GADGETS } from '@/lib/gadgets';
+import * as motion from 'motion/react-client';
 
 const ALL_ITEMS = [
   ...heavyWeapons,
@@ -53,7 +54,16 @@ export const Footer = () => {
   })();
 
   return (
-    <footer className="w-full bg-black text-gray-300 py-4 align-end absolute bottom-0">
+    <motion.footer
+      animate="animate"
+      className="w-full bg-black text-gray-300 py-4 align-end absolute bottom-0"
+      initial="initial"
+      transition={{ duration: 1 }}
+      variants={{
+        animate: { opacity: 0, y: 0 },
+        initial: { opacity: 0, y: 100 },
+      }}
+    >
       <div className="container mx-auto px-4 text-sm text-center">
         <p className="mb-2">
           Thanks to{' '}
@@ -72,6 +82,6 @@ export const Footer = () => {
         </p>
         <p className="text-gray-400">{randomRequest}</p>
       </div>
-    </footer>
+    </motion.footer>
   );
 };

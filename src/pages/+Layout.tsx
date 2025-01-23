@@ -1,8 +1,12 @@
-import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import React, { type ReactNode } from 'react';
+import { clientOnly } from 'vike-react/clientOnly';
 // eslint-disable-next-line import/no-unassigned-import
 import './Layout.css';
+
+const Footer = clientOnly(
+  async () => (await import('@/components/footer')).Footer,
+);
 
 export const Layout = ({ children }: { readonly children: ReactNode }) => {
   return (

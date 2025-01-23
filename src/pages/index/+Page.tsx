@@ -1,19 +1,25 @@
 import { ItemCard } from '@/components/item-card';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { cvu } from '@/lib/cvu';
 import { getRandomLoadout } from '@/lib/get-random-items';
+import { getRecentLoadouts, saveRecentLoadout } from '@/lib/recents-storage';
 import { type ContestantLoadout } from '@/lib/schema';
 import { deserializeLoadout, serializeLoadout } from '@/lib/serialize';
-import { Fire, MagicWand, Person, Sword } from '@phosphor-icons/react';
+import { Fire, MagicWand, Person, Rewind, Sword } from '@phosphor-icons/react';
 import { AnimatePresence } from 'motion/react';
 import * as motion from 'motion/react-client';
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
 const LOADOUT_PARAMETER = 'loadout';
 
 const buttonContainer = cvu(
-  'py-4 w-full bg-finals-black flex items-center justify-center sticky top-0 left-0',
+  'py-4 w-full bg-finals-black flex flex-row gap-8 items-center justify-center sticky top-0 left-0',
   {
     variants: {
       firstLoadout: { false: [], true: ['my-20'] },
@@ -21,15 +27,20 @@ const buttonContainer = cvu(
   },
 );
 
+const maybeGetLoadout = (maybeLoadoutParameter: string) => {
+  const maybeLoadout = deserializeLoadout(maybeLoadoutParameter ?? '');
+  return maybeLoadout;
+};
+
 export const Page = () => {
   const pageContext = usePageContext();
   const contestantElementRef = useRef<HTMLDivElement | null>(null);
   const [loadout, setLoadout] = useState<ContestantLoadout | null>(() => {
     const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
-    const maybeLoadout = deserializeLoadout(maybeLoadoutParameter ?? '');
-    return maybeLoadout;
+    return maybeGetLoadout(maybeLoadoutParameter);
   });
   const [loadoutKey, setLoadoutKey] = useState<null | string>(null);
+  const recents = getRecentLoadouts();
 
   const onClickLoadout = () => {
     const randomLoadout = getRandomLoadout();
@@ -38,7 +49,18 @@ export const Page = () => {
     setLoadoutKey(newLoadoutKey);
     setLoadout(randomLoadout);
 
-    navigate(`/${newLoadoutKey}`);
+    if (
+      !recents.some(
+        (recentLoadout) => serializeLoadout(recentLoadout) === newLoadoutKey,
+      )
+    ) {
+      saveRecentLoadout(newLoadoutKey);
+    }
+
+    navigate(`/${newLoadoutKey}`, {
+      keepScrollPosition: true,
+      overwriteLastHistoryEntry: true,
+    });
 
     const { matches: isSmallWindow } = window.matchMedia(
       'screen and (max-width: 674px)',
@@ -56,6 +78,16 @@ export const Page = () => {
       });
     }
   };
+
+  useEffect(() => {
+    const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
+    const maybeLoadout = maybeGetLoadout(maybeLoadoutParameter);
+
+    if (maybeLoadout) {
+      setLoadoutKey(maybeLoadoutParameter);
+      setLoadout(maybeLoadout);
+    }
+  }, [pageContext.routeParams]);
 
   const items = useMemo(
     () =>
@@ -125,6 +157,42 @@ export const Page = () => {
         >
           {items.length ? 'Roll another!' : 'Roll your loadout'}
         </button>
+        {recents.length ? (
+          <Popover>
+            <motion.div
+              animate="animate"
+              initial="initial"
+              variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
+            >
+              <PopoverTrigger className="flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-yellow-300 transition-colors px-4 py-2 rounded-lg uppercase italic">
+                <Rewind size={16} /> Recent
+              </PopoverTrigger>
+            </motion.div>
+            <PopoverContent>
+              <h1>Recents Builds</h1>
+              <div className="flex flex-col gap-2">
+                {recents
+                  .filter(
+                    (recentLoadout) =>
+                      serializeLoadout(recentLoadout) !== loadoutKey,
+                  )
+                  .map((recentLoadout) => {
+                    const currentLoadoutKey = serializeLoadout(recentLoadout);
+
+                    return (
+                      <a
+                        className="text-sm text-white"
+                        href={`/${currentLoadoutKey}`}
+                        key={currentLoadoutKey}
+                      >
+                        {recentLoadout.loadoutName}
+                      </a>
+                    );
+                  })}
+              </div>
+            </PopoverContent>
+          </Popover>
+        ) : null}
       </div>
       <div ref={contestantElementRef}>
         {items.length && loadout ? (
