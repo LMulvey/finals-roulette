@@ -135,6 +135,7 @@ export const Page = () => {
               id: loadout.specialization.id,
               imageUrl: loadout.specialization.imageUrl,
               label: loadout.specialization.label,
+              recentlyAdjusted: loadout.specialization.recentlyAdjusted,
               title: 'Specialization',
             },
             {
@@ -143,6 +144,7 @@ export const Page = () => {
               id: loadout.weapon.id,
               imageUrl: loadout.weapon.imageUrl,
               label: loadout.weapon.label,
+              recentlyAdjusted: loadout.weapon.recentlyAdjusted,
               title: 'Weapon',
             },
             {
@@ -151,6 +153,7 @@ export const Page = () => {
               id: loadout.gadgets[0]?.id,
               imageUrl: loadout.gadgets[0]?.imageUrl,
               label: loadout.gadgets[0]?.label,
+              recentlyAdjusted: loadout.gadgets[0]?.recentlyAdjusted,
               title: 'Gadget',
             },
             {
@@ -159,6 +162,7 @@ export const Page = () => {
               id: loadout.gadgets[1]?.id,
               imageUrl: loadout.gadgets[1]?.imageUrl,
               label: loadout.gadgets[1]?.label,
+              recentlyAdjusted: loadout.gadgets[1]?.recentlyAdjusted,
               title: 'Gadget',
             },
             {
@@ -167,6 +171,7 @@ export const Page = () => {
               id: loadout.gadgets[2]?.id,
               imageUrl: loadout.gadgets[2]?.imageUrl,
               label: loadout.gadgets[2]?.label,
+              recentlyAdjusted: loadout.gadgets[2]?.recentlyAdjusted,
               title: 'Gadget',
             },
           ]

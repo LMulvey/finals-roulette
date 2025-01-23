@@ -54,7 +54,8 @@ const getRandomItems = <T extends WeightedItem>(
   const weightedPool: T[] = items.reduce((accumulator: T[], item) => {
     accumulator.push(item);
     if (item.recentlyAdjusted?.adjustmentType === 'buff') {
-      accumulator.push(item); // Add buffed items twice for double weight
+      accumulator.push(item);
+      accumulator.push(item);
     }
 
     return accumulator;
