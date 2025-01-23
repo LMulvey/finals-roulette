@@ -139,6 +139,11 @@ export const heavyWeapons: ContestantWeapon[] = [
     id: 'spear',
     imageUrl: '/images/weapons/spear.png',
     label: 'Spear',
+    recentlyAdjusted: {
+      adjustmentType: 'nerf',
+      note: 'You can no longer slide spin.',
+      url: 'https://www.reachthefinals.com/patchnotes/560',
+    },
     type: 'melee',
   },
 ];
@@ -173,5 +178,10 @@ export const heavySpecializations: ContestantSpecialization[] = [
     id: 'winch-claw',
     imageUrl: '/images/specializations/winch-claw.png',
     label: 'Winch Claw',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Will now cancel and block vaulting for opponents on successful hits. Great.',
+      url: 'https://www.reachthefinals.com/patchnotes/560',
+    },
   },
 ];

@@ -27,10 +27,6 @@ export const Page = () => {
               <div className="flex flex-col gap-6">
                 {/* Weapons Section */}
                 <div>
-                  <h3 className="text-lg font-medium mb-3 text-red-600 flex items-center gap-2">
-                    <Sword size={20} />
-                    Weapons
-                  </h3>
                   <div className="flex flex-row flex-wrap gap-2">
                     {meta.weapons.map((weapon) => (
                       <ItemCard
@@ -45,10 +41,6 @@ export const Page = () => {
 
                 {/* Specializations Section */}
                 <div>
-                  <h3 className="text-lg font-medium mb-3 text-purple-600 flex items-center gap-2">
-                    <MagicWand size={20} />
-                    Specializations
-                  </h3>
                   <div className="flex flex-row flex-wrap gap-2">
                     {meta.specializations.map((spec) => (
                       <ItemCard
@@ -63,10 +55,6 @@ export const Page = () => {
 
                 {/* Gadgets Section */}
                 <div>
-                  <h3 className="text-lg font-medium mb-3 text-orange-600 flex items-center gap-2">
-                    <Fire size={20} />
-                    Gadgets
-                  </h3>
                   <div className="flex flex-row flex-wrap gap-2">
                     {meta.gadgets.map((gadget) => (
                       <ItemCard

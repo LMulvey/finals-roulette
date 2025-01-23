@@ -40,6 +40,11 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'dagger',
     imageUrl: '/images/weapons/dagger.png',
     label: 'Dagger',
+    recentlyAdjusted: {
+      adjustmentType: 'neutral',
+      note: "Fixed an issue where the backstab wouldn't re-trigger the charge up after a vault if the input was held down. Backstabbing from the front remains prominent.",
+      url: 'https://www.reachthefinals.com/patchnotes/560',
+    },
     type: 'melee',
   },
   {
@@ -131,6 +136,11 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'sword',
     imageUrl: '/images/weapons/sword.png',
     label: 'Sword',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Lunging into a jump pad now propels the contestant as expected. Flying swords are back on the menu.',
+      url: 'https://www.reachthefinals.com/patchnotes/560',
+    },
     type: 'melee',
   },
   {

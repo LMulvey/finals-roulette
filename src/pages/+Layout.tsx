@@ -1,8 +1,9 @@
 import { Header } from '@/components/header';
+import { Toaster } from '@/components/ui/toaster';
 import React, { type ReactNode } from 'react';
-import { clientOnly } from 'vike-react/clientOnly';
 // eslint-disable-next-line import/no-unassigned-import
 import './Layout.css';
+import { clientOnly } from 'vike-react/clientOnly';
 
 const Footer = clientOnly(
   async () => (await import('@/components/footer')).Footer,
@@ -12,6 +13,7 @@ export const Layout = ({ children }: { readonly children: ReactNode }) => {
   return (
     <React.StrictMode>
       <meta charSet="utf8" />
+      <title>THE FINALS Roulette</title>
       <link
         href="/images/logos/the-finals-logo-symbol.crop.png"
         rel="icon"
@@ -36,6 +38,7 @@ export const Layout = ({ children }: { readonly children: ReactNode }) => {
       <main className="w-screen min-h-screen relative">
         <Header />
         {children}
+        <Toaster />
         <Footer />
       </main>
     </React.StrictMode>

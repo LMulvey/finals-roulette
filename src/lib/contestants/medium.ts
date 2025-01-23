@@ -65,6 +65,11 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'dual-blades',
     imageUrl: '/images/weapons/dual-blades.png',
     label: 'Dual Blades',
+    recentlyAdjusted: {
+      adjustmentType: 'neutral',
+      note: 'Name changed to DUEL Blades. Fixed an issue when swapping back from a deployable like the Jump Pad would cause the Dual Blades to get stuck swinging only once.',
+      url: 'https://www.reachthefinals.com/patchnotes/560',
+    },
     type: 'melee',
   },
   {

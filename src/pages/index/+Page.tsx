@@ -4,12 +4,20 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { useToast } from '@/hooks/use-toast';
 import { cvu } from '@/lib/cvu';
 import { getRandomLoadout } from '@/lib/get-random-items';
 import { getRecentLoadouts, saveRecentLoadout } from '@/lib/recents-storage';
 import { type ContestantLoadout } from '@/lib/schema';
 import { deserializeLoadout, serializeLoadout } from '@/lib/serialize';
-import { Fire, MagicWand, Person, Rewind, Sword } from '@phosphor-icons/react';
+import {
+  Fire,
+  MagicWand,
+  Person,
+  Rewind,
+  ShareFat,
+  Sword,
+} from '@phosphor-icons/react';
 import { AnimatePresence } from 'motion/react';
 import * as motion from 'motion/react-client';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -34,6 +42,7 @@ const maybeGetLoadout = (maybeLoadoutParameter: string) => {
 
 export const Page = () => {
   const pageContext = usePageContext();
+  const { toast } = useToast();
   const contestantElementRef = useRef<HTMLDivElement | null>(null);
   const [loadout, setLoadout] = useState<ContestantLoadout | null>(() => {
     const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
@@ -88,6 +97,24 @@ export const Page = () => {
       setLoadout(maybeLoadout);
     }
   }, [pageContext.routeParams]);
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        description:
+          "Post to Reddit, Discord, Friendster, Bluesky, whatever. I don't give a shit I'm not your dad.",
+        title: 'Copied shareable URL to clipboard',
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to copy URL:', error);
+      toast({
+        description: 'Worked fine on my machine so I am blaming you.',
+        title: 'Failed to copy',
+      });
+    }
+  };
 
   const items = useMemo(
     () =>
@@ -157,26 +184,38 @@ export const Page = () => {
         >
           {items.length ? 'Roll another!' : 'Roll your loadout'}
         </button>
-        {recents.length ? (
-          <Popover>
-            <motion.div
+        <div className="flex flex-row items-center justify-between gap-8">
+          {items.length ? (
+            <motion.button
               animate="animate"
+              className="flex flex-row items-center gap-2 text-lg bg-finals-red text-finals-white font-bold hover:bg-red-400 transition-colors px-4 py-2 rounded-lg uppercase italic"
               initial="initial"
+              onClick={copyToClipboard}
+              type="button"
               variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
             >
-              <PopoverTrigger className="flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-yellow-300 transition-colors px-4 py-2 rounded-lg uppercase italic">
-                <Rewind size={16} /> Recent
-              </PopoverTrigger>
-            </motion.div>
-            <PopoverContent>
-              <h1>Recents Builds</h1>
-              <div className="flex flex-col gap-2">
-                {recents
-                  .filter(
-                    (recentLoadout) =>
-                      serializeLoadout(recentLoadout) !== loadoutKey,
-                  )
-                  .map((recentLoadout) => {
+              <ShareFat
+                size={16}
+                weight="fill"
+              />
+              Share
+            </motion.button>
+          ) : null}
+          {recents.length ? (
+            <Popover>
+              <motion.div
+                animate="animate"
+                initial="initial"
+                variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
+              >
+                <PopoverTrigger className="flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
+                  <Rewind size={16} /> Recent
+                </PopoverTrigger>
+              </motion.div>
+              <PopoverContent>
+                <h1>Recents Builds</h1>
+                <div className="flex flex-col gap-2">
+                  {recents.map((recentLoadout) => {
                     const currentLoadoutKey = serializeLoadout(recentLoadout);
 
                     return (
@@ -189,10 +228,11 @@ export const Page = () => {
                       </a>
                     );
                   })}
-              </div>
-            </PopoverContent>
-          </Popover>
-        ) : null}
+                </div>
+              </PopoverContent>
+            </Popover>
+          ) : null}
+        </div>
       </div>
       <div ref={contestantElementRef}>
         {items.length && loadout ? (

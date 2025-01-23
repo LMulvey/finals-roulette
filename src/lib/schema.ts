@@ -1,3 +1,8 @@
+export type BaseItemType = {
+  id: string;
+  recentlyAdjusted?: PatchNotes;
+};
+
 export type ClassType = 'heavy' | 'light' | 'medium';
 
 export type ContestantClass = {
@@ -44,9 +49,10 @@ export type ContestantWeapon = BaseItemType & {
   type: WeaponType;
 };
 
-type BaseItemType = {
-  id: string;
-  recentlyBuffed?: boolean;
+export type PatchNotes = {
+  adjustmentType: 'buff' | 'nerf' | 'neutral';
+  note: string;
+  url: string;
 };
 
 type DamageCriticalType = 'alt' | 'headshot' | 'none';

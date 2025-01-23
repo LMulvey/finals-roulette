@@ -16,6 +16,7 @@ import {
 import { generateLoadoutName } from './generate-loadout-name';
 import { getGadgetsForClass } from './get-gadgets-for-class';
 import {
+  type BaseItemType,
   type ClassType,
   type ContestantGadget,
   type ContestantLoadout,
@@ -23,9 +24,8 @@ import {
   type ContestantWeapon,
 } from './schema';
 
-type WeightedItem = {
+type WeightedItem = BaseItemType & {
   [key: string]: unknown;
-  recentlyBuffed?: boolean;
 };
 
 /**
@@ -53,7 +53,7 @@ const getRandomItems = <T extends WeightedItem>(
   // eslint-disable-next-line unicorn/no-array-reduce
   const weightedPool: T[] = items.reduce((accumulator: T[], item) => {
     accumulator.push(item);
-    if (item.recentlyBuffed) {
+    if (item.recentlyAdjusted?.adjustmentType === 'buff') {
       accumulator.push(item); // Add buffed items twice for double weight
     }
 
