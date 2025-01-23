@@ -19,10 +19,10 @@ import { navigate } from 'vike/client/router';
 const LOADOUT_PARAMETER = 'loadout';
 
 const buttonContainer = cvu(
-  'py-4 w-full bg-finals-black flex flex-row gap-8 items-center justify-center sticky top-0 left-0',
+  'py-4 w-full bg-finals-black flex flex-col gap-2 items-center justify-center sticky top-0 left-0',
   {
     variants: {
-      firstLoadout: { false: [], true: ['my-20'] },
+      firstLoadout: { false: ['my-2'], true: ['my-20'] },
     },
   },
 );
@@ -67,7 +67,7 @@ export const Page = () => {
     );
 
     if (contestantElementRef.current && isSmallWindow) {
-      const stickyOffset = 100;
+      const stickyOffset = 248;
       const elementTop =
         contestantElementRef.current.getBoundingClientRect().top;
       const offsetPosition = elementTop + window.pageYOffset - stickyOffset;
@@ -197,19 +197,6 @@ export const Page = () => {
       <div ref={contestantElementRef}>
         {items.length && loadout ? (
           <AnimatePresence mode="wait">
-            <motion.h2
-              animate="animate"
-              className="text-3xl text-center"
-              exit="initial"
-              initial="initial"
-              key={`${loadoutKey}-name`}
-              variants={{
-                animate: { opacity: 1, scale: 1 },
-                initial: { opacity: 0, scale: 0 },
-              }}
-            >
-              {loadout.loadoutName}
-            </motion.h2>
             <motion.div
               animate="animate"
               className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mt-10 mb-40"
@@ -221,6 +208,19 @@ export const Page = () => {
                 exit: { transition: { staggerChildren: 0.1 } },
               }}
             >
+              <motion.h2
+                animate="animate"
+                className="text-3xl text-center w-full"
+                exit="initial"
+                initial="initial"
+                key={`${loadoutKey}-name`}
+                variants={{
+                  animate: { opacity: 1, scale: 1 },
+                  initial: { opacity: 0, scale: 0 },
+                }}
+              >
+                {loadout.loadoutName}
+              </motion.h2>
               {items.map((item) => (
                 <ItemCard
                   key={item.id}
