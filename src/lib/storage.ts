@@ -22,6 +22,13 @@ export class LocalStorageHandler {
   }
 
   get<T>(key: string): null | T {
+    if (!LocalStorageHandler.isAvailable()) {
+      console.error(
+        'get:localStorage not available. Make sure you call from the client, not the server.',
+      );
+      return null;
+    }
+
     try {
       const item = localStorage.getItem(this.getKey(key));
       if (!item) return null;
@@ -45,6 +52,13 @@ export class LocalStorageHandler {
    * Cleans up all expired items in localStorage
    */
   purgeExpired(): void {
+    if (!LocalStorageHandler.isAvailable()) {
+      console.error(
+        'purgeExpired:localStorage not available. Make sure you call from the client, not the server.',
+      );
+      return;
+    }
+
     try {
       const keys = Object.keys(localStorage);
       for (const key of keys) {
@@ -64,6 +78,13 @@ export class LocalStorageHandler {
   }
 
   remove(key: string): void {
+    if (!LocalStorageHandler.isAvailable()) {
+      console.error(
+        'remove:localStorage not available. Make sure you call from the client, not the server.',
+      );
+      return;
+    }
+
     try {
       localStorage.removeItem(this.getKey(key));
     } catch (error) {
@@ -72,6 +93,13 @@ export class LocalStorageHandler {
   }
 
   set<T>(key: string, value: T, expiryInMinutes?: number): void {
+    if (!LocalStorageHandler.isAvailable()) {
+      console.error(
+        'set:localStorage not available. Make sure you call from the client, not the server.',
+      );
+      return;
+    }
+
     const item: StorageItem<T> = {
       value,
       ...(expiryInMinutes && {

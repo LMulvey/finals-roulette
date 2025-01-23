@@ -61,7 +61,7 @@ export const ItemCard = (item: Item & { ref?: Ref<HTMLDivElement> }) => {
         initial: { opacity: 0, scale: 0 },
       }}
     >
-      <div className="flex flex-col justify-between gap-1 p-6 bg-finals-black/60 h-full w-full">
+      <div className="flex flex-col justify-between gap-1 p-6 bg-finals-black/70 h-full w-full">
         <div className="flex flex-row items-center justify-between w-full gap-2">
           <div className="text-md text-yellow-400 flex flex-row items-center gap-2  px-2 py-1 w-full bg-gray-800 rounded-md">
             {item.icon}
@@ -125,8 +125,8 @@ export const ItemCard = (item: Item & { ref?: Ref<HTMLDivElement> }) => {
           ) : null}
         </div>
         <div className="space-y-2 h-28">
-          <p className="text-lg">{item.label}</p>
-          <p className="text-sm font-medium italic text-white line-clamp-4 text-ellipsis">
+          <p className="text-xl">{item.label}</p>
+          <p className="text-xs font-sans font-medium text-white line-clamp-4 text-ellipsis">
             {item.description}
           </p>
         </div>

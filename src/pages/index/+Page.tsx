@@ -1,4 +1,4 @@
-import { ItemCard } from '@/components/item-card';
+import { LoadoutDisplay } from '@/components/loadout-display';
 import {
   Popover,
   PopoverContent,
@@ -8,26 +8,21 @@ import { useToast } from '@/hooks/use-toast';
 import { cvu } from '@/lib/cvu';
 import { getRandomLoadout } from '@/lib/get-random-items';
 import { getRecentLoadouts, saveRecentLoadout } from '@/lib/recents-storage';
+import { addSavedLoadout, getSavedLoadoutKeys } from '@/lib/saved-loadouts';
 import { type ContestantLoadout } from '@/lib/schema';
 import { deserializeLoadout, serializeLoadout } from '@/lib/serialize';
-import {
-  Fire,
-  MagicWand,
-  Person,
-  Rewind,
-  ShareFat,
-  Sword,
-} from '@phosphor-icons/react';
-import { AnimatePresence } from 'motion/react';
+import { FloppyDisk, Rewind, ShareFat } from '@phosphor-icons/react';
+import { PopoverClose } from '@radix-ui/react-popover';
+import { DicesIcon } from 'lucide-react';
 import * as motion from 'motion/react-client';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
 const LOADOUT_PARAMETER = 'loadout';
 
 const buttonContainer = cvu(
-  'py-4 w-full bg-finals-black flex flex-col gap-2 items-center justify-center sticky top-0 left-0',
+  'py-4 w-full bg-finals-black flex flex-col gap-2 items-center justify-center sticky top-0 left-0 w-[316px]',
   {
     variants: {
       firstLoadout: { false: ['my-2'], true: ['my-20'] },
@@ -51,7 +46,7 @@ export const Page = () => {
   const [loadoutKey, setLoadoutKey] = useState<null | string>(null);
   const recents = getRecentLoadouts();
 
-  const onClickLoadout = () => {
+  const onClickLoadout = useCallback(() => {
     const randomLoadout = getRandomLoadout();
     const newLoadoutKey = serializeLoadout(randomLoadout);
 
@@ -86,7 +81,13 @@ export const Page = () => {
         top: offsetPosition,
       });
     }
-  };
+  }, [recents]);
+
+  useEffect(() => {
+    if (!loadout) {
+      onClickLoadout();
+    }
+  }, [loadout, onClickLoadout]);
 
   useEffect(() => {
     const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
@@ -116,84 +117,95 @@ export const Page = () => {
     }
   };
 
-  const items = useMemo(
-    () =>
-      loadout
-        ? [
-            {
-              description: loadout.contestant.description,
-              icon: <Person size={16} />,
-              id: loadout.contestant.id,
-              imageUrl: loadout.contestant.imageUrl,
-              label: loadout.contestant.label,
-              ref: contestantElementRef,
-              title: 'Contestant',
-            },
-            {
-              description: loadout.specialization.description,
-              icon: <MagicWand size={16} />,
-              id: loadout.specialization.id,
-              imageUrl: loadout.specialization.imageUrl,
-              label: loadout.specialization.label,
-              recentlyAdjusted: loadout.specialization.recentlyAdjusted,
-              title: 'Specialization',
-            },
-            {
-              description: loadout.weapon.description,
-              icon: <Sword size={16} />,
-              id: loadout.weapon.id,
-              imageUrl: loadout.weapon.imageUrl,
-              label: loadout.weapon.label,
-              recentlyAdjusted: loadout.weapon.recentlyAdjusted,
-              title: 'Weapon',
-            },
-            {
-              description: loadout.gadgets[0]?.description,
-              icon: <Fire size={16} />,
-              id: loadout.gadgets[0]?.id,
-              imageUrl: loadout.gadgets[0]?.imageUrl,
-              label: loadout.gadgets[0]?.label,
-              recentlyAdjusted: loadout.gadgets[0]?.recentlyAdjusted,
-              title: 'Gadget',
-            },
-            {
-              description: loadout.gadgets[1]?.description,
-              icon: <Fire size={16} />,
-              id: loadout.gadgets[1]?.id,
-              imageUrl: loadout.gadgets[1]?.imageUrl,
-              label: loadout.gadgets[1]?.label,
-              recentlyAdjusted: loadout.gadgets[1]?.recentlyAdjusted,
-              title: 'Gadget',
-            },
-            {
-              description: loadout.gadgets[2]?.description,
-              icon: <Fire size={16} />,
-              id: loadout.gadgets[2]?.id,
-              imageUrl: loadout.gadgets[2]?.imageUrl,
-              label: loadout.gadgets[2]?.label,
-              recentlyAdjusted: loadout.gadgets[2]?.recentlyAdjusted,
-              title: 'Gadget',
-            },
-          ]
-        : [],
-    [loadout],
-  );
+  const onClickSave = async () => {
+    const currentLoadouts = getSavedLoadoutKeys();
+    if (loadoutKey && !currentLoadouts.includes(loadoutKey)) {
+      // save new key
+      addSavedLoadout(loadoutKey);
+      toast({
+        description: (
+          <>
+            Saved <strong>{loadout?.loadoutName ?? 'Loadout'}</strong> to local
+            storage!
+          </>
+        ),
+        title: 'Loadout saved!',
+      });
+    }
+  };
 
   return (
     <div className="w-screen flex flex-col items-center justify-center">
-      <div className={buttonContainer({ firstLoadout: items.length === 0 })}>
-        <button
-          className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 py-4 rounded-lg uppercase italic"
-          onClick={onClickLoadout}
-          type="button"
-        >
-          {items.length ? 'Roll another!' : 'Roll your loadout'}
-        </button>
-        <div className="flex flex-row items-center justify-between gap-8">
-          {items.length ? (
+      <div className={buttonContainer({ firstLoadout: !loadout })}>
+        <div className="flex flex-row gap-2">
+          <button
+            className="text-3xl bg-yellow-400 text-gray-800 font-bold hover:bg-yellow-300 transition-colors px-6 h-16 w-full rounded-lg uppercase flex flex-row items-center gap-2 justify-center"
+            onClick={onClickLoadout}
+            type="button"
+          >
+            <DicesIcon />
+            {loadout ? 'Roll another!' : 'Roll loadout'}
+          </button>
+          {recents.length ? (
+            <Popover>
+              <motion.div
+                animate="animate"
+                initial="initial"
+                variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
+              >
+                <PopoverTrigger className="h-16 flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
+                  <Rewind
+                    size={24}
+                    weight="fill"
+                  />
+                </PopoverTrigger>
+              </motion.div>
+              <PopoverContent className="border-none font-sans w-84">
+                <h1 className="text-3xl">Recents Builds</h1>
+                <div className="flex flex-col gap-2">
+                  {recents.map((recentLoadout) => {
+                    const currentLoadoutKey = serializeLoadout(recentLoadout);
+
+                    return (
+                      <PopoverClose
+                        asChild
+                        key={currentLoadoutKey}
+                      >
+                        <a
+                          className="text-md text-white"
+                          href={`/${currentLoadoutKey}`}
+                        >
+                          {recentLoadout.loadoutName}
+                        </a>
+                      </PopoverClose>
+                    );
+                  })}
+                </div>
+              </PopoverContent>
+            </Popover>
+          ) : null}
+        </div>
+        <div className="flex flex-row items-center justify-end gap-2 w-full">
+          {loadout ? (
             <motion.button
               animate="animate"
-              className="flex flex-row items-center gap-2 text-lg bg-finals-red text-finals-white font-bold hover:bg-red-400 transition-colors px-4 py-2 rounded-lg uppercase italic"
+              className="flex flex-row items-center gap-2 text-xl border border-white bg-finals-black text-finals-white font-bold hover:bg-yellow-500 transition-colors px-4 py-2 rounded-lg uppercase italic"
+              initial="initial"
+              onClick={onClickSave}
+              type="button"
+              variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
+            >
+              <FloppyDisk
+                size={24}
+                weight="duotone"
+              />
+              Save
+            </motion.button>
+          ) : null}
+          {loadout ? (
+            <motion.button
+              animate="animate"
+              className="flex flex-row items-center gap-2 text-lg border border-finals-red bg-finals-red text-finals-white font-bold hover:bg-red-400 transition-colors px-4 py-2 rounded-lg uppercase italic"
               initial="initial"
               onClick={copyToClipboard}
               type="button"
@@ -206,75 +218,10 @@ export const Page = () => {
               Share
             </motion.button>
           ) : null}
-          {recents.length ? (
-            <Popover>
-              <motion.div
-                animate="animate"
-                initial="initial"
-                variants={{ animate: { opacity: 1 }, initial: { opacity: 0 } }}
-              >
-                <PopoverTrigger className="flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
-                  <Rewind size={16} /> Recent
-                </PopoverTrigger>
-              </motion.div>
-              <PopoverContent>
-                <h1>Recents Builds</h1>
-                <div className="flex flex-col gap-2">
-                  {recents.map((recentLoadout) => {
-                    const currentLoadoutKey = serializeLoadout(recentLoadout);
-
-                    return (
-                      <a
-                        className="text-sm text-white"
-                        href={`/${currentLoadoutKey}`}
-                        key={currentLoadoutKey}
-                      >
-                        {recentLoadout.loadoutName}
-                      </a>
-                    );
-                  })}
-                </div>
-              </PopoverContent>
-            </Popover>
-          ) : null}
         </div>
       </div>
       <div ref={contestantElementRef}>
-        {items.length && loadout ? (
-          <AnimatePresence mode="wait">
-            <motion.div
-              animate="animate"
-              className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mt-10 mb-40"
-              exit="initial"
-              initial="initial"
-              key={loadoutKey}
-              variants={{
-                animate: { transition: { staggerChildren: 0.1 } },
-                exit: { transition: { staggerChildren: 0.1 } },
-              }}
-            >
-              <motion.h2
-                animate="animate"
-                className="text-3xl text-center w-full"
-                exit="initial"
-                initial="initial"
-                key={`${loadoutKey}-name`}
-                variants={{
-                  animate: { opacity: 1, scale: 1 },
-                  initial: { opacity: 0, scale: 0 },
-                }}
-              >
-                {loadout.loadoutName}
-              </motion.h2>
-              {items.map((item) => (
-                <ItemCard
-                  key={item.id}
-                  {...item}
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
-        ) : null}
+        {loadout ? <LoadoutDisplay loadout={loadout} /> : null}
       </div>
     </div>
   );

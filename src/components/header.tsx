@@ -1,5 +1,5 @@
 import { cvu } from '@/lib/cvu';
-import { Person, SelectionAll } from '@phosphor-icons/react';
+import { FloppyDiskBack, Person, SelectionAll } from '@phosphor-icons/react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
@@ -37,14 +37,24 @@ export const Header = () => {
         <div className="flex flex-col gap-2 md:flex-row md:gap-8 pt-8 border-t border-t-gray-500 md:pt-0 md:border-t-0 md:pl-12 md:border-l md:border-l-gray-500 w-full">
           <a
             className={linkClasses({
-              active: pageContext.urlPathname !== '/all',
+              active:
+                pageContext.urlPathname !== '/all' &&
+                !pageContext.urlPathname.includes('/saved'),
             })}
             onClick={() => navigate('/')}
           >
             <Person size={NAV_ITEM_ICON_SIZE} />
             Loadouts
           </a>
-          <div className="w-[1px] h-full bg-gray-500" />
+          <a
+            className={linkClasses({
+              active: pageContext.urlPathname.startsWith('/saved'),
+            })}
+            onClick={() => navigate('/saved')}
+          >
+            <FloppyDiskBack size={NAV_ITEM_ICON_SIZE} />
+            Saved
+          </a>
           <a
             className={linkClasses({
               active: pageContext.urlPathname === '/all',

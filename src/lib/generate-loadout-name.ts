@@ -395,7 +395,7 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Feeder`,
     `${item.label} Sweatlord`,
     `${item.label} Bot`,
-    `${item.label} AFK`,
+    `${item.label} AFKer`,
     `${item.label} Clicker`,
     `${item.label} Backseater`,
     `${item.label} Gremlin`,
