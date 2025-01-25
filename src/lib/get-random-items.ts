@@ -18,11 +18,21 @@ import { getGadgetsForClass } from './get-gadgets-for-class';
 import {
   type BaseItemType,
   type ClassType,
+  type ContestantClass,
   type ContestantGadget,
   type ContestantLoadout,
   type ContestantSpecialization,
   type ContestantWeapon,
 } from './schema';
+
+export type Locks = {
+  contestant?: ContestantClass;
+  gadgets?: GadgetWithPosition[];
+  specialization?: ContestantSpecialization;
+  weapon?: ContestantWeapon;
+};
+
+type GadgetWithPosition = ContestantGadget & { position: number };
 
 type WeightedItem = BaseItemType & {
   [key: string]: unknown;
@@ -80,8 +90,72 @@ const getRandomItems = <T extends WeightedItem>(
   return selected;
 };
 
-const getRandomContestant = () => {
+const findCommonClassTypes = (gadgets: ContestantGadget[]): ClassType[] => {
+  if (!gadgets.length) {
+    return [];
+  }
+
+  const commonTypes = new Set(gadgets[0].classType);
+
+  for (let index = 1; index < gadgets.length; index++) {
+    const currentGadgetTypes = new Set(gadgets[index].classType);
+
+    for (const type of commonTypes) {
+      if (!currentGadgetTypes.has(type)) {
+        commonTypes.delete(type);
+      }
+    }
+
+    if (commonTypes.size === 0) break;
+  }
+
+  return Array.from(commonTypes) as ClassType[];
+};
+
+const filterGadgetsByCommonTypes = (
+  gadgets: ContestantGadget[],
+): ContestantGadget[] => {
+  const commonTypes = findCommonClassTypes(gadgets);
+
+  if (commonTypes.length === 0) return [];
+
+  return gadgets.filter((gadget) =>
+    commonTypes.every((type) => gadget.classType.includes(type)),
+  );
+};
+
+const getRandomContestant = (locks?: Locks) => {
   const MERGED_CONTESTANTS = [lightClass, mediumClass, heavyClass];
+
+  if (locks?.contestant) {
+    return [locks.contestant];
+  }
+
+  if (locks?.specialization) {
+    const filteredContestants = MERGED_CONTESTANTS.filter(
+      (contestant) => contestant.type === locks.specialization?.classType,
+    );
+    return getRandomItems(filteredContestants, 1, false);
+  }
+
+  if (locks?.weapon) {
+    const filteredContestants = MERGED_CONTESTANTS.filter(
+      (contestant) => contestant.type === locks.weapon?.classType,
+    );
+    return getRandomItems(filteredContestants, 1, false);
+  }
+
+  if (locks?.gadgets) {
+    const filteredGadgets = filterGadgetsByCommonTypes(locks.gadgets);
+    const supportedClassTypes = filteredGadgets.flatMap(
+      (gadget) => gadget.classType,
+    );
+    const filteredContestants = MERGED_CONTESTANTS.filter((contestant) =>
+      supportedClassTypes.includes(contestant.type),
+    );
+    return getRandomItems(filteredContestants, 1, false);
+  }
+
   return getRandomItems(MERGED_CONTESTANTS, 1, false);
 };
 
@@ -116,16 +190,61 @@ export const getContestantMeta = (
   }
 };
 
-export const getRandomLoadout = (): ContestantLoadout => {
-  const [contestant] = getRandomContestant();
-  const meta = getContestantMeta(contestant.type);
-  const possibleGadgets = getGadgetsForClass(contestant.type);
+const getRandomLoadoutGadgets = (contestantType: ClassType, locks?: Locks) => {
+  const possibleGadgets = getGadgetsForClass(contestantType, locks);
+  const maybeLockedGadgets = locks?.gadgets ?? [];
 
-  const gadgets = getRandomItems(possibleGadgets, 3, true);
-  const [specialization] = getRandomItems(meta.specializations, 1, true);
-  const [weapon] = getRandomItems(meta.weapons, 1, true);
+  // eslint-disable-next-line unicorn/no-new-array
+  let mergedGadgets: Array<ContestantGadget | null> = new Array(3).fill(null);
+
+  for (const { position, ...lockedGadget } of maybeLockedGadgets) {
+    mergedGadgets[position] = lockedGadget;
+  }
+
+  const remainingSlots = mergedGadgets.filter(
+    (currentGadget) => currentGadget === null,
+  ).length;
+  const randomGadgets = getRandomItems(possibleGadgets, remainingSlots, true);
+
+  let randomIndex = 0;
+  mergedGadgets = mergedGadgets.map((gadget) =>
+    gadget === null ? randomGadgets[randomIndex++] : gadget,
+  );
+
+  return mergedGadgets as ContestantGadget[];
+};
+
+type GetRandomLoadoutOptions = {
+  locks: Locks;
+};
+
+export const getRandomLoadout = (
+  options?: GetRandomLoadoutOptions,
+): ContestantLoadout => {
+  const [contestant] = getRandomContestant(options?.locks);
+  const meta = getContestantMeta(contestant.type);
+
+  const gadgets = getRandomLoadoutGadgets(contestant.type, options?.locks);
+
+  const maybeLockedSpecialization = options?.locks.specialization
+    ? [options?.locks.specialization]
+    : null;
+  const [specialization] =
+    maybeLockedSpecialization ?? getRandomItems(meta.specializations, 1, true);
+
+  const maybeLockedWeapon = options?.locks.weapon
+    ? [options?.locks.weapon]
+    : null;
+  const [weapon] = maybeLockedWeapon ?? getRandomItems(meta.weapons, 1, true);
+
   const loadout = { contestant, gadgets, specialization, weapon };
   const loadoutName = generateLoadoutName(loadout);
 
-  return { contestant, gadgets, loadoutName, specialization, weapon };
+  return {
+    contestant,
+    gadgets,
+    loadoutName,
+    specialization,
+    weapon,
+  };
 };

@@ -62,7 +62,7 @@ export const Header = () => {
             onClick={() => navigate('/all')}
           >
             <SelectionAll size={NAV_ITEM_ICON_SIZE} />
-            All Equipment
+            Equipment
           </a>
         </div>
       </div>

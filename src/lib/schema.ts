@@ -55,9 +55,7 @@ export type PatchNotes = {
   url: string;
 };
 
-type DamageCriticalType = 'alt' | 'headshot' | 'none';
-
-type WeaponType =
+export type WeaponType =
   | 'assault-rifle'
   | 'grenade-launcher'
   | 'handgun'
@@ -66,3 +64,5 @@ type WeaponType =
   | 'melee'
   | 'shotgun'
   | 'smg';
+
+type DamageCriticalType = 'alt' | 'headshot' | 'none';

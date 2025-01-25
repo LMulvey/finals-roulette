@@ -91,6 +91,7 @@ const adjectives = {
     'Over-The-Top-Huffy',
   ],
   defensive: [
+    'Skibidi',
     'Guarded',
     'Shielded',
     'Paranoid',
@@ -170,6 +171,7 @@ const adjectives = {
     'Deflection-Prone',
   ],
   sneaky: [
+    'Negative Aura',
     'Sketchy',
     'Sus',
     'Backstabbing',
@@ -253,10 +255,10 @@ const adjectives = {
     'Little Stinker',
   ],
   technical: [
-    'Over-engineered',
-    'Galaxy-brain',
-    'Try-hard',
-    'Streaming to 1 viewer',
+    'Over-Engineered',
+    'Galaxy-Brain',
+    'Try-Hard',
+    'Streaming To 1 Viewer',
     'Sweaty',
     '9001 IQ',
     'Technical',
@@ -339,13 +341,36 @@ const adjectives = {
 };
 
 const patterns = {
-  allRanged: (loadout: Loadout) =>
-    loadout.weapon.id.includes('bow') ||
+  bow: (loadout: Loadout) =>
+    loadout.weapon.label.toLowerCase().includes('bow')
+      ? ['Bow-zo', 'Heavy Hunter', 'Strung-Out', 'Bow-man']
+      : [],
+  leftClick: (loadout: Loadout) => {
+    const weaponName = loadout.weapon.label.toLowerCase();
+
+    if (
+      weaponName.includes('m11') ||
+      weaponName.includes('flamethrower') ||
+      weaponName.includes('sword')
+    ) {
+      return ['Left Click Legend', 'EZ Mode', 'Fuck-O'];
+    }
+
+    return [];
+  },
+  sniper: (loadout: Loadout) =>
     loadout.weapon.type === 'marksman-rifle'
-      ? ['Tent Erector', 'Chris Kyle At Home']
+      ? [
+          'Tent Erector',
+          'Chris Kyle At Home',
+          'Bush Wookie',
+          'Inactive Participant',
+          'Teabag Recipient',
+          'Serial Disconnector',
+        ]
       : [],
   sword: (loadout: Loadout) =>
-    loadout.weapon.type === 'melee' && loadout.weapon.id.includes('sword')
+    loadout.weapon.id.includes('sword')
       ? ['Reddit Warrior', 'Bushido Bob', 'Tom Cruise in The Last Samurai']
       : [],
   tooManyGrenades: (loadout: Loadout) => {
@@ -353,12 +378,7 @@ const patterns = {
       gadget.label.toLowerCase().includes('grenade'),
     );
     return grenades?.length >= 2
-      ? [
-          'Peter Pitcher',
-          'Fraggy Frank',
-          'Grenade Greg',
-          'Hides-behind-wall-while-throwing-bombs',
-        ]
+      ? ['Peter Pitcher', 'Fraggy Frank', 'Grenade Greg', 'Blind Bomb Lobber']
       : [];
   },
 };
@@ -386,7 +406,7 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Haystack`,
     `${item.label} Carry`,
     `${item.label} Tank`,
-    `${item.label} MetaChaser`,
+    `${item.label} Meta-chaser`,
     `${item.label} Nooblord`,
     `${item.label} Trashlord`,
     `${item.label} Sigma Simp`,
@@ -395,7 +415,6 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Feeder`,
     `${item.label} Sweatlord`,
     `${item.label} Bot`,
-    `${item.label} AFKer`,
     `${item.label} Clicker`,
     `${item.label} Backseater`,
     `${item.label} Gremlin`,
@@ -409,7 +428,6 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Sandbagger`,
     `${item.label} Int Lord`,
     `${item.label} W Keyer`,
-    `${item.label} Mouse1 Spammer`,
     `${item.label} Cheese Lover`,
     `${item.label} Spawn Camper`,
     `${item.label} Rage Quitter`,

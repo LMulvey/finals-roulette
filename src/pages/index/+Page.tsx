@@ -1,23 +1,22 @@
 import { LoadoutDisplay } from '@/components/loadout-display';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
 import { useToast } from '@/hooks/use-toast';
 import { cvu } from '@/lib/cvu';
-import { getRandomLoadout } from '@/lib/get-random-items';
+import { getRandomLoadout, type Locks } from '@/lib/get-random-items';
 import { getRecentLoadouts, saveRecentLoadout } from '@/lib/recents-storage';
 import { addSavedLoadout, getSavedLoadoutKeys } from '@/lib/saved-loadouts';
 import { type ContestantLoadout } from '@/lib/schema';
 import { deserializeLoadout, serializeLoadout } from '@/lib/serialize';
-import { FloppyDisk, Rewind, ShareFat } from '@phosphor-icons/react';
-import { PopoverClose } from '@radix-ui/react-popover';
+import { FloppyDisk, ShareFat } from '@phosphor-icons/react';
 import { DicesIcon } from 'lucide-react';
 import * as motion from 'motion/react-client';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { clientOnly } from 'vike-react/clientOnly';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
+
+const RecentsToggle = clientOnly(
+  async () => (await import('@/lib/recents-toggle')).RecentsToggle,
+);
 
 const LOADOUT_PARAMETER = 'loadout';
 
@@ -44,10 +43,11 @@ export const Page = () => {
     return maybeGetLoadout(maybeLoadoutParameter);
   });
   const [loadoutKey, setLoadoutKey] = useState<null | string>(null);
+  const [locks, setLocks] = useState<Locks>({});
   const recents = getRecentLoadouts();
 
   const onClickLoadout = useCallback(() => {
-    const randomLoadout = getRandomLoadout();
+    const randomLoadout = getRandomLoadout({ locks });
     const newLoadoutKey = serializeLoadout(randomLoadout);
 
     setLoadoutKey(newLoadoutKey);
@@ -81,13 +81,13 @@ export const Page = () => {
         top: offsetPosition,
       });
     }
-  }, [recents]);
+  }, [locks, recents]);
 
   useEffect(() => {
-    if (!loadout) {
+    if (!loadout || !loadoutKey) {
       onClickLoadout();
     }
-  }, [loadout, onClickLoadout]);
+  }, [loadout, loadoutKey, onClickLoadout]);
 
   useEffect(() => {
     const maybeLoadoutParameter = pageContext.routeParams[LOADOUT_PARAMETER];
@@ -136,7 +136,7 @@ export const Page = () => {
 
   return (
     <div className="w-screen flex flex-col items-center justify-center">
-      <div className="sticky top-0 left-0 w-full bg-finals-black flex items-center justify-center">
+      <div className="sticky md:static top-0 left-0 w-full bg-finals-black flex items-center justify-center">
         <div className={buttonContainer({ firstLoadout: !loadout })}>
           <div className="flex flex-row gap-2">
             <button
@@ -147,47 +147,7 @@ export const Page = () => {
               <DicesIcon />
               {loadout ? 'Roll another!' : 'Roll loadout'}
             </button>
-            {recents.length ? (
-              <Popover>
-                <motion.div
-                  animate="animate"
-                  initial="initial"
-                  variants={{
-                    animate: { opacity: 1 },
-                    initial: { opacity: 0 },
-                  }}
-                >
-                  <PopoverTrigger className="h-16 flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
-                    <Rewind
-                      size={24}
-                      weight="fill"
-                    />
-                  </PopoverTrigger>
-                </motion.div>
-                <PopoverContent className="border-none font-sans w-84">
-                  <h1 className="text-3xl">Recents Builds</h1>
-                  <div className="flex flex-col gap-2">
-                    {recents.map((recentLoadout) => {
-                      const currentLoadoutKey = serializeLoadout(recentLoadout);
-
-                      return (
-                        <PopoverClose
-                          asChild
-                          key={currentLoadoutKey}
-                        >
-                          <a
-                            className="text-md text-white"
-                            href={`/${currentLoadoutKey}`}
-                          >
-                            {recentLoadout.loadoutName}
-                          </a>
-                        </PopoverClose>
-                      );
-                    })}
-                  </div>
-                </PopoverContent>
-              </Popover>
-            ) : null}
+            <RecentsToggle />
           </div>
           <div className="flex flex-row items-center justify-end gap-2 w-full">
             {loadout ? (
@@ -226,7 +186,13 @@ export const Page = () => {
         </div>
       </div>
       <div ref={contestantElementRef}>
-        {loadout ? <LoadoutDisplay loadout={loadout} /> : null}
+        {loadout ? (
+          <LoadoutDisplay
+            loadout={loadout}
+            locks={locks}
+            setLocks={setLocks}
+          />
+        ) : null}
       </div>
     </div>
   );

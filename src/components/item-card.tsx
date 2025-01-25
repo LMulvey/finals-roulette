@@ -10,12 +10,14 @@ import {
   ArrowFatDown,
   ArrowFatUp,
   LinkSimple,
+  LockSimple,
   TriangleDashed,
 } from '@phosphor-icons/react';
+import { LockIcon, UnlockIcon } from 'lucide-react';
 import * as motion from 'motion/react-client';
 import { type ReactNode, type Ref } from 'react';
 
-type Item = {
+export type Item = {
   description?: string;
   icon: ReactNode;
   id: string;
@@ -49,7 +51,22 @@ const triggerClass = cvu('bg-finals-red p-2 rounded-full text-white', {
   },
 });
 
-export const ItemCard = (item: Item & { ref?: Ref<HTMLDivElement> }) => {
+const lockButton = cvu(
+  'rounded-full p-2 hover:bg-white/90 flex items-center justify-center bg-white/60 text-finals-black',
+);
+
+export const ItemCard = (
+  item: Item & {
+    lockDisabled?: string;
+    locked?: boolean;
+    onSetLock?: () => void;
+    ref?: Ref<HTMLDivElement>;
+  },
+) => {
+  const lockIcon = (
+    <>{item.locked ? <LockIcon size={18} /> : <UnlockIcon size={18} />}</>
+  );
+
   return (
     <motion.div
       className="rounded-lg bg-gray-800 text-yellow-400 font-bold flex md:flex-col gap-4 items-center w-full md:w-60 h-60 bg-cover bg-no-repeat"
@@ -122,6 +139,39 @@ export const ItemCard = (item: Item & { ref?: Ref<HTMLDivElement> }) => {
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+          ) : null}
+          {item.onSetLock ? (
+            <>
+              {item.lockDisabled ? (
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger className={lockButton()}>
+                      <LockSimple
+                        size={18}
+                        weight="fill"
+                      />
+                    </TooltipTrigger>
+                    <TooltipContent
+                      className="w-64 space-y-3"
+                      side="bottom"
+                    >
+                      <p className="text-lg">Item Auto-Locked!</p>
+                      <p className="text-md font-normal font-sans">
+                        {item.lockDisabled}
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                <button
+                  className={lockButton()}
+                  onClick={() => item.onSetLock?.()}
+                  type="button"
+                >
+                  {lockIcon}
+                </button>
+              )}
+            </>
           ) : null}
         </div>
         <div className="space-y-2 h-28">
