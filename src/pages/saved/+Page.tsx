@@ -43,7 +43,6 @@ export const Page = () => {
           <LoadoutDisplay
             key={serializeLoadout(loadout)}
             loadout={loadout}
-            showToolbar
           />
         ) : null}
       </div>
