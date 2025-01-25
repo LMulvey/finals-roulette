@@ -21,6 +21,8 @@ type SectionItem =
 const CONTESTANTS = [lightClass, mediumClass, heavyClass];
 const FILTER_OPTIONS = [
   'All',
+  'Recently Buffed',
+  'Recently Nerfed',
   'Weapons',
   'Specializations',
   'Gadgets',
@@ -105,6 +107,11 @@ export const Page = () => {
     );
   };
 
+  const isAllFilter =
+    activeFilter === 'All' ||
+    activeFilter === 'Recently Buffed' ||
+    activeFilter === 'Recently Nerfed';
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-8">All Classes</h1>
@@ -161,22 +168,52 @@ export const Page = () => {
 
               <div className="flex flex-col gap-6">
                 {renderSection(
-                  meta.weapons,
+                  meta.weapons.filter((item) => {
+                    if (activeFilter === 'Recently Buffed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'buff';
+                    }
+
+                    if (activeFilter === 'Recently Nerfed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
+                    }
+
+                    return true;
+                  }),
                   'Weapon',
                   Sword,
-                  activeFilter === 'All' || activeFilter === 'Weapons',
+                  isAllFilter || activeFilter === 'Weapons',
                 )}
                 {renderSection(
-                  meta.specializations,
+                  meta.specializations.filter((item) => {
+                    if (activeFilter === 'Recently Buffed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'buff';
+                    }
+
+                    if (activeFilter === 'Recently Nerfed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
+                    }
+
+                    return true;
+                  }),
                   'Specialization',
                   MagicWand,
-                  activeFilter === 'All' || activeFilter === 'Specializations',
+                  isAllFilter || activeFilter === 'Specializations',
                 )}
                 {renderSection(
-                  meta.gadgets,
+                  meta.gadgets.filter((item) => {
+                    if (activeFilter === 'Recently Buffed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'buff';
+                    }
+
+                    if (activeFilter === 'Recently Nerfed') {
+                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
+                    }
+
+                    return true;
+                  }),
                   'Gadget',
                   Fire,
-                  activeFilter === 'All' || activeFilter === 'Gadgets',
+                  isAllFilter || activeFilter === 'Gadgets',
                 )}
               </div>
             </div>
