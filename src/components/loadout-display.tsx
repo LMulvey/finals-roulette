@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { ItemCard } from './item-card';
 import { type Locks } from '@/lib/get-random-items';
 import { type ContestantLoadout } from '@/lib/schema';
@@ -13,8 +14,8 @@ export const LoadoutDisplay = ({
   setLocks,
 }: {
   readonly loadout: ContestantLoadout;
-  readonly locks: Locks;
-  readonly setLocks: Dispatch<SetStateAction<Locks>>;
+  readonly locks?: Locks;
+  readonly setLocks?: Dispatch<SetStateAction<Locks>>;
 }) => {
   const loadoutKey = serializeLoadout(loadout);
   const items = useMemo(
@@ -28,17 +29,19 @@ export const LoadoutDisplay = ({
               imageUrl: loadout.contestant.imageUrl,
               label: loadout.contestant.label,
               lockDisabled:
-                locks.specialization || locks.weapon
+                locks?.specialization || locks?.weapon
                   ? 'Locking the weapon or specialization also locks the contestant.'
                   : '',
-              locked: Boolean(locks.contestant),
-              onSetLock: () =>
-                setLocks((currentLocks) => ({
-                  ...currentLocks,
-                  contestant: currentLocks.contestant
-                    ? undefined
-                    : loadout.contestant,
-                })),
+              locked: Boolean(locks?.contestant),
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => ({
+                      ...currentLocks,
+                      contestant: currentLocks.contestant
+                        ? undefined
+                        : loadout.contestant,
+                    }))
+                : undefined,
               title: 'Contestant',
             },
             {
@@ -47,15 +50,17 @@ export const LoadoutDisplay = ({
               id: loadout.specialization.id,
               imageUrl: loadout.specialization.imageUrl,
               label: loadout.specialization.label,
-              locked: Boolean(locks.specialization),
-              onSetLock: () =>
-                setLocks((currentLocks) => ({
-                  ...currentLocks,
-                  contestant: loadout.contestant,
-                  specialization: currentLocks.specialization
-                    ? undefined
-                    : loadout.specialization,
-                })),
+              locked: Boolean(locks?.specialization),
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => ({
+                      ...currentLocks,
+                      contestant: loadout.contestant,
+                      specialization: currentLocks?.specialization
+                        ? undefined
+                        : loadout.specialization,
+                    }))
+                : undefined,
               recentlyAdjusted: loadout.specialization.recentlyAdjusted,
               title: 'Specialization',
             },
@@ -65,13 +70,15 @@ export const LoadoutDisplay = ({
               id: loadout.weapon.id,
               imageUrl: loadout.weapon.imageUrl,
               label: loadout.weapon.label,
-              locked: Boolean(locks.weapon),
-              onSetLock: () =>
-                setLocks((currentLocks) => ({
-                  ...currentLocks,
-                  contestant: loadout.contestant,
-                  weapon: currentLocks.weapon ? undefined : loadout.weapon,
-                })),
+              locked: Boolean(locks?.weapon),
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => ({
+                      ...currentLocks,
+                      contestant: loadout.contestant,
+                      weapon: currentLocks?.weapon ? undefined : loadout.weapon,
+                    }))
+                : undefined,
               recentlyAdjusted: loadout.weapon.recentlyAdjusted,
               title: 'Weapon',
             },
@@ -81,25 +88,30 @@ export const LoadoutDisplay = ({
               id: loadout.gadgets[0]?.id,
               imageUrl: loadout.gadgets[0]?.imageUrl,
               label: loadout.gadgets[0]?.label,
-              locked: locks.gadgets?.some(
+              locked: locks?.gadgets?.some(
                 (gadget) => gadget.id === loadout.gadgets[0].id,
               ),
-              onSetLock: () =>
-                setLocks((currentLocks) => {
-                  const position = 0;
-                  const newGadget = { ...loadout.gadgets[position], position };
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => {
+                      const position = 0;
+                      const newGadget = {
+                        ...loadout.gadgets[position],
+                        position,
+                      };
 
-                  return {
-                    ...currentLocks,
-                    gadgets: currentLocks.gadgets?.some(
-                      (gadget) => gadget.id === newGadget.id,
-                    )
-                      ? currentLocks.gadgets?.filter(
-                          (gadget) => gadget.id !== newGadget.id,
+                      return {
+                        ...currentLocks,
+                        gadgets: currentLocks?.gadgets?.some(
+                          (gadget) => gadget.id === newGadget.id,
                         )
-                      : [...(currentLocks.gadgets ?? []), newGadget],
-                  };
-                }),
+                          ? currentLocks?.gadgets?.filter(
+                              (gadget) => gadget.id !== newGadget.id,
+                            )
+                          : [...(currentLocks?.gadgets ?? []), newGadget],
+                      };
+                    })
+                : undefined,
               recentlyAdjusted: loadout.gadgets[0]?.recentlyAdjusted,
               title: 'Gadget',
             },
@@ -109,25 +121,30 @@ export const LoadoutDisplay = ({
               id: loadout.gadgets[1]?.id,
               imageUrl: loadout.gadgets[1]?.imageUrl,
               label: loadout.gadgets[1]?.label,
-              locked: locks.gadgets?.some(
+              locked: locks?.gadgets?.some(
                 (gadget) => gadget.id === loadout.gadgets[1].id,
               ),
-              onSetLock: () =>
-                setLocks((currentLocks) => {
-                  const position = 1;
-                  const newGadget = { ...loadout.gadgets[position], position };
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => {
+                      const position = 1;
+                      const newGadget = {
+                        ...loadout.gadgets[position],
+                        position,
+                      };
 
-                  return {
-                    ...currentLocks,
-                    gadgets: currentLocks.gadgets?.some(
-                      (gadget) => gadget.id === newGadget.id,
-                    )
-                      ? currentLocks.gadgets?.filter(
-                          (gadget) => gadget.id !== newGadget.id,
+                      return {
+                        ...currentLocks,
+                        gadgets: currentLocks?.gadgets?.some(
+                          (gadget) => gadget.id === newGadget.id,
                         )
-                      : [...(currentLocks.gadgets ?? []), newGadget],
-                  };
-                }),
+                          ? currentLocks?.gadgets?.filter(
+                              (gadget) => gadget.id !== newGadget.id,
+                            )
+                          : [...(currentLocks?.gadgets ?? []), newGadget],
+                      };
+                    })
+                : undefined,
               recentlyAdjusted: loadout.gadgets[1]?.recentlyAdjusted,
               title: 'Gadget',
             },
@@ -137,25 +154,30 @@ export const LoadoutDisplay = ({
               id: loadout.gadgets[2]?.id,
               imageUrl: loadout.gadgets[2]?.imageUrl,
               label: loadout.gadgets[2]?.label,
-              locked: locks.gadgets?.some(
+              locked: locks?.gadgets?.some(
                 (gadget) => gadget.id === loadout.gadgets[2].id,
               ),
-              onSetLock: () =>
-                setLocks((currentLocks) => {
-                  const position = 2;
-                  const newGadget = { ...loadout.gadgets[position], position };
+              onSetLock: setLocks
+                ? () =>
+                    setLocks((currentLocks) => {
+                      const position = 2;
+                      const newGadget = {
+                        ...loadout.gadgets[position],
+                        position,
+                      };
 
-                  return {
-                    ...currentLocks,
-                    gadgets: currentLocks.gadgets?.some(
-                      (gadget) => gadget.id === newGadget.id,
-                    )
-                      ? currentLocks.gadgets?.filter(
-                          (gadget) => gadget.id !== newGadget.id,
+                      return {
+                        ...currentLocks,
+                        gadgets: currentLocks?.gadgets?.some(
+                          (gadget) => gadget.id === newGadget.id,
                         )
-                      : [...(currentLocks.gadgets ?? []), newGadget],
-                  };
-                }),
+                          ? currentLocks?.gadgets?.filter(
+                              (gadget) => gadget.id !== newGadget.id,
+                            )
+                          : [...(currentLocks?.gadgets ?? []), newGadget],
+                      };
+                    })
+                : undefined,
               recentlyAdjusted: loadout.gadgets[2]?.recentlyAdjusted,
               title: 'Gadget',
             },
