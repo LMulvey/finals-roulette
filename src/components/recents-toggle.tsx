@@ -1,5 +1,5 @@
-import { getRecentLoadouts } from './recents-storage';
-import { serializeLoadout } from './serialize';
+import { getRecentLoadouts } from '../lib/recents-storage';
+import { serializeLoadout } from '../lib/serialize';
 import {
   Popover,
   PopoverContent,

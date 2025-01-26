@@ -15,7 +15,7 @@ import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
 const RecentsToggle = clientOnly(
-  async () => (await import('@/lib/recents-toggle')).RecentsToggle,
+  async () => (await import('@/components/recents-toggle')).RecentsToggle,
 );
 
 const LOADOUT_PARAMETER = 'loadout';
@@ -46,25 +46,31 @@ export const Page = () => {
   const [locks, setLocks] = useState<Locks>({});
   const recents = getRecentLoadouts();
 
+  const updateLoadout = useCallback(
+    (newLoadout: ContestantLoadout) => {
+      const newLoadoutKey = serializeLoadout(newLoadout);
+      setLoadoutKey(newLoadoutKey);
+
+      if (
+        !recents.some(
+          (recentLoadout) => serializeLoadout(recentLoadout) === newLoadoutKey,
+        )
+      ) {
+        saveRecentLoadout(newLoadoutKey);
+      }
+
+      navigate(`/${newLoadoutKey}`, {
+        keepScrollPosition: true,
+        overwriteLastHistoryEntry: true,
+      });
+    },
+    [recents],
+  );
+
   const onClickLoadout = useCallback(() => {
     const randomLoadout = getRandomLoadout({ locks });
-    const newLoadoutKey = serializeLoadout(randomLoadout);
 
-    setLoadoutKey(newLoadoutKey);
-    setLoadout(randomLoadout);
-
-    if (
-      !recents.some(
-        (recentLoadout) => serializeLoadout(recentLoadout) === newLoadoutKey,
-      )
-    ) {
-      saveRecentLoadout(newLoadoutKey);
-    }
-
-    navigate(`/${newLoadoutKey}`, {
-      keepScrollPosition: true,
-      overwriteLastHistoryEntry: true,
-    });
+    updateLoadout(randomLoadout);
 
     const { matches: isSmallWindow } = window.matchMedia(
       'screen and (max-width: 674px)',
@@ -81,10 +87,10 @@ export const Page = () => {
         top: offsetPosition,
       });
     }
-  }, [locks, recents]);
+  }, [locks, updateLoadout]);
 
   useEffect(() => {
-    if (!loadout || !loadoutKey) {
+    if (!loadout && !loadoutKey) {
       onClickLoadout();
     }
   }, [loadout, loadoutKey, onClickLoadout]);
@@ -190,6 +196,13 @@ export const Page = () => {
           <LoadoutDisplay
             loadout={loadout}
             locks={locks}
+            onUpdateLoadoutName={(newName) => {
+              const newLoadout: ContestantLoadout = {
+                ...loadout,
+                loadoutName: newName,
+              };
+              updateLoadout(newLoadout);
+            }}
             setLocks={setLocks}
           />
         ) : null}

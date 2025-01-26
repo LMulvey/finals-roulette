@@ -3,20 +3,37 @@ import { ItemCard } from './item-card';
 import { type Locks } from '@/lib/get-random-items';
 import { type ContestantLoadout } from '@/lib/schema';
 import { serializeLoadout } from '@/lib/serialize';
-import { Fire, MagicWand, Person, Sword } from '@phosphor-icons/react';
+import {
+  Check,
+  Fire,
+  MagicWand,
+  Person,
+  Sword,
+  X,
+} from '@phosphor-icons/react';
 import { AnimatePresence } from 'motion/react';
 import * as motion from 'motion/react-client';
-import { type Dispatch, type SetStateAction, useMemo } from 'react';
+import {
+  type Dispatch,
+  type SetStateAction,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 export const LoadoutDisplay = ({
   loadout,
   locks,
+  onUpdateLoadoutName,
   setLocks,
 }: {
   readonly loadout: ContestantLoadout;
   readonly locks?: Locks;
+  readonly onUpdateLoadoutName?: (newName: string) => void;
   readonly setLocks?: Dispatch<SetStateAction<Locks>>;
 }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedName, setEditedName] = useState(loadout.loadoutName);
   const loadoutKey = serializeLoadout(loadout);
   const items = useMemo(
     () =>
@@ -186,6 +203,10 @@ export const LoadoutDisplay = ({
     [loadout, locks, setLocks],
   );
 
+  useEffect(() => {
+    setEditedName(loadout.loadoutName);
+  }, [loadout.loadoutName, loadoutKey]);
+
   return (
     <>
       {items.length && loadout ? (
@@ -201,9 +222,9 @@ export const LoadoutDisplay = ({
               exit: { transition: { staggerChildren: 0.1 } },
             }}
           >
-            <motion.h2
+            <motion.div
               animate="animate"
-              className="text-4xl md:text-7xl text-center w-full"
+              className="relative w-full"
               exit="initial"
               initial="initial"
               key={`${loadoutKey}-name`}
@@ -212,9 +233,49 @@ export const LoadoutDisplay = ({
                 initial: { opacity: 0, scale: 0 },
               }}
             >
-              {loadout.loadoutName}
-            </motion.h2>
-
+              {isEditing ? (
+                <div className="flex items-center justify-center gap-2">
+                  <input
+                    autoFocus
+                    className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-none"
+                    onChange={(event) => setEditedName(event.target.value)}
+                    type="text"
+                    value={editedName ?? ''}
+                  />
+                  <div className="flex gap-2">
+                    <button
+                      className="p-2 hover:text-green-500 transition-colors"
+                      onClick={() => {
+                        onUpdateLoadoutName?.(editedName ?? '');
+                        setIsEditing(false);
+                      }}
+                      type="button"
+                    >
+                      <Check size={24} />
+                    </button>
+                    <button
+                      className="p-2 hover:text-red-500 transition-colors"
+                      onClick={() => {
+                        setEditedName(loadout.loadoutName);
+                        setIsEditing(false);
+                      }}
+                      type="button"
+                    >
+                      <X size={24} />
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <h2
+                  className="text-4xl md:text-7xl text-center w-full cursor-pointer hover:opacity-80 transition-opacity"
+                  onClick={
+                    onUpdateLoadoutName ? () => setIsEditing(true) : undefined
+                  }
+                >
+                  {loadout.loadoutName}
+                </h2>
+              )}
+            </motion.div>
             {items.map((item) => {
               return (
                 <ItemCard
