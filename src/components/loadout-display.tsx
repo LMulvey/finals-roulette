@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import { ItemCard } from './item-card';
+import { generateLoadoutName } from '@/lib/generate-loadout-name';
 import { type Locks } from '@/lib/get-random-items';
 import { type ContestantLoadout } from '@/lib/schema';
 import { serializeLoadout } from '@/lib/serialize';
@@ -11,6 +12,7 @@ import {
   Sword,
   X,
 } from '@phosphor-icons/react';
+import { Dices } from 'lucide-react';
 import { AnimatePresence } from 'motion/react';
 import * as motion from 'motion/react-client';
 import {
@@ -224,17 +226,17 @@ export const LoadoutDisplay = ({
           >
             <motion.div
               animate="animate"
-              className="relative w-full"
+              className="relative w-full flex flex-row gap-2 items-center justify-center"
               exit="initial"
               initial="initial"
-              key={`${loadoutKey}-name`}
+              key="loadout-container"
               variants={{
                 animate: { opacity: 1, scale: 1 },
                 initial: { opacity: 0, scale: 0 },
               }}
             >
               {isEditing ? (
-                <div className="flex items-center justify-center gap-2">
+                <div className="flex items-center justify-center gap-2 w-full">
                   <input
                     autoFocus
                     className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-none"
@@ -267,7 +269,7 @@ export const LoadoutDisplay = ({
                 </div>
               ) : (
                 <h2
-                  className="text-4xl md:text-7xl text-center w-full cursor-pointer hover:opacity-80 transition-opacity"
+                  className="text-4xl md:text-7xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={
                     onUpdateLoadoutName ? () => setIsEditing(true) : undefined
                   }
@@ -275,6 +277,19 @@ export const LoadoutDisplay = ({
                   {loadout.loadoutName}
                 </h2>
               )}
+              {onUpdateLoadoutName ? (
+                <button
+                  className="bg-white/80 rounded-full p-4 flex items-center justify-center text-finals-black"
+                  onClick={() => {
+                    // re-roll name
+                    const newName = generateLoadoutName(loadout);
+                    onUpdateLoadoutName(newName);
+                  }}
+                  type="button"
+                >
+                  <Dices size={18} />
+                </button>
+              ) : null}
             </motion.div>
             {items.map((item) => {
               return (
