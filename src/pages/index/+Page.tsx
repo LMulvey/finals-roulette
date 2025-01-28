@@ -142,7 +142,7 @@ export const Page = () => {
 
   return (
     <div className="w-screen flex flex-col items-center justify-center">
-      <div className="sticky md:static top-0 left-0 w-full bg-finals-black flex items-center justify-center">
+      <div className="sticky z-50 md:z-auto md:static top-0 left-0 w-full bg-finals-black flex items-center justify-center">
         <div className={buttonContainer({ firstLoadout: !loadout })}>
           <div className="flex flex-row gap-2">
             <button
