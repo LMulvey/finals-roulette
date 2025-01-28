@@ -218,7 +218,7 @@ export const LoadoutDisplay = ({
             className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mt-10 mb-40"
             exit="initial"
             initial="initial"
-            key={loadoutKey}
+            key="loadout-container"
             variants={{
               animate: { transition: { staggerChildren: 0.1 } },
               exit: { transition: { staggerChildren: 0.1 } },
@@ -229,7 +229,7 @@ export const LoadoutDisplay = ({
               className="relative w-full flex flex-row gap-2 items-center justify-center"
               exit="initial"
               initial="initial"
-              key="loadout-container"
+              key={loadout.loadoutName}
               variants={{
                 animate: { opacity: 1, scale: 1 },
                 initial: { opacity: 0, scale: 0 },

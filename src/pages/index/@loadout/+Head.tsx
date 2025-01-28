@@ -15,6 +15,11 @@ export const Head = () => {
   return (
     <>
       <title>{titleWithTemplate}</title>
+      <link
+        href="/images/logos/the-finals-logo-symbol.crop.png"
+        rel="icon"
+        type="image/svg+xml"
+      />
       <meta
         content={description}
         name="description"
