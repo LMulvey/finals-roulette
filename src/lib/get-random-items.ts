@@ -24,6 +24,7 @@ import {
   type ContestantSpecialization,
   type ContestantWeapon,
 } from './schema';
+import { getSettings } from './settings-storage';
 
 export type Locks = {
   contestant?: ContestantClass;
@@ -125,7 +126,10 @@ const filterGadgetsByCommonTypes = (
 };
 
 const getRandomContestant = (locks?: Locks) => {
-  const MERGED_CONTESTANTS = [lightClass, mediumClass, heavyClass];
+  const settings = getSettings();
+  const MERGED_CONTESTANTS = [lightClass, mediumClass, heavyClass].filter(
+    (contestant) => !settings.disabledEquipmentIds.includes(contestant.id),
+  );
 
   if (locks?.contestant) {
     return [locks.contestant];
@@ -166,26 +170,48 @@ export const getContestantMeta = (
   specializations: ContestantSpecialization[];
   weapons: ContestantWeapon[];
 } => {
+  const settings = getSettings();
   const gadgets = getGadgetsForClass(classType);
   switch (classType) {
     case 'heavy':
       return {
-        gadgets,
-        specializations: heavySpecializations,
-        weapons: heavyWeapons,
+        gadgets: gadgets.filter(
+          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
+        ),
+        specializations: heavySpecializations.filter(
+          (specialization) =>
+            !settings.disabledEquipmentIds.includes(specialization.id),
+        ),
+        weapons: heavyWeapons.filter(
+          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
+        ),
       };
     case 'medium':
       return {
-        gadgets,
-        specializations: mediumSpecializations,
-        weapons: mediumWeapons,
+        gadgets: gadgets.filter(
+          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
+        ),
+        specializations: mediumSpecializations.filter(
+          (specialization) =>
+            !settings.disabledEquipmentIds.includes(specialization.id),
+        ),
+        weapons: mediumWeapons.filter(
+          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
+        ),
       };
     case 'light':
     default:
       return {
-        gadgets,
-        specializations: lightSpecializations,
-        weapons: lightWeapons,
+        gadgets: gadgets.filter(
+          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
+        ),
+        specializations: lightSpecializations.filter(
+          (specialization) =>
+            !settings.disabledEquipmentIds.includes(specialization.id),
+        ),
+        weapons: lightWeapons.filter(
+          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
+        ),
       };
   }
 };
@@ -223,7 +249,6 @@ export const getRandomLoadout = (
 ): ContestantLoadout => {
   const [contestant] = getRandomContestant(options?.locks);
   const meta = getContestantMeta(contestant.type);
-
   const gadgets = getRandomLoadoutGadgets(contestant.type, options?.locks);
 
   const maybeLockedSpecialization = options?.locks.specialization

@@ -6,12 +6,14 @@ import {
 } from './ui/tooltip';
 import { cvu } from '@/lib/cvu';
 import { type PatchNotes } from '@/lib/schema';
+import { getSettings } from '@/lib/settings-storage';
 import {
   ArrowFatDown,
   ArrowFatUp,
   LinkSimple,
   LockSimple,
   TriangleDashed,
+  XCircle,
 } from '@phosphor-icons/react';
 import { LockIcon, UnlockIcon } from 'lucide-react';
 import * as motion from 'motion/react-client';
@@ -55,6 +57,10 @@ const lockButton = cvu(
   'rounded-full p-2 hover:bg-white/90 flex items-center justify-center bg-white/60 text-finals-black',
 );
 
+const disabledButton = cvu(
+  'rounded-full p-2 flex items-center justify-center bg-finals-red/60 text-finals-black',
+);
+
 export const ItemCard = (
   item: Item & {
     lockDisabled?: string;
@@ -66,6 +72,9 @@ export const ItemCard = (
   const lockIcon = (
     <>{item.locked ? <LockIcon size={18} /> : <UnlockIcon size={18} />}</>
   );
+  const settings = getSettings();
+  const isDisabled = settings.disabledEquipmentIds.includes(item.id);
+  const isDescriptionEnabled = settings.showEquipmentDescriptions;
 
   return (
     <motion.div
@@ -173,12 +182,47 @@ export const ItemCard = (
               )}
             </>
           ) : null}
+          {isDisabled ? (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger className={disabledButton()}>
+                  <XCircle size={18} />
+                </TooltipTrigger>
+                <TooltipContent
+                  className="w-64 space-y-3"
+                  side="bottom"
+                >
+                  <p className="text-lg">Item disabled in settings!</p>
+                  <p className="text-md font-normal font-sans">
+                    This item will no longer appear in loadouts. If this is a
+                    mistake, visit the Settings page and remove from your
+                    Disabled Equipment.
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          ) : null}
         </div>
-        <div className="space-y-2 h-28">
+        <div
+          className={cvu('space-y-2', {
+            variants: {
+              descriptionEnabled: {
+                false: ['h-auto bg-gray-500/80 rounded-md px-2 py-1'],
+                true: ['h-28'],
+              },
+            },
+          })({ descriptionEnabled: isDescriptionEnabled })}
+        >
           <p className="text-xl">{item.label}</p>
-          <p className="text-xs font-sans font-medium text-white line-clamp-4 text-ellipsis">
-            {item.description}
-          </p>
+          {isDescriptionEnabled ? (
+            <motion.p
+              animate={{ opacity: 1 }}
+              className="text-xs font-sans font-medium text-white line-clamp-4 text-ellipsis"
+              initial={{ opacity: 0 }}
+            >
+              {item.description}
+            </motion.p>
+          ) : null}
         </div>
       </div>
     </motion.div>

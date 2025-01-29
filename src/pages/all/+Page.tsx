@@ -10,6 +10,7 @@ import {
   type ContestantWeapon,
   type WeaponType,
 } from '@/lib/schema';
+import { getSettings } from '@/lib/settings-storage';
 import { Fire, MagicWand, Sword } from '@phosphor-icons/react';
 import { useState } from 'react';
 
@@ -26,6 +27,7 @@ const FILTER_OPTIONS = [
   'Weapons',
   'Specializations',
   'Gadgets',
+  'Disabled Equipment',
 ] as const;
 type FilterOption = (typeof FILTER_OPTIONS)[number];
 
@@ -107,10 +109,13 @@ export const Page = () => {
     );
   };
 
+  const settings = getSettings();
+
   const isAllFilter =
     activeFilter === 'All' ||
     activeFilter === 'Recently Buffed' ||
-    activeFilter === 'Recently Nerfed';
+    activeFilter === 'Recently Nerfed' ||
+    activeFilter === 'Disabled Equipment';
 
   return (
     <div className="p-8">
@@ -177,6 +182,10 @@ export const Page = () => {
                       return item.recentlyAdjusted?.adjustmentType === 'nerf';
                     }
 
+                    if (activeFilter === 'Disabled Equipment') {
+                      return settings.disabledEquipmentIds.includes(item.id);
+                    }
+
                     return true;
                   }),
                   'Weapon',
@@ -193,6 +202,10 @@ export const Page = () => {
                       return item.recentlyAdjusted?.adjustmentType === 'nerf';
                     }
 
+                    if (activeFilter === 'Disabled Equipment') {
+                      return settings.disabledEquipmentIds.includes(item.id);
+                    }
+
                     return true;
                   }),
                   'Specialization',
@@ -207,6 +220,10 @@ export const Page = () => {
 
                     if (activeFilter === 'Recently Nerfed') {
                       return item.recentlyAdjusted?.adjustmentType === 'nerf';
+                    }
+
+                    if (activeFilter === 'Disabled Equipment') {
+                      return settings.disabledEquipmentIds.includes(item.id);
                     }
 
                     return true;

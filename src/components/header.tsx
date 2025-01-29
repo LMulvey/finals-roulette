@@ -1,12 +1,17 @@
 import { cvu } from '@/lib/cvu';
-import { FloppyDiskBack, Person, SelectionAll } from '@phosphor-icons/react';
+import {
+  FloppyDiskBack,
+  Gear,
+  Person,
+  SelectionAll,
+} from '@phosphor-icons/react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
 const NAV_ITEM_ICON_SIZE = 24;
 
 const linkClasses = cvu(
-  'hover:yellow-300 hover:cursor-pointer text-gray-500 text-4xl font-bold transition-colors flex flex-row items-center gap-2',
+  'hover:yellow-300 hover:cursor-pointer text-gray-500 text-3xl font-bold transition-colors flex flex-row items-center gap-2',
   {
     variants: {
       active: { true: ['text-yellow-300'] },
@@ -39,6 +44,7 @@ export const Header = () => {
             className={linkClasses({
               active:
                 pageContext.urlPathname !== '/all' &&
+                pageContext.urlPathname !== '/settings' &&
                 !pageContext.urlPathname.includes('/saved'),
             })}
             onClick={() => navigate('/')}
@@ -63,6 +69,15 @@ export const Header = () => {
           >
             <SelectionAll size={NAV_ITEM_ICON_SIZE} />
             Equipment
+          </a>
+          <a
+            className={linkClasses({
+              active: pageContext.urlPathname === '/settings',
+            })}
+            onClick={() => navigate('/settings')}
+          >
+            <Gear size={NAV_ITEM_ICON_SIZE} />
+            Settings
           </a>
         </div>
       </div>

@@ -1,5 +1,7 @@
 export type BaseItemType = {
+  description?: string;
   id: string;
+  label?: string;
   recentlyAdjusted?: PatchNotes;
 };
 
@@ -53,6 +55,11 @@ export type PatchNotes = {
   adjustmentType: 'buff' | 'nerf' | 'neutral';
   note: string;
   url: string;
+};
+
+export type Settings = {
+  disabledEquipmentIds: string[];
+  showEquipmentDescriptions: boolean;
 };
 
 export type WeaponType =
