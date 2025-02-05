@@ -123,7 +123,7 @@ export const Page = () => {
 
       {/* Filter Bar */}
       <div className="flex flex-col gap-4 mb-8">
-        <div className="flex gap-4">
+        <div className="flex gap-4 flex-wrap">
           {FILTER_OPTIONS.map((filter) => (
             <button
               className={filterButton({ active: activeFilter === filter })}
