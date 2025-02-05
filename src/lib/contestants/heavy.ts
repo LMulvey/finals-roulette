@@ -139,11 +139,6 @@ export const heavyWeapons: ContestantWeapon[] = [
     id: 'spear',
     imageUrl: '/images/weapons/spear.png',
     label: 'Spear',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'You can no longer slide spin.',
-      url: 'https://www.reachthefinals.com/patchnotes/560',
-    },
     type: 'melee',
   },
 ];
@@ -155,6 +150,11 @@ export const heavySpecializations: ContestantSpecialization[] = [
     id: 'charge-n-slam',
     imageUrl: '/images/specializations/charge-n-slam.png',
     label: "Charge 'N' Slam",
+    recentlyAdjusted: {
+      adjustmentType: 'nerf',
+      note: 'Decreased damage all around. Slams even less effective than before.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
   },
   {
     classType: 'heavy',
@@ -179,9 +179,9 @@ export const heavySpecializations: ContestantSpecialization[] = [
     imageUrl: '/images/specializations/winch-claw.png',
     label: 'Winch Claw',
     recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Will now cancel and block vaulting for opponents on successful hits. Great.',
-      url: 'https://www.reachthefinals.com/patchnotes/560',
+      adjustmentType: 'nerf',
+      note: 'IT ONLY SHRUNK BECAUSE ITS COLD OUT (range decreased from 12m to 10m)',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
     },
   },
 ];

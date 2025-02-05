@@ -42,15 +42,15 @@ export const lightWeapons: ContestantWeapon[] = [
     label: 'Dagger',
     recentlyAdjusted: {
       adjustmentType: 'neutral',
-      note: "Fixed an issue where the backstab wouldn't re-trigger the charge up after a vault if the input was held down. Backstabbing from the front remains prominent.",
-      url: 'https://www.reachthefinals.com/patchnotes/560',
+      note: 'Adjusted view model to more obviously show when the secondary attack is fully charged.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
     },
     type: 'melee',
   },
   {
     classType: 'light',
-    damageBodyMax: 48,
-    damageBodyMin: 48,
+    damageBodyMax: 46,
+    damageBodyMin: 46,
     damageCriticalMultiplier: 2,
     damageCriticalType: 'headshot',
     description:
@@ -58,6 +58,11 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'lh1',
     imageUrl: '/images/weapons/lh1.png',
     label: 'LH1',
+    recentlyAdjusted: {
+      adjustmentType: 'nerf',
+      note: 'Fire rate and damage decreased slightly. Still the weapon of choice for aimbotters.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'marksman-rifle',
   },
   {
@@ -114,8 +119,8 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 115,
-    damageBodyMin: 115,
+    damageBodyMax: 118,
+    damageBodyMin: 118,
     damageCriticalMultiplier: 2,
     damageCriticalType: 'headshot',
     description:
@@ -123,6 +128,11 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'sr-84',
     imageUrl: '/images/weapons/sr-84.png',
     label: 'SR-84',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Increased rate of fire and damage. Contestants now encouraged to hide as far away as possible.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'marksman-rifle',
   },
   {
@@ -138,8 +148,8 @@ export const lightWeapons: ContestantWeapon[] = [
     label: 'Sword',
     recentlyAdjusted: {
       adjustmentType: 'buff',
-      note: 'Lunging into a jump pad now propels the contestant as expected. Flying swords are back on the menu.',
-      url: 'https://www.reachthefinals.com/patchnotes/560',
+      note: 'Increased the length of the lunge. Great.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
     },
     type: 'melee',
   },

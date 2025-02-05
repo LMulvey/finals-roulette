@@ -35,9 +35,19 @@ export const Header = () => {
             className="w-96"
             src="/images/logos/the-finals-logo-horizontal.crop.png"
           />
-          <h3 className="text-3xl font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-red">
-            Roulette
-          </h3>
+          <div className="flex flex-row items-center gap-2 h-[36px] w-full">
+            <div className="text-3xl font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-red flex-grow">
+              Roulette
+            </div>
+            <a
+              className="text-xl text-finals-red font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-white whitespace-nowrap h-full flex items-center"
+              href="https://www.reachthefinals.com/patchnotes/580"
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              Up to date with 5.8!
+            </a>
+          </div>
         </button>
         <div className="flex flex-col gap-2 md:flex-row md:gap-8 pt-8 border-t border-t-gray-500 md:pt-0 md:border-t-0 md:pl-12 md:border-l md:border-l-gray-500 w-full">
           <a

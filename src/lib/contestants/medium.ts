@@ -30,7 +30,7 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 108,
+    damageBodyMax: 120,
     damageBodyMin: 9,
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
@@ -39,6 +39,11 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'cerberus',
     imageUrl: '/images/weapons/cerberus-12ga.png',
     label: 'Cerberus 15GA',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Weapon adjusted to actually damage enemies without a 20s reload in between shots',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'shotgun',
   },
   {
@@ -48,10 +53,15 @@ export const mediumWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
     description:
-      'A grenade launcher that blasts targets and does a hilariously low amount of self-damage as long as you bunny hop.',
+      'A grenade launcher that blasts targets and does even more hilariously low amounts of self-damage as long as you bunny hop.',
     id: 'cl-40',
     imageUrl: '/images/weapons/cl-40.png',
     label: 'CL-40',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Ah, yes. Less self-damage. Just what this weapon logically needed..',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'grenade-launcher',
   },
   {
@@ -65,23 +75,23 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'dual-blades',
     imageUrl: '/images/weapons/dual-blades.png',
     label: 'Dual Blades',
-    recentlyAdjusted: {
-      adjustmentType: 'neutral',
-      note: 'Name changed to DUEL Blades. Fixed an issue when swapping back from a deployable like the Jump Pad would cause the Dual Blades to get stuck swinging only once.',
-      url: 'https://www.reachthefinals.com/patchnotes/560',
-    },
     type: 'melee',
   },
   {
     classType: 'medium',
-    damageBodyMax: 24,
-    damageBodyMin: 24,
+    damageBodyMax: 23,
+    damageBodyMin: 23,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description: 'A little burst-fire rifle that goes BLAP BLAP BLAP.',
     id: 'famas',
     imageUrl: '/images/weapons/famas.png',
     label: 'FAMAS',
+    recentlyAdjusted: {
+      adjustmentType: 'nerf',
+      note: 'Fires more slowly, slight damage decrease. Frequency of FAMAS posts on the subreddit increased to 3.5 per day.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'assault-rifle',
   },
   {
@@ -98,7 +108,7 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 117,
+    damageBodyMax: 99,
     damageBodyMin: 9,
     damageCriticalMultiplier: 1,
     damageCriticalType: 'none',
@@ -107,12 +117,17 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'model-1887',
     imageUrl: '/images/weapons/model-1887.png',
     label: 'Model 1887',
+    recentlyAdjusted: {
+      adjustmentType: 'nerf',
+      note: 'MY BOY. MY SWEET BOY. HES BEEN NERFED AGAIN. FUCK.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'shotgun',
   },
   {
     classType: 'medium',
-    damageBodyMax: 47,
-    damageBodyMin: 47,
+    damageBodyMax: 50,
+    damageBodyMin: 50,
     damageCriticalMultiplier: 1.5,
     damageCriticalType: 'headshot',
     description:
@@ -120,6 +135,11 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'pike-556',
     imageUrl: '/images/weapons/pike-556.png',
     label: 'Pike-556',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Increased damage. Three shots to bonk a Light now.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
     type: 'marksman-rifle',
   },
   {
@@ -157,6 +177,11 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'guardian-turret',
     imageUrl: '/images/specializations/guardian-turret.png',
     label: 'Guardian Turret',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: "Pick those babies up and slap 'em back down even faster now. APS cheese activated.",
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
   },
   {
     classType: 'medium',
@@ -165,6 +190,11 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'dematerializer',
     imageUrl: '/images/specializations/dematerializer.png',
     label: 'Dematerializer',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Dematerializing lasts less long, however, should now dematerialize more effectively.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
   },
   {
     classType: 'medium',
@@ -172,5 +202,10 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'healing-beam',
     imageUrl: '/images/specializations/healing-beam.png',
     label: 'Healing Beam',
+    recentlyAdjusted: {
+      adjustmentType: 'neutral',
+      note: 'Added a sound cue to indicate when a target is completed healed.',
+      url: 'https://www.reachthefinals.com/patchnotes/580',
+    },
   },
 ];
