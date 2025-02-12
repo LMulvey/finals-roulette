@@ -36,14 +36,14 @@ export const lightWeapons: ContestantWeapon[] = [
     damageCriticalMultiplier: 6.4,
     damageCriticalType: 'alt',
     description:
-      'The backstab is so good that sometimes it can backstab you from the front.',
+      'The backstab is so good that sometimes it can MAYBE backstab you from the front.',
     id: 'dagger',
     imageUrl: '/images/weapons/dagger.png',
     label: 'Dagger',
     recentlyAdjusted: {
-      adjustmentType: 'neutral',
-      note: 'Adjusted view model to more obviously show when the secondary attack is fully charged.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
+      adjustmentType: 'nerf',
+      note: 'Reduced backstab angle from 180 degrees to 150 degrees. Front-backstabs may finally be gone 🎉',
+      url: 'https://www.reachthefinals.com/patchnotes/590',
     },
     type: 'melee',
   },

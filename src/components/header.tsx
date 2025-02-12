@@ -41,11 +41,11 @@ export const Header = () => {
             </div>
             <a
               className="text-xl text-finals-red font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-white whitespace-nowrap h-full flex items-center"
-              href="https://www.reachthefinals.com/patchnotes/580"
+              href="https://www.reachthefinals.com/patchnotes/590"
               rel="noreferrer noopener"
               target="_blank"
             >
-              Up to date with 5.8!
+              Right on time with 5.9
             </a>
           </div>
         </button>

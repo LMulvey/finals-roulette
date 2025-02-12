@@ -52,6 +52,11 @@ export const heavyWeapons: ContestantWeapon[] = [
     id: 'ks-23',
     imageUrl: '/images/weapons/ks-23.png',
     label: 'KS-23',
+    recentlyAdjusted: {
+      adjustmentType: 'buff',
+      note: 'Increased damage at range, reduced bullet dispersion when ADSing. May be usable by more contestants now.',
+      url: 'https://www.reachthefinals.com/patchnotes/590',
+    },
     type: 'shotgun',
   },
   {
