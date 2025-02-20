@@ -9,10 +9,10 @@ import { NotebookPenIcon } from 'lucide-react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
-const NAV_ITEM_ICON_SIZE = 24;
+const NAV_ITEM_ICON_SIZE = 18;
 
 const linkClasses = cvu(
-  'hover:yellow-300 hover:cursor-pointer text-gray-500 text-3xl font-bold transition-colors flex flex-row items-center gap-2',
+  'hover:yellow-300 hover:cursor-pointer text-gray-500 text-2xl font-bold transition-colors flex flex-row items-center gap-2',
   {
     variants: {
       active: { true: ['text-yellow-300'] },
@@ -25,7 +25,7 @@ export const Header = () => {
 
   return (
     <header className="w-full p-8">
-      <div className=" w-full flex flex-col md:flex-row items-center gap-12 text-white">
+      <div className=" w-full flex flex-col lg:flex-row items-center gap-8 text-white">
         <button
           className="flex flex-col gap-2"
           onClick={() => navigate('/')}
@@ -50,7 +50,7 @@ export const Header = () => {
             </a>
           </div>
         </button>
-        <div className="flex flex-col gap-2 md:flex-row md:gap-8 pt-8 border-t border-t-gray-500 md:pt-0 md:border-t-0 md:pl-12 md:border-l md:border-l-gray-500 w-full">
+        <div className="flex flex-col gap-2 lg:flex-row lg:gap-8 pt-8 border-t border-t-gray-500 lg:pt-0 lg:border-t-0 lg:pl-12 lg:border-l lg:border-l-gray-500 w-full">
           <a
             className={linkClasses({
               active:
