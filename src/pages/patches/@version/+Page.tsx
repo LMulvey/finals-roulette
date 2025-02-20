@@ -1,7 +1,12 @@
 /* eslint-disable unicorn/no-array-reduce */
 import { cvu } from '@/lib/cvu';
 import { maybeGetItemById } from '@/lib/maybe-get-item-by-id';
-import { type Patch, type PatchNote } from '@/lib/patch-notes/types';
+import {
+  type Patch,
+  type PatchNote,
+  type PatchNoteCategory,
+  type PatchNoteSection,
+} from '@/lib/patch-notes/types';
 import {
   ArrowFatDown,
   ArrowFatUp,
@@ -89,6 +94,41 @@ const groupPatchNotes = (notes: PatchNote[]): GroupedNotes => {
   }, {} as GroupedNotes);
 };
 
+const getCategoryLabel = (category: PatchNoteCategory): string => {
+  const labels: Record<PatchNoteCategory, string> = {
+    animation: 'Animation',
+    audio: 'Audio',
+    characters: 'Characters',
+    contestants: 'Contestants',
+    controller: 'Controller',
+    cosmetics: 'Cosmetics',
+    gadget: 'Gadgets',
+    'game-mode': 'Game Mode',
+    gameplay: 'Gameplay',
+    general: 'General',
+    maps: 'Maps',
+    settings: 'Settings',
+    specializations: 'Specializations',
+    'stability-and-performance': 'Stability & Performance',
+    ui: 'UI',
+    vfx: 'VFX',
+    weapons: 'Weapons',
+  };
+
+  return labels[category];
+};
+
+const getSectionLabel = (section: PatchNoteSection): string => {
+  const labels: Record<PatchNoteSection, string> = {
+    additions: 'Additions',
+    balance: 'Balance',
+    'content-and-bug-fixes': 'Content & Bug Fixes',
+    'security-and-anti-cheat': 'Security & Anti-Cheat',
+  };
+
+  return labels[section];
+};
+
 export const Page = () => {
   const data = useData<{ patch: null | Patch }>();
   const { patch } = data;
@@ -140,7 +180,7 @@ export const Page = () => {
             key={section}
           >
             <h2 className="text-2xl font-bold capitalize mb-6">
-              {section.replaceAll('-', ' ')}
+              {getSectionLabel(section as PatchNoteSection)}
             </h2>
 
             <div className="space-y-8">
@@ -150,7 +190,7 @@ export const Page = () => {
                   key={category}
                 >
                   <h3 className="text-xl font-semibold capitalize">
-                    {category.replaceAll('-', ' ')}
+                    {getCategoryLabel(category as PatchNoteCategory)}
                   </h3>
 
                   <div className="space-y-6">
