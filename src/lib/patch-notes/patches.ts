@@ -18,14 +18,19 @@ export const getPatchByVersion = (flatVersion: string) => {
 };
 
 const getRecentPatches = (numberOfDays?: number) => {
-  const DEFAULT_NUMBER_OF_DAYS = 14;
+  const DEFAULT_NUMBER_OF_DAYS = 21;
   const resolvedNumberOfDays = numberOfDays ?? DEFAULT_NUMBER_OF_DAYS;
 
   return ALL_PATCHES.filter((patch) => {
     const difference = differenceInCalendarDays(new Date(), patch.date);
 
     return difference < resolvedNumberOfDays;
-  });
+  }).sort((a, b) => b.date.getTime() - a.date.getTime());
+};
+
+export const getMostRecentPatch = () => {
+  const recentPatches = getRecentPatches();
+  return recentPatches[0];
 };
 
 const findMostCommonAdjustmentType = (
@@ -78,7 +83,9 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
     return {
       adjustmentType,
       note: `${flattenedNotes}.`,
+      patchDate: maybeAdjustmentPatches.date.toLocaleDateString(),
       patchUrl: `/patches/${maybeAdjustmentPatches.version.replaceAll('.', '')}`,
+      patchVersion: maybeAdjustmentPatches.version,
     };
   }
 

@@ -1,4 +1,5 @@
 import { cvu } from '@/lib/cvu';
+import { getMostRecentPatch } from '@/lib/patch-notes/patches';
 import {
   FloppyDiskBack,
   Gear,
@@ -22,6 +23,7 @@ const linkClasses = cvu(
 
 export const Header = () => {
   const pageContext = usePageContext();
+  const mostRecentPatch = getMostRecentPatch();
 
   return (
     <header className="w-full p-8">
@@ -46,7 +48,9 @@ export const Header = () => {
               rel="noreferrer noopener"
               target="_blank"
             >
-              Updated again for 5.10
+              {mostRecentPatch.updatedNote ?? (
+                <>Updated for {mostRecentPatch.version}</>
+              )}
             </a>
           </div>
         </button>

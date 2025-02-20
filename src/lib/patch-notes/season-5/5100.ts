@@ -276,5 +276,6 @@ Thank you for your feedback and reports, community input has been invaluable in 
     },
   ],
   title: 'Balance changes and an AMA ',
+  updatedNote: 'Updated again for 5.10',
   version: '5.10.0',
 };

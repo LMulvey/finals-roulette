@@ -1,0 +1,470 @@
+import { type Patch } from '../types';
+
+export const patch580: Patch = {
+  date: new Date('2025-02-05'),
+  description:
+    "Love is in the air, Contestants! As we hit the heart of the season, there are some exciting events kicking off, plus a whole slew of balance changes and fixes to keep your matches fresh, fierce, and fun.\n\nValentine's Event: Spin the Wheel of Love!\nCupid's not the only one shooting arrows this season! Our Valentine's event is live, and the Wheel of Love is here to steal your heart (and maybe a few wins). Earn tickets by completing daily contracts, spinning the wheel, and unlocking up to 20 charming rewards. If you snag them all, you'll also win the final prize: the Heads Over Heels Set! Not totally in love with your daily contract? Re-roll with VRs!\n\nThis time around, when you land on a duplicate item, you'll receive a ticket part. Collect four parts to craft a new ticket for another spin! You'll also start off with a ticket to ensure everyone gets lucky this Valentine's Day!\n\nStay tuned tomorrow for the Love Hurts World Tour event for another week of heart-pounding action, with an explosive touch!\n\nReddit AMA Incoming!\nGot burning questions about THE FINALS? Join Rob and the team for an AMA on r/thefinals, the fan-run Reddit on February 19. It's your chance to dive deep, get insights, and maybe even drop that meme you've been saving. Please come and join us for a few hours of questions!\n\nStun Gun Rework on the Horizon\nWe hear you loud and clear: the Stun Gun needs some love (the other kind, not the Valentine's kind). We're got some plans for this gadget and will give you more insight about the road ahead in Update 5.10.0",
+  originalUrl: 'https://www.reachthefinals.com/patchnotes/580',
+  patchNotes: [
+    // Gadgets
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Decreased the delay between throwing multiple Breach Charges from 0.9s to 0.6s',
+      section: 'balance',
+      target: 'breach-charge',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Re-enabled the ability for the Lockbolt to attach to objectives',
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Increased activation grace period from 0.8s to 1s, making it slightly easier to lock on to targets',
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'gadget',
+      note: 'Decreased the minimum pull distance from 8m to 6m, giving locked players slightly less room to maneuver',
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'gadget',
+      note: 'Decreased the maximum pull distance from 10m to 6m, giving locked players less room to maneuver',
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: "Increased the pull force of the Lockbolt by 50%, making it slightly harder for players to move beyond the radius of the lock's chains",
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Increased the damage the Lockbolt applies to targets from 0 to 5',
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gadget',
+      note: "Added functionality that will disable the Lockbolt's tethers if the Lockbolt is carried through a Gateway that is outside the maximum pull distance (6m)",
+      section: 'balance',
+      target: 'lockbolt-launcher',
+    },
+
+    // Game Modes
+    {
+      adjustmentType: 'nerf',
+      category: 'game-mode',
+      devNote:
+        "Since our changes to deposit values in Cashout in Season 3, we've noticed an increasing number of teams adopting the 'plug meta,' where teams primarily focus on depositing Cash Boxes in World Tour and Ranked Tournaments to increase their chances of winning. While we wanted to encourage teams to focus on depositing and protecting cashouts, rather than third-partying already active cashouts, the 'plug meta' has become a little too common and leads to a bad teamplay experience. The changes to team wipes and deposit values, listed below, aim to nudge teams away from focusing entirely on plugging, while still reducing the incentives for third-partying.",
+      note: 'Decreased the percentage of cash in a Cashbox that is awarded for depositing it at the Cashout Station from ~30% to ~20%',
+      section: 'balance',
+      target: 'cashout',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'game-mode',
+      note: "Increased the percentage of cash in a Cashbox that is awarded for completing a cashout from ~70% to ~80% of the Cashbox's value",
+      section: 'balance',
+      target: 'cashout',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'game-mode',
+      note: "Increased the amount of cash lost from a team's total for a team wipe from 10% to 15%",
+      section: 'balance',
+      target: 'cashout',
+    },
+
+    // Specializations
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      devNote:
+        "The damage applied by Charge N' Slam has been quite high for some time and is especially punishing for Light players, especially when repeatedly hit by the charge. We feel these new values offer a fairer experience",
+      note: 'Decreased the damage done by the initial impact on enemies from 130 to 100',
+      section: 'balance',
+      target: 'charge-n-slam',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      note: 'Decreased the damage done by subsequent hits on enemies from 50 to 40',
+      section: 'balance',
+      target: 'charge-n-slam',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      note: 'Decreased the minimum damage of the ground slam, based on fall height from 80 to 50',
+      section: 'balance',
+      target: 'charge-n-slam',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      devNote:
+        'This change should mean that the Dematerializer now makes clearer holes in the environment that are easier to move through',
+      note: 'Decreased the duration of dematerialized objects from 30s to 15s, causing objects to rematerialize sooner',
+      section: 'balance',
+      target: 'dematerializer',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      note: 'Added the ability for the Dematerializer to remove props attached to wall segments',
+      section: 'balance',
+      target: 'dematerializer',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      note: 'Decreased the cooldown from 8s to 3s when manually picking up the Guardian Turret',
+      section: 'balance',
+      target: 'guardian-turret',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      note: 'Decreased the range of the Winch Claw from 12m to 10m',
+      section: 'balance',
+      target: 'winch-claw',
+    },
+
+    // Weapons
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage from 9 to 10 per pellet',
+      section: 'balance',
+      target: 'cerberus',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Slightly decreased the size of the pellet distribution, making the weapon more accurate',
+      section: 'balance',
+      target: 'cerberus',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Decreased the reload time for reloading one cartridge from 2.2s to 2.1s',
+      section: 'balance',
+      target: 'cerberus',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Decreased the reload time for reloading two cartridges from 2.4s to 2.25s',
+      section: 'balance',
+      target: 'cerberus',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Decreased the reload time for reloading three cartridges from 2.6s to 2.45s',
+      section: 'balance',
+      target: 'cerberus',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote:
+        "While the CL-40 has been in a much better place recently than in the past, we feel these small 'quality of life' changes will improve the experience of using it",
+      note: "Decreased the radius of the weapon's projectile from 10cm to 5cm, making it easier to avoid accidentally hitting nearby surfaces",
+      section: 'balance',
+      target: 'cl-40',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Decreased self-damage multiplier from 1.6 to 1.25, meaning it will now do less damage to the player using it should they accidentally hit themselves',
+      section: 'balance',
+      target: 'cl-40',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'weapons',
+      note: 'Added a slight adjustment to FoV when charging up for a secondary attack, to make it clearer when the attack is at maximum charge',
+      section: 'balance',
+      target: 'dagger',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased the fire rate from 230 RPM to 220 RPM',
+      section: 'balance',
+      target: 'famas',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased damage per bullet from 24 to 23',
+      section: 'balance',
+      target: 'famas',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased damage from 48 to 46',
+      section: 'balance',
+      target: 'lh1',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased rate of fire from 280 RPM to 270 RPM',
+      section: 'balance',
+      target: 'lh1',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased damage from 13 to 11 per pellet',
+      section: 'balance',
+      target: 'model-1887',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased min damage falloff multiplier from 0.6 to 0.7, meaning the Model 1887 retains the same damage at max range as in update 5.7',
+      section: 'balance',
+      target: 'model-1887',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage from 47 to 50',
+      section: 'balance',
+      target: 'pike-556',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: "Decreased the bolt action animation duration from 1.25s to 1.05s, slightly increasing the SR-84's rate of fire",
+      section: 'balance',
+      target: 'sr-84',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage from 115 to 118',
+      section: 'balance',
+      target: 'sr-84',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote:
+        'This change reverts the change made in 4.6 and should mean the primary and secondary attacks of the Sword now have a more consistent length',
+      note: "Increased the length of the Sword's secondary attack hit sweep by 55cm",
+      section: 'balance',
+      target: 'sword',
+    },
+
+    // Bug Fixes - Animation
+    {
+      adjustmentType: 'neutral',
+      category: 'animation',
+      note: 'Fixed a bug where player animations would stutter in the intro and celebration sequences',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'animation',
+      note: 'Fixed clipping issues on ShAK-50 inspects',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'animation',
+      note: "Fixed an issue where the character's hands looked broken after throwing the Gravity Vortex",
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'animation',
+      note: "Fixed an issue where the red dot sight for the Horizon Hammer R .357 skin wasn't aligned properly when aiming down sights",
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // Bug Fixes - Cosmetics
+    {
+      adjustmentType: 'neutral',
+      category: 'cosmetics',
+      note: 'Fixed the Mirrorball Mood helmet so it would not clip with facewears',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'cosmetics',
+      note: 'Fixed the hologram effect for ISEUL-T Escape Pants and ISEUL-T Lifestyle Coat',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'cosmetics',
+      note: 'Fixed visual fidelity of the Final Toss cosmetics',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // Bug Fixes - Gameplay
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Fixed "Blind 2 opponents with a Flashbang" so it would not count for teammates',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Fixed an issue where some contracts were able to progress inside Private Matches',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Improved stuttery movement on elevators and elevator doors',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Fixed draw bridges to prevent stuttering when moving',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Fixed an issue that allowed players to vault while being revived by Defibrillator',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gameplay',
+      note: 'Improved the visual effect during respawn invulnerability to be more prominent',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // Maps
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Fixed several floating assets, clipping, and faulty collisions across all maps',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Improved fog rendering',
+      section: 'content-and-bug-fixes',
+      target: 'bernal',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Upgraded the destruction from the ground up. Each building will collapse more easily, with destruction happening on a more granular scale. Debris from collapsed structures will behave more naturally and add to the terrain',
+      section: 'content-and-bug-fixes',
+      target: 'kyoto',
+    },
+
+    // Performance & Settings
+    {
+      adjustmentType: 'neutral',
+      category: 'stability-and-performance',
+      note: 'Optimized GPU load when there are a lot of effects onscreen',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'stability-and-performance',
+      note: "Minor GPU optimizations for Low and Medium 'Post-Processing' Quality",
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'stability-and-performance',
+      note: 'Upgraded XeSS SDK to version 1.3.1',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // UI
+    {
+      adjustmentType: 'neutral',
+      category: 'ui',
+      note: 'New loading screens!',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'ui',
+      note: 'Fixed an issue where loading screens could appear stretched when using an ultra wide monitor',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'ui',
+      note: 'Increased the number of emotes you can equip to 8',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // Security
+    {
+      adjustmentType: 'neutral',
+      category: 'general',
+      note: 'UI updates for a more transparent player messaging when using prohibited software',
+      section: 'security-and-anti-cheat',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'general',
+      note: 'Use of NVIDIA Profile Inspector is no longer allowed',
+      section: 'security-and-anti-cheat',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'general',
+      note: 'Improvements to anti-cheat performance and reliability',
+      section: 'security-and-anti-cheat',
+      target: 'general',
+    },
+  ],
+  title: 'The Season 5 Mid-Season Update',
+  version: '5.8.0',
+};

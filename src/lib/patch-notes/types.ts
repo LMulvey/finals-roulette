@@ -6,6 +6,7 @@ export type Patch = {
   originalUrl: string;
   patchNotes: PatchNote[];
   title: string;
+  updatedNote?: string;
   version: string;
 };
 

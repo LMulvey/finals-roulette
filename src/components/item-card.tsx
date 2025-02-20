@@ -134,10 +134,18 @@ export const ItemCard = (
                   className="w-64 space-y-3"
                   side="bottom"
                 >
-                  <p className="text-lg">
-                    Recently{' '}
-                    {getFriendlyAdjustmentType(recentAdjustment.adjustmentType)}
-                  </p>
+                  <div className="space-y-1">
+                    <p className="text-lg">
+                      Recently{' '}
+                      {getFriendlyAdjustmentType(
+                        recentAdjustment.adjustmentType,
+                      )}
+                    </p>
+                    <p className="text-xs italic font-normal">
+                      Most Recently Adjusted in {recentAdjustment.patchVersion}{' '}
+                      on {recentAdjustment.patchDate}
+                    </p>
+                  </div>
                   <p className="text-md font-normal font-sans">
                     {recentAdjustment.note}
                   </p>
