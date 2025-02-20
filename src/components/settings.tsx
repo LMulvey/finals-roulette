@@ -42,7 +42,7 @@ const FILTER_OPTIONS = [
 
 type FilterOption = (typeof FILTER_OPTIONS)[number];
 
-const getAllItems = (): BaseItemType[] => [
+const getAllItems = (): Array<BaseItemType<string>> => [
   ...ALL_GADGETS,
   ...heavyWeapons,
   ...mediumWeapons,
