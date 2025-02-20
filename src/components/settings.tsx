@@ -16,7 +16,7 @@ import {
   mediumWeapons,
 } from '@/lib/contestants/medium';
 import { cvu } from '@/lib/cvu';
-import { GADGETS } from '@/lib/gadgets';
+import { ALL_GADGETS } from '@/lib/gadgets';
 import { type BaseItemType } from '@/lib/schema';
 import { getSettings, saveSettings } from '@/lib/settings-storage';
 import * as motion from 'motion/react-client';
@@ -43,7 +43,7 @@ const FILTER_OPTIONS = [
 type FilterOption = (typeof FILTER_OPTIONS)[number];
 
 const getAllItems = (): BaseItemType[] => [
-  ...GADGETS,
+  ...ALL_GADGETS,
   ...heavyWeapons,
   ...mediumWeapons,
   ...lightWeapons,

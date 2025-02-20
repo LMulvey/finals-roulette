@@ -52,11 +52,6 @@ export const heavyWeapons: ContestantWeapon[] = [
     id: 'ks-23',
     imageUrl: '/images/weapons/ks-23.png',
     label: 'KS-23',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Increased damage at range, reduced bullet dispersion when ADSing. May be usable by more contestants now.',
-      url: 'https://www.reachthefinals.com/patchnotes/590',
-    },
     type: 'shotgun',
   },
   {
@@ -155,11 +150,6 @@ export const heavySpecializations: ContestantSpecialization[] = [
     id: 'charge-n-slam',
     imageUrl: '/images/specializations/charge-n-slam.png',
     label: "Charge 'N' Slam",
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'Decreased damage all around. Slams even less effective than before.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
   {
     classType: 'heavy',
@@ -183,10 +173,5 @@ export const heavySpecializations: ContestantSpecialization[] = [
     id: 'winch-claw',
     imageUrl: '/images/specializations/winch-claw.png',
     label: 'Winch Claw',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'IT ONLY SHRUNK BECAUSE ITS COLD OUT (range decreased from 12m to 10m)',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
 ];

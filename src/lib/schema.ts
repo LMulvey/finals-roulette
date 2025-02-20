@@ -1,8 +1,8 @@
-export type BaseItemType = {
+export type BaseItemType<TIdType extends string> = {
   description?: string;
-  id: string;
+  disabled?: boolean;
+  id: TIdType;
   label?: string;
-  recentlyAdjusted?: PatchNotes;
 };
 
 export type ClassType = 'heavy' | 'light' | 'medium';
@@ -17,7 +17,7 @@ export type ContestantClass = {
   type: ClassType;
 };
 
-export type ContestantGadget = BaseItemType & {
+export type ContestantGadget = BaseItemType<GadgetId> & {
   classType: ClassType[];
   description: string;
   imageUrl?: string;
@@ -32,14 +32,14 @@ export type ContestantLoadout = {
   weapon: ContestantWeapon;
 };
 
-export type ContestantSpecialization = BaseItemType & {
+export type ContestantSpecialization = BaseItemType<SpecializationId> & {
   classType: ClassType;
   description: string;
   imageUrl?: string;
   label: string;
 };
 
-export type ContestantWeapon = BaseItemType & {
+export type ContestantWeapon = BaseItemType<WeaponId> & {
   classType: ClassType;
   damageBodyMax: number;
   damageBodyMin: number;
@@ -51,16 +51,90 @@ export type ContestantWeapon = BaseItemType & {
   type: WeaponType;
 };
 
-export type PatchNotes = {
-  adjustmentType: 'buff' | 'nerf' | 'neutral';
-  note: string;
-  url: string;
-};
+export type GadgetId =
+  | 'anti-gravity-cube'
+  | 'aps-turret'
+  | 'barricade'
+  | 'breach-charge'
+  | 'c4'
+  | 'data-reshaper'
+  | 'defibrillator'
+  | 'dome-shield'
+  | 'explosive-mine'
+  | 'flashbang'
+  | 'frag-grenade'
+  | 'gas-grenade'
+  | 'gas-mine'
+  | 'gateway'
+  | 'glitch-grenade'
+  | 'glitch-trap'
+  | 'goo-grenade'
+  | 'gravity-vortex'
+  | 'jump-pad'
+  | 'lockbolt-launcher'
+  | 'proximity-sensor'
+  | 'pyro-grenade'
+  | 'pyro-mine'
+  | 'rpg-7'
+  | 'smoke-grenade'
+  | 'sonar-grenade'
+  | 'stun-gun'
+  | 'thermal-bore'
+  | 'thermal-vision'
+  | 'tracking-dart'
+  | 'vanishing-bomb'
+  | 'zipline';
 
 export type Settings = {
   disabledEquipmentIds: string[];
   showEquipmentDescriptions: boolean;
 };
+
+export type SpecializationId =
+  | 'charge-n-slam'
+  | 'cloaking-device'
+  | 'dematerializer'
+  | 'evasive-dash'
+  | 'goo-gun'
+  | 'grappling-hook'
+  | 'guardian-turret'
+  | 'healing-beam'
+  | 'mesh-shield'
+  | 'winch-claw';
+
+export type WeaponId =
+  | '50-akimbo'
+  | '93r'
+  | 'akm'
+  | 'cerberus'
+  | 'cl-40'
+  | 'dagger'
+  | 'dual-blades'
+  | 'famas'
+  | 'fcar'
+  | 'flamethrower'
+  | 'ks-23'
+  | 'lewis-gun'
+  | 'lh1'
+  | 'm11'
+  | 'm26-matter'
+  | 'm32gl'
+  | 'm60'
+  | 'model-1887'
+  | 'pike-556'
+  | 'r-357'
+  | 'recurve-bow'
+  | 'riot-shield'
+  | 'sa1216'
+  | 'sh1900'
+  | 'shak-50'
+  | 'sledgehammer'
+  | 'spear'
+  | 'sr-84'
+  | 'sword'
+  | 'throwing-knives'
+  | 'v9s'
+  | 'xp-54';
 
 export type WeaponType =
   | 'assault-rifle'

@@ -4,7 +4,9 @@ import { lightClass } from '@/lib/contestants/light';
 import { mediumClass } from '@/lib/contestants/medium';
 import { cvu } from '@/lib/cvu';
 import { getContestantMeta } from '@/lib/get-random-items';
+import { maybeGetRecentAdjustmentForTarget } from '@/lib/patch-notes/patches';
 import {
+  type BaseItemType,
   type ContestantGadget,
   type ContestantSpecialization,
   type ContestantWeapon,
@@ -117,6 +119,24 @@ export const Page = () => {
     activeFilter === 'Recently Nerfed' ||
     activeFilter === 'Disabled Equipment';
 
+  const applyFilters = <TItem extends BaseItemType<string>>(item: TItem) => {
+    const maybeRecentlyAdjusted = maybeGetRecentAdjustmentForTarget(item.id);
+
+    if (activeFilter === 'Recently Buffed') {
+      return maybeRecentlyAdjusted?.adjustmentType === 'buff';
+    }
+
+    if (activeFilter === 'Recently Nerfed') {
+      return maybeRecentlyAdjusted?.adjustmentType === 'nerf';
+    }
+
+    if (activeFilter === 'Disabled Equipment') {
+      return settings.disabledEquipmentIds.includes(item.id) || item.disabled;
+    }
+
+    return true;
+  };
+
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold mb-8">All Classes</h1>
@@ -160,7 +180,10 @@ export const Page = () => {
 
       <div className="grid gap-8 mb-40">
         {CONTESTANTS.map((contestantClass) => {
-          const meta = getContestantMeta(contestantClass.type);
+          const meta = getContestantMeta(contestantClass.type, {
+            returnIfDisabledByEmbark: true,
+            returnIfDisabledByUser: true,
+          });
 
           return (
             <div
@@ -173,61 +196,19 @@ export const Page = () => {
 
               <div className="flex flex-col gap-6">
                 {renderSection(
-                  meta.weapons.filter((item) => {
-                    if (activeFilter === 'Recently Buffed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'buff';
-                    }
-
-                    if (activeFilter === 'Recently Nerfed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
-                    }
-
-                    if (activeFilter === 'Disabled Equipment') {
-                      return settings.disabledEquipmentIds.includes(item.id);
-                    }
-
-                    return true;
-                  }),
+                  meta.weapons.filter(applyFilters),
                   'Weapon',
                   Sword,
                   isAllFilter || activeFilter === 'Weapons',
                 )}
                 {renderSection(
-                  meta.specializations.filter((item) => {
-                    if (activeFilter === 'Recently Buffed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'buff';
-                    }
-
-                    if (activeFilter === 'Recently Nerfed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
-                    }
-
-                    if (activeFilter === 'Disabled Equipment') {
-                      return settings.disabledEquipmentIds.includes(item.id);
-                    }
-
-                    return true;
-                  }),
+                  meta.specializations.filter(applyFilters),
                   'Specialization',
                   MagicWand,
                   isAllFilter || activeFilter === 'Specializations',
                 )}
                 {renderSection(
-                  meta.gadgets.filter((item) => {
-                    if (activeFilter === 'Recently Buffed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'buff';
-                    }
-
-                    if (activeFilter === 'Recently Nerfed') {
-                      return item.recentlyAdjusted?.adjustmentType === 'nerf';
-                    }
-
-                    if (activeFilter === 'Disabled Equipment') {
-                      return settings.disabledEquipmentIds.includes(item.id);
-                    }
-
-                    return true;
-                  }),
+                  meta.gadgets.filter(applyFilters),
                   'Gadget',
                   Fire,
                   isAllFilter || activeFilter === 'Gadgets',

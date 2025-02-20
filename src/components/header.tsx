@@ -5,6 +5,7 @@ import {
   Person,
   SelectionAll,
 } from '@phosphor-icons/react';
+import { NotebookPenIcon } from 'lucide-react';
 import { usePageContext } from 'vike-react/usePageContext';
 import { navigate } from 'vike/client/router';
 
@@ -41,11 +42,11 @@ export const Header = () => {
             </div>
             <a
               className="text-xl text-finals-red font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-white whitespace-nowrap h-full flex items-center"
-              href="https://www.reachthefinals.com/patchnotes/590"
+              href="https://www.reachthefinals.com/patchnotes/5100"
               rel="noreferrer noopener"
               target="_blank"
             >
-              Right on time with 5.9
+              Updated again for 5.10
             </a>
           </div>
         </button>
@@ -55,6 +56,7 @@ export const Header = () => {
               active:
                 pageContext.urlPathname !== '/all' &&
                 pageContext.urlPathname !== '/settings' &&
+                !pageContext.urlPathname.includes('/patches') &&
                 !pageContext.urlPathname.includes('/saved'),
             })}
             onClick={() => navigate('/')}
@@ -79,6 +81,15 @@ export const Header = () => {
           >
             <SelectionAll size={NAV_ITEM_ICON_SIZE} />
             Equipment
+          </a>
+          <a
+            className={linkClasses({
+              active: pageContext.urlPathname.includes('/patches'),
+            })}
+            onClick={() => navigate('/patches')}
+          >
+            <NotebookPenIcon size={NAV_ITEM_ICON_SIZE} />
+            Patches
           </a>
           <a
             className={linkClasses({

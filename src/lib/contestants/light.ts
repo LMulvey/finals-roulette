@@ -40,11 +40,6 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'dagger',
     imageUrl: '/images/weapons/dagger.png',
     label: 'Dagger',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'Reduced backstab angle from 180 degrees to 150 degrees. Front-backstabs may finally be gone 🎉',
-      url: 'https://www.reachthefinals.com/patchnotes/590',
-    },
     type: 'melee',
   },
   {
@@ -58,11 +53,6 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'lh1',
     imageUrl: '/images/weapons/lh1.png',
     label: 'LH1',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'Fire rate and damage decreased slightly. Still the weapon of choice for aimbotters.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'marksman-rifle',
   },
   {
@@ -128,11 +118,6 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'sr-84',
     imageUrl: '/images/weapons/sr-84.png',
     label: 'SR-84',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Increased rate of fire and damage. Contestants now encouraged to hide as far away as possible.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'marksman-rifle',
   },
   {
@@ -146,11 +131,6 @@ export const lightWeapons: ContestantWeapon[] = [
     id: 'sword',
     imageUrl: '/images/weapons/sword.png',
     label: 'Sword',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Increased the length of the lunge. Great.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'melee',
   },
   {

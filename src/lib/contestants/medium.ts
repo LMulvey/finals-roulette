@@ -39,11 +39,6 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'cerberus',
     imageUrl: '/images/weapons/cerberus-12ga.png',
     label: 'Cerberus 15GA',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Weapon adjusted to actually damage enemies without a 20s reload in between shots',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'shotgun',
   },
   {
@@ -57,11 +52,6 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'cl-40',
     imageUrl: '/images/weapons/cl-40.png',
     label: 'CL-40',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Ah, yes. Less self-damage. Just what this weapon logically needed..',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'grenade-launcher',
   },
   {
@@ -87,11 +77,6 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'famas',
     imageUrl: '/images/weapons/famas.png',
     label: 'FAMAS',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'Fires more slowly, slight damage decrease. Frequency of FAMAS posts on the subreddit increased to 3.5 per day.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'assault-rifle',
   },
   {
@@ -117,11 +102,6 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'model-1887',
     imageUrl: '/images/weapons/model-1887.png',
     label: 'Model 1887',
-    recentlyAdjusted: {
-      adjustmentType: 'nerf',
-      note: 'MY BOY. MY SWEET BOY. HES BEEN NERFED AGAIN. FUCK.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'shotgun',
   },
   {
@@ -135,11 +115,6 @@ export const mediumWeapons: ContestantWeapon[] = [
     id: 'pike-556',
     imageUrl: '/images/weapons/pike-556.png',
     label: 'Pike-556',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Increased damage. Three shots to bonk a Light now.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
     type: 'marksman-rifle',
   },
   {
@@ -177,11 +152,6 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'guardian-turret',
     imageUrl: '/images/specializations/guardian-turret.png',
     label: 'Guardian Turret',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: "Pick those babies up and slap 'em back down even faster now. APS cheese activated.",
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
   {
     classType: 'medium',
@@ -190,11 +160,6 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'dematerializer',
     imageUrl: '/images/specializations/dematerializer.png',
     label: 'Dematerializer',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Dematerializing lasts less long, however, should now dematerialize more effectively.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
   {
     classType: 'medium',
@@ -202,10 +167,5 @@ export const mediumSpecializations: ContestantSpecialization[] = [
     id: 'healing-beam',
     imageUrl: '/images/specializations/healing-beam.png',
     label: 'Healing Beam',
-    recentlyAdjusted: {
-      adjustmentType: 'neutral',
-      note: 'Added a sound cue to indicate when a target is completed healed.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
 ];

@@ -1,17 +1,12 @@
 import { type ContestantGadget } from './schema';
 
-export const GADGETS: ContestantGadget[] = [
+export const ALL_GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description: 'A lower-powered version of C4.',
     id: 'breach-charge',
     imageUrl: '/images/gadgets/breach-charge.png',
     label: 'Breach Charge',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Throwing delay decreased from 0.9s to 0.6s. Whether you trigger them successfully is still up to the Embark God.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
   {
     classType: ['light'],
@@ -48,6 +43,7 @@ export const GADGETS: ContestantGadget[] = [
   {
     classType: ['light'],
     description: "Don't taze me, bruh.",
+    disabled: true,
     id: 'stun-gun',
     imageUrl: '/images/gadgets/stun-gun.png',
     label: 'Stun Gun',
@@ -191,11 +187,6 @@ export const GADGETS: ContestantGadget[] = [
     id: 'lockbolt-launcher',
     imageUrl: '/images/gadgets/lockbolt-launcher.png',
     label: 'Lockbolt Launcher',
-    recentlyAdjusted: {
-      adjustmentType: 'buff',
-      note: 'Lockbolt objectives, easier to lock targets, less room to maneuver, harder to pull it away, and added damage. Bufferino.',
-      url: 'https://www.reachthefinals.com/patchnotes/580',
-    },
   },
   {
     classType: ['heavy'],

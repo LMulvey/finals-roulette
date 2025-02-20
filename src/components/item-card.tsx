@@ -5,7 +5,8 @@ import {
   TooltipTrigger,
 } from './ui/tooltip';
 import { cvu } from '@/lib/cvu';
-import { type PatchNotes } from '@/lib/schema';
+import { maybeGetRecentAdjustmentForTarget } from '@/lib/patch-notes/patches';
+import { type PatchNote } from '@/lib/patch-notes/types';
 import { getSettings } from '@/lib/settings-storage';
 import {
   ArrowFatDown,
@@ -25,18 +26,19 @@ export type Item = {
   id: string;
   imageUrl?: string;
   label?: string;
-  recentlyAdjusted?: PatchNotes;
   title: string;
 };
 
 const getFriendlyAdjustmentType = (
-  adjustmentType: PatchNotes['adjustmentType'],
+  adjustmentType: PatchNote['adjustmentType'],
 ) => {
   switch (adjustmentType) {
     case 'buff':
       return 'Buffed';
     case 'nerf':
       return 'Nerfed';
+    case 'removal':
+      return 'Removed';
     case 'neutral':
     default:
       return 'Adjusted (neutral)';
@@ -49,6 +51,7 @@ const triggerClass = cvu('bg-finals-red p-2 rounded-full text-white', {
       buff: ['bg-green-700'],
       nerf: ['bg-finals-red'],
       neutral: ['bg-gray-800'],
+      removal: ['bg-finals-red'],
     },
   },
 });
@@ -75,6 +78,7 @@ export const ItemCard = (
   const settings = getSettings();
   const isDisabled = settings.disabledEquipmentIds.includes(item.id);
   const isDescriptionEnabled = settings.showEquipmentDescriptions;
+  const recentAdjustment = maybeGetRecentAdjustmentForTarget(item.id);
 
   return (
     <motion.div
@@ -93,28 +97,34 @@ export const ItemCard = (
             {item.icon}
             {item.title}
           </div>
-          {item.recentlyAdjusted ? (
+          {recentAdjustment ? (
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger
                   className={triggerClass({
-                    type: item.recentlyAdjusted.adjustmentType,
+                    type: recentAdjustment.adjustmentType,
                   })}
                 >
-                  {item.recentlyAdjusted.adjustmentType === 'neutral' && (
+                  {recentAdjustment.adjustmentType === 'neutral' && (
                     <TriangleDashed
                       size={18}
                       weight="fill"
                     />
                   )}
-                  {item.recentlyAdjusted.adjustmentType === 'buff' && (
+                  {recentAdjustment.adjustmentType === 'buff' && (
                     <ArrowFatUp
                       size={18}
                       weight="fill"
                     />
                   )}
-                  {item.recentlyAdjusted.adjustmentType === 'nerf' && (
+                  {recentAdjustment.adjustmentType === 'nerf' && (
                     <ArrowFatDown
+                      size={18}
+                      weight="fill"
+                    />
+                  )}
+                  {recentAdjustment.adjustmentType === 'removal' && (
+                    <XCircle
                       size={18}
                       weight="fill"
                     />
@@ -126,16 +136,14 @@ export const ItemCard = (
                 >
                   <p className="text-lg">
                     Recently{' '}
-                    {getFriendlyAdjustmentType(
-                      item.recentlyAdjusted.adjustmentType,
-                    )}
+                    {getFriendlyAdjustmentType(recentAdjustment.adjustmentType)}
                   </p>
                   <p className="text-md font-normal font-sans">
-                    {item.recentlyAdjusted.note}
+                    {recentAdjustment.note}
                   </p>
                   <a
                     className="flex flex-row items-center gap-2 text-white text-md"
-                    href={item.recentlyAdjusted.url}
+                    href={recentAdjustment.patchUrl}
                     rel="noopener noreferrer"
                     target="_blank"
                   >

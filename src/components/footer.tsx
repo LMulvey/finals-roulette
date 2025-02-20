@@ -13,7 +13,7 @@ import {
   mediumSpecializations,
   mediumWeapons,
 } from '@/lib/contestants/medium';
-import { GADGETS } from '@/lib/gadgets';
+import { ALL_GADGETS } from '@/lib/gadgets';
 import * as motion from 'motion/react-client';
 
 const ALL_ITEMS = [
@@ -26,7 +26,7 @@ const ALL_ITEMS = [
   heavyClass,
   mediumClass,
   lightClass,
-  ...GADGETS,
+  ...ALL_GADGETS,
 ];
 
 const generateBalanceRequest = (type: 'BUFF' | 'NERF') => {

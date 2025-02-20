@@ -15,6 +15,7 @@ import {
 } from './contestants/medium';
 import { generateLoadoutName } from './generate-loadout-name';
 import { getGadgetsForClass } from './get-gadgets-for-class';
+import { maybeGetRecentAdjustmentForTarget } from './patch-notes/patches';
 import {
   type BaseItemType,
   type ClassType,
@@ -35,7 +36,7 @@ export type Locks = {
 
 type GadgetWithPosition = ContestantGadget & { position: number };
 
-type WeightedItem = BaseItemType & {
+type WeightedItem = BaseItemType<string> & {
   [key: string]: unknown;
 };
 
@@ -64,7 +65,8 @@ const getRandomItems = <T extends WeightedItem>(
   // eslint-disable-next-line unicorn/no-array-reduce
   const weightedPool: T[] = items.reduce((accumulator: T[], item) => {
     accumulator.push(item);
-    if (item.recentlyAdjusted?.adjustmentType === 'buff') {
+    const maybeRecentlyAdjusted = maybeGetRecentAdjustmentForTarget(item.id);
+    if (maybeRecentlyAdjusted?.adjustmentType === 'buff') {
       accumulator.push(item);
       accumulator.push(item);
     }
@@ -165,60 +167,61 @@ const getRandomContestant = (locks?: Locks) => {
 
 export const getContestantMeta = (
   classType: ClassType,
+  options?: {
+    returnIfDisabledByEmbark?: boolean;
+    returnIfDisabledByUser?: boolean;
+  },
 ): {
   gadgets: ContestantGadget[];
   specializations: ContestantSpecialization[];
   weapons: ContestantWeapon[];
 } => {
   const settings = getSettings();
-  const gadgets = getGadgetsForClass(classType);
+  const gadgets = getGadgetsForClass(classType, options);
+
+  const filterItems = <TItem extends BaseItemType<string>>(item: TItem) => {
+    const isDisabledByUser = settings.disabledEquipmentIds.includes(item.id);
+    const isDisabledByEmbark = item.disabled;
+
+    if (isDisabledByUser && !options?.returnIfDisabledByUser) return false;
+    if (isDisabledByEmbark && !options?.returnIfDisabledByEmbark) return false;
+
+    return true;
+  };
+
   switch (classType) {
     case 'heavy':
       return {
-        gadgets: gadgets.filter(
-          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
-        ),
-        specializations: heavySpecializations.filter(
-          (specialization) =>
-            !settings.disabledEquipmentIds.includes(specialization.id),
-        ),
-        weapons: heavyWeapons.filter(
-          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
-        ),
+        gadgets: gadgets.filter(filterItems),
+        specializations: heavySpecializations.filter(filterItems),
+        weapons: heavyWeapons.filter(filterItems),
       };
     case 'medium':
       return {
-        gadgets: gadgets.filter(
-          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
-        ),
-        specializations: mediumSpecializations.filter(
-          (specialization) =>
-            !settings.disabledEquipmentIds.includes(specialization.id),
-        ),
-        weapons: mediumWeapons.filter(
-          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
-        ),
+        gadgets: gadgets.filter(filterItems),
+        specializations: mediumSpecializations.filter(filterItems),
+        weapons: mediumWeapons.filter(filterItems),
       };
     case 'light':
     default:
       return {
-        gadgets: gadgets.filter(
-          (gadget) => !settings.disabledEquipmentIds.includes(gadget.id),
-        ),
-        specializations: lightSpecializations.filter(
-          (specialization) =>
-            !settings.disabledEquipmentIds.includes(specialization.id),
-        ),
-        weapons: lightWeapons.filter(
-          (weapon) => !settings.disabledEquipmentIds.includes(weapon.id),
-        ),
+        gadgets: gadgets.filter(filterItems),
+        specializations: lightSpecializations.filter(filterItems),
+        weapons: lightWeapons.filter(filterItems),
       };
   }
 };
 
-const getRandomLoadoutGadgets = (contestantType: ClassType, locks?: Locks) => {
-  const possibleGadgets = getGadgetsForClass(contestantType, locks);
-  const maybeLockedGadgets = locks?.gadgets ?? [];
+const getRandomLoadoutGadgets = (
+  contestantType: ClassType,
+  options?: {
+    locks?: Locks;
+    returnIfDisabledByEmbark?: boolean;
+    returnIfDisabledByUser?: boolean;
+  },
+) => {
+  const possibleGadgets = getGadgetsForClass(contestantType, options);
+  const maybeLockedGadgets = options?.locks?.gadgets ?? [];
 
   // eslint-disable-next-line unicorn/no-new-array
   let mergedGadgets: Array<ContestantGadget | null> = new Array(3).fill(null);
@@ -249,7 +252,9 @@ export const getRandomLoadout = (
 ): ContestantLoadout => {
   const [contestant] = getRandomContestant(options?.locks);
   const meta = getContestantMeta(contestant.type);
-  const gadgets = getRandomLoadoutGadgets(contestant.type, options?.locks);
+  const gadgets = getRandomLoadoutGadgets(contestant.type, {
+    locks: options?.locks,
+  });
 
   const maybeLockedSpecialization = options?.locks.specialization
     ? [options?.locks.specialization]
