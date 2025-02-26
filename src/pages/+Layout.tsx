@@ -1,8 +1,9 @@
 import { Header } from '@/components/header';
 import { Toaster } from '@/components/ui/toaster';
-import React, { type ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 // eslint-disable-next-line import/no-unassigned-import
 import './Layout.css';
+import React, { type ReactNode } from 'react';
 import { clientOnly } from 'vike-react/clientOnly';
 
 const Footer = clientOnly(
@@ -36,6 +37,7 @@ export const Layout = ({ children }: { readonly children: ReactNode }) => {
         rel="stylesheet"
       />
       <main className="w-screen min-h-screen relative">
+        <Analytics />
         <Header />
         {children}
         <Toaster />
