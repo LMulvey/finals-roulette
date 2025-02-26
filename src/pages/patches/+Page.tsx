@@ -1,4 +1,11 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { ALL_PATCHES } from '@/lib/patch-notes/patches';
+import { BookX } from 'lucide-react';
 
 export const Page = () => {
   const patches = [...ALL_PATCHES].sort(
@@ -20,9 +27,24 @@ export const Page = () => {
             key={patch.version}
           >
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold text-yellow-300">
-                {patch.version}
-              </h2>
+              <div className="flex flex-row items-center gap-1">
+                {patch.patchNotes.length ? null : (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <BookX
+                          className="text-finals-red"
+                          size={16}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>No patch notes this week.</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+                <h2 className="text-xl font-semibold text-yellow-300">
+                  {patch.version}
+                </h2>
+              </div>
               <span className="text-finals-white/80">
                 {patch.date.toLocaleDateString()}
               </span>

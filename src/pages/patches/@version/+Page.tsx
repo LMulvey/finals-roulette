@@ -14,7 +14,7 @@ import {
   TriangleDashed,
   XCircle,
 } from '@phosphor-icons/react';
-import { ArrowLeftIcon } from 'lucide-react';
+import { ArrowLeftIcon, PlusIcon } from 'lucide-react';
 import { useData } from 'vike-react/useData';
 
 const sectionClasses = cvu(
@@ -36,6 +36,13 @@ const AdjustmentIcon = ({
   readonly type: PatchNote['adjustmentType'];
 }) => {
   switch (type) {
+    case 'addition':
+      return (
+        <PlusIcon
+          className="text-green-700"
+          size={16}
+        />
+      );
     case 'buff':
       return (
         <ArrowFatUp
@@ -138,6 +145,7 @@ export const Page = () => {
   }
 
   const groupedNotes = groupPatchNotes(patch.patchNotes);
+  const groupedNotesEntries = Object.entries(groupedNotes);
 
   return (
     <div className="max-w-4xl mx-auto p-8 pb-80">
@@ -174,74 +182,84 @@ export const Page = () => {
       </div>
 
       <div className="space-y-12">
-        {Object.entries(groupedNotes).map(([section, categories]) => (
-          <div
-            className={sectionClasses()}
-            key={section}
-          >
-            <h2 className="text-2xl font-bold capitalize mb-6">
-              {getSectionLabel(section as PatchNoteSection)}
-            </h2>
+        {groupedNotesEntries.length ? (
+          <>
+            {groupedNotesEntries.map(([section, categories]) => (
+              <div
+                className={sectionClasses()}
+                key={section}
+              >
+                <h2 className="text-2xl font-bold capitalize mb-6">
+                  {getSectionLabel(section as PatchNoteSection)}
+                </h2>
 
-            <div className="space-y-8">
-              {Object.entries(categories).map(([category, targets]) => (
-                <div
-                  className={categoryClasses()}
-                  key={category}
-                >
-                  <h3 className="text-xl font-semibold capitalize">
-                    {getCategoryLabel(category as PatchNoteCategory)}
-                  </h3>
+                <div className="space-y-8">
+                  {Object.entries(categories).map(([category, targets]) => (
+                    <div
+                      className={categoryClasses()}
+                      key={category}
+                    >
+                      <h3 className="text-xl font-semibold capitalize">
+                        {getCategoryLabel(category as PatchNoteCategory)}
+                      </h3>
 
-                  <div className="space-y-6">
-                    {Object.entries(targets).map(([target, notes]) => (
-                      <div
-                        className="space-y-2"
-                        key={target}
-                      >
-                        {target !== 'general' && (
-                          <h4 className="text-lg font-medium">
-                            {maybeGetItemById(target)?.label ?? target}
-                          </h4>
-                        )}
-
-                        {notes.map((note) => (
+                      <div className="space-y-6">
+                        {Object.entries(targets).map(([target, notes]) => (
                           <div
-                            className="flex gap-2"
-                            key={`${note.category}-${note.note}`}
+                            className="space-y-2"
+                            key={target}
                           >
-                            <div className="w-4 h-4 flex-shrink-0 mt-1">
-                              <AdjustmentIcon type={note.adjustmentType} />
-                            </div>
-                            <div className="space-y-2">
-                              <p>{note.note}</p>
-                              {note.devNote && (
-                                <p className="text-gray-400 text-sm whitespace-pre-wrap">
-                                  Dev Note: {note.devNote}
-                                </p>
-                              )}
-                              {note.sassyNote && (
-                                <p className="text-yellow-400 text-sm italic">
-                                  <span
-                                    className="mr-2"
-                                    role="img"
-                                  >
-                                    💁‍♂️
-                                  </span>{' '}
-                                  {note.sassyNote}
-                                </p>
-                              )}
-                            </div>
+                            {target !== 'general' && (
+                              <h4 className="text-lg font-medium">
+                                {maybeGetItemById(target)?.label ?? target}
+                              </h4>
+                            )}
+
+                            {notes.map((note) => (
+                              <div
+                                className="flex gap-2"
+                                key={`${note.category}-${note.note}`}
+                              >
+                                <div className="w-4 h-4 flex-shrink-0 mt-1">
+                                  <AdjustmentIcon type={note.adjustmentType} />
+                                </div>
+                                <div className="space-y-2">
+                                  <p>{note.note}</p>
+                                  {note.devNote && (
+                                    <p className="text-gray-400 text-sm whitespace-pre-wrap">
+                                      Dev Note: {note.devNote}
+                                    </p>
+                                  )}
+                                  {note.sassyNote && (
+                                    <p className="text-yellow-400 text-sm italic">
+                                      <span
+                                        className="mr-2"
+                                        role="img"
+                                      >
+                                        💁‍♂️
+                                      </span>{' '}
+                                      {note.sassyNote}
+                                    </p>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
                           </div>
                         ))}
                       </div>
-                    ))}
-                  </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div className={sectionClasses()}>
+            <h2 className="text-2xl font-bold normal-case my-6 text-center bg-finals-red/30 px-4 py-6 rounded-2xl">
+              No patch notes this week.
+            </h2>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

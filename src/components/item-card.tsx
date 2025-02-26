@@ -16,7 +16,7 @@ import {
   TriangleDashed,
   XCircle,
 } from '@phosphor-icons/react';
-import { LockIcon, UnlockIcon } from 'lucide-react';
+import { LockIcon, PlusIcon, UnlockIcon } from 'lucide-react';
 import * as motion from 'motion/react-client';
 import { type ReactNode, type Ref } from 'react';
 
@@ -33,6 +33,8 @@ const getFriendlyAdjustmentType = (
   adjustmentType: PatchNote['adjustmentType'],
 ) => {
   switch (adjustmentType) {
+    case 'addition':
+      return 'Added';
     case 'buff':
       return 'Buffed';
     case 'nerf':
@@ -48,6 +50,7 @@ const getFriendlyAdjustmentType = (
 const triggerClass = cvu('bg-finals-red p-2 rounded-full text-white', {
   variants: {
     type: {
+      addition: ['bg-green-800'],
       buff: ['bg-green-700'],
       nerf: ['bg-finals-red'],
       neutral: ['bg-gray-800'],
@@ -129,18 +132,34 @@ export const ItemCard = (
                       weight="fill"
                     />
                   )}
+                  {recentAdjustment.adjustmentType === 'removal' && (
+                    <PlusIcon size={18} />
+                  )}
                 </TooltipTrigger>
                 <TooltipContent
                   className="w-64 space-y-3"
                   side="bottom"
                 >
                   <div className="space-y-1">
-                    <p className="text-lg">
-                      Recently{' '}
-                      {getFriendlyAdjustmentType(
-                        recentAdjustment.adjustmentType,
-                      )}
-                    </p>
+                    <div className="flex flex-row gap-2 items-center">
+                      <p className="text-lg">
+                        Recently{' '}
+                        {getFriendlyAdjustmentType(
+                          recentAdjustment.adjustmentType,
+                        )}
+                      </p>
+                      <a
+                        className="flex flex-row items-center gap-2 text-white text-md"
+                        href={recentAdjustment.patchUrl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        <LinkSimple
+                          size={16}
+                          weight="fill"
+                        />
+                      </a>
+                    </div>
                     <p className="text-xs italic font-normal">
                       Most Recently Adjusted in {recentAdjustment.patchVersion}{' '}
                       on {recentAdjustment.patchDate}
@@ -149,18 +168,17 @@ export const ItemCard = (
                   <p className="text-md font-normal font-sans">
                     {recentAdjustment.note}
                   </p>
-                  <a
-                    className="flex flex-row items-center gap-2 text-white text-md"
-                    href={recentAdjustment.patchUrl}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <LinkSimple
-                      size={16}
-                      weight="fill"
-                    />
-                    Patch Notes
-                  </a>
+                  {recentAdjustment.sassyNotes && (
+                    <p className="text-yellow-400 text-sm italic">
+                      <span
+                        className="mr-2"
+                        role="img"
+                      >
+                        💁‍♂️
+                      </span>{' '}
+                      {recentAdjustment.sassyNotes}
+                    </p>
+                  )}
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>

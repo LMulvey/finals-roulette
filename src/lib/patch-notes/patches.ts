@@ -76,7 +76,11 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
       (patchNote) => patchNote.target === target,
     );
     const flattenedNotes = filteredByTarget
-      .map((patchNote) => patchNote.sassyNote ?? patchNote.note)
+      .map((patchNote) => patchNote.note)
+      .join('. ');
+    const flattenedSassyNotes = filteredByTarget
+      .map((patchNote) => patchNote.sassyNote)
+      .filter(Boolean)
       .join('. ');
     const adjustmentType = findMostCommonAdjustmentType(filteredByTarget);
 
@@ -86,6 +90,7 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
       patchDate: maybeAdjustmentPatches.date.toLocaleDateString(),
       patchUrl: `/patches/${maybeAdjustmentPatches.version.replaceAll('.', '')}`,
       patchVersion: maybeAdjustmentPatches.version,
+      sassyNotes: `${flattenedSassyNotes}.`,
     };
   }
 

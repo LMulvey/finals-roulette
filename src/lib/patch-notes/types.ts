@@ -11,7 +11,7 @@ export type Patch = {
 };
 
 export type PatchNote = {
-  adjustmentType: 'buff' | 'nerf' | 'neutral' | 'removal';
+  adjustmentType: 'addition' | 'buff' | 'nerf' | 'neutral' | 'removal';
   category: PatchNoteCategory;
   devNote?: string;
   note: string;
