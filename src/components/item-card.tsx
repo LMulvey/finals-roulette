@@ -132,7 +132,7 @@ export const ItemCard = (
                       weight="fill"
                     />
                   )}
-                  {recentAdjustment.adjustmentType === 'removal' && (
+                  {recentAdjustment.adjustmentType === 'addition' && (
                     <PlusIcon size={18} />
                   )}
                 </TooltipTrigger>
