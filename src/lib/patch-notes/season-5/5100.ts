@@ -25,6 +25,7 @@ Thank you for your feedback and reports, community input has been invaluable in 
       adjustmentType: 'nerf',
       category: 'gadget',
       note: 'Decreased ammo from 2 to 1',
+      sassyNote: 'Make grenades more noticeable but please bring back to two.',
       section: 'balance',
       target: 'frag-grenade',
     },
