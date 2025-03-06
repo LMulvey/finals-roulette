@@ -32,6 +32,7 @@ export type PatchNoteCategory =
   | 'gameplay'
   | 'general'
   | 'maps'
+  | 'rendering'
   | 'settings'
   | 'specializations'
   | 'stability-and-performance'
@@ -43,7 +44,8 @@ export type PatchNoteSection =
   | 'additions'
   | 'balance'
   | 'content-and-bug-fixes'
-  | 'security-and-anti-cheat';
+  | 'security-and-anti-cheat'
+  | 'store';
 
 export type PatchNoteTarget =
   | 'general'
