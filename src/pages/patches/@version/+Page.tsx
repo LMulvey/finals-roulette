@@ -114,6 +114,7 @@ const getCategoryLabel = (category: PatchNoteCategory): string => {
     gameplay: 'Gameplay',
     general: 'General',
     maps: 'Maps',
+    rendering: 'Rendering',
     settings: 'Settings',
     specializations: 'Specializations',
     'stability-and-performance': 'Stability & Performance',
@@ -131,6 +132,7 @@ const getSectionLabel = (section: PatchNoteSection): string => {
     balance: 'Balance',
     'content-and-bug-fixes': 'Content & Bug Fixes',
     'security-and-anti-cheat': 'Security & Anti-Cheat',
+    store: 'Store',
   };
 
   return labels[section];
