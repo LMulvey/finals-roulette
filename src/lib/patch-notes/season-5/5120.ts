@@ -1,7 +1,7 @@
 import { type Patch } from '../types';
 
 export const patch5120: Patch = {
-  date: new Date('2025-06'),
+  date: new Date('2025-03-02 11:00:00'),
   description:
     'It’s time to say goodbye to the TDM event but today we say hello to the Bonus XP Fiesta! From now until the end of the season, you’ll rack up 200% XP for Daily Contracts and up to 150% XP and Fans earned for gameplay!\nThis week we have a few balance changes and bug fixes to check out below! Finally, the store has a fresh new update:',
   originalUrl: 'https://www.reachthefinals.com/patchnotes/5120',
