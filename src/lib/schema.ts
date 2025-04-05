@@ -41,10 +41,6 @@ export type ContestantSpecialization = BaseItemType<SpecializationId> & {
 
 export type ContestantWeapon = BaseItemType<WeaponId> & {
   classType: ClassType;
-  damageBodyMax: number;
-  damageBodyMin: number;
-  damageCriticalMultiplier: number;
-  damageCriticalType: DamageCriticalType;
   description: string;
   imageUrl?: string;
   label: string;
@@ -106,6 +102,8 @@ export type WeaponId =
   | '50-akimbo'
   | '93r'
   | 'akm'
+  | 'arn-220'
+  | 'cb-01-repeater'
   | 'cerberus'
   | 'cl-40'
   | 'dagger'
@@ -120,6 +118,7 @@ export type WeaponId =
   | 'm26-matter'
   | 'm32gl'
   | 'm60'
+  | 'm134-minigun'
   | 'model-1887'
   | 'pike-556'
   | 'r-357'
@@ -145,5 +144,3 @@ export type WeaponType =
   | 'melee'
   | 'shotgun'
   | 'smg';
-
-type DamageCriticalType = 'alt' | 'headshot' | 'none';

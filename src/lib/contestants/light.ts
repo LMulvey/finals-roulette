@@ -18,10 +18,6 @@ export const lightClass: ContestantClass = {
 export const lightWeapons: ContestantWeapon[] = [
   {
     classType: 'light',
-    damageBodyMax: 28,
-    damageBodyMin: 28,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'A burst-fire machine pistol designed to deal burst damage at close-to-moderate distances.',
     id: '93r',
@@ -31,10 +27,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 50,
-    damageBodyMin: 50,
-    damageCriticalMultiplier: 6.4,
-    damageCriticalType: 'alt',
     description:
       'The backstab is so good that sometimes it can MAYBE backstab you from the front.',
     id: 'dagger',
@@ -44,10 +36,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 46,
-    damageBodyMin: 46,
-    damageCriticalMultiplier: 2,
-    damageCriticalType: 'headshot',
     description:
       'A marksman rifle designed to deal high damage per shot and very high critical damage. Currently the weapon of choice for cheaters.',
     id: 'lh1',
@@ -57,10 +45,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 16,
-    damageBodyMin: 16,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'The only audio you will hear is the rapid fire *pfbt* sounds while you are being shredded and inevitably die.',
     id: 'm11',
@@ -70,10 +54,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 121,
-    damageBodyMin: 121,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A bolt-action shotgun that is magazine-fed, designed to deal high damage at close range.',
     id: 'm26-matter',
@@ -83,10 +63,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 120,
-    damageBodyMin: 60,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'Lights who can use this, use it really well. Everyone else just cannot.',
     id: 'recurve-bow',
@@ -96,10 +72,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 195,
-    damageBodyMin: 15,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A sawed-off double barrel shotgun designed to instantly two-tap other lights.',
     id: 'sh1900',
@@ -109,10 +81,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 118,
-    damageBodyMin: 118,
-    damageCriticalMultiplier: 2,
-    damageCriticalType: 'headshot',
     description:
       'Sniper rifle designed for lights who want to stay away from the action. Killing one earns a friendly bagging.',
     id: 'sr-84',
@@ -122,10 +90,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 74,
-    damageBodyMin: 74,
-    damageCriticalMultiplier: 1.62,
-    damageCriticalType: 'alt',
     description:
       'Who the fuck put swords in this game? Skill-less waste of a loadout only used by real dinguses.',
     id: 'sword',
@@ -135,10 +99,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 40,
-    damageBodyMin: 40,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description: 'Pew pew pew pew secret agent man.',
     id: 'v9s',
     imageUrl: '/images/weapons/v9s.png',
@@ -147,10 +107,6 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 16,
-    damageBodyMin: 16,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'A submachine gun designed to deal high damage over short windows at close to moderate distances.',
     id: 'xp-54',
@@ -160,16 +116,21 @@ export const lightWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'light',
-    damageBodyMax: 140,
-    damageBodyMin: 60,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'Sharp spoons. Clangs every time they miss a shot. Clangs constantly.',
     id: 'throwing-knives',
     imageUrl: '/images/weapons/throwing-knives.png',
     label: 'Throwing Knives',
     type: 'melee',
+  },
+  {
+    classType: 'light',
+    description:
+      'Mid-range, fast fire-rate machine gun. Get beamed by lights from further away.',
+    id: 'arn-220',
+    imageUrl: '/images/weapons/arn-220.png',
+    label: 'ARN-220',
+    type: 'smg',
   },
 ];
 

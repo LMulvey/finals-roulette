@@ -71,6 +71,17 @@ const getRandomItems = <T extends WeightedItem>(
       accumulator.push(item);
     }
 
+    /**
+     * Push new additions way up!
+     */
+    if (maybeRecentlyAdjusted?.adjustmentType === 'addition') {
+      accumulator.push(item);
+      accumulator.push(item);
+      accumulator.push(item);
+      accumulator.push(item);
+      accumulator.push(item);
+    }
+
     return accumulator;
   }, []);
 

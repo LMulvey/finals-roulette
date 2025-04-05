@@ -17,10 +17,6 @@ export const mediumClass: ContestantClass = {
 export const mediumWeapons: ContestantWeapon[] = [
   {
     classType: 'medium',
-    damageBodyMax: 20,
-    damageBodyMin: 20,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'An automatic assault rifle that is perpetually one bullet short.',
     id: 'akm',
@@ -30,10 +26,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 120,
-    damageBodyMin: 9,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A three-barrel shotgun that fires hot pellets capable of lighting the target on fire.',
     id: 'cerberus',
@@ -43,10 +35,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 100,
-    damageBodyMin: 100,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A grenade launcher that blasts targets and does even more hilariously low amounts of self-damage as long as you bunny hop.',
     id: 'cl-40',
@@ -56,10 +44,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 70,
-    damageBodyMin: 50,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'Two swords that can reflect bullets back at the target and deal slash damage.',
     id: 'dual-blades',
@@ -69,10 +53,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 23,
-    damageBodyMin: 23,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description: 'A little burst-fire rifle that goes BLAP BLAP BLAP.',
     id: 'famas',
     imageUrl: '/images/weapons/famas.png',
@@ -81,10 +61,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 22,
-    damageBodyMin: 22,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description: 'When the FCAR is coming, prepare to be booped.',
     id: 'fcar',
     imageUrl: '/images/weapons/fcar.png',
@@ -93,10 +69,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 99,
-    damageBodyMin: 9,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A shotgun-type weapon that can blast your opponents away. Previously worked as a sniper rifle.',
     id: 'model-1887',
@@ -106,10 +78,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 50,
-    damageBodyMin: 50,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'A marksman rifle for the mediums with a lot of power, range, and recoil.',
     id: 'pike-556',
@@ -119,10 +87,6 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 74,
-    damageBodyMin: 74,
-    damageCriticalMultiplier: 2,
-    damageCriticalType: 'headshot',
     description: 'A revolver-style handgun that doubles as a sniper rifle.',
     id: 'r-357',
     imageUrl: '/images/weapons/r-357.png',
@@ -131,16 +95,20 @@ export const mediumWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'medium',
-    damageBodyMax: 90,
-    damageBodyMin: 90,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A shield and baton that will make your opponents feel like university students exercising their right to free speech.',
     id: 'riot-shield',
     imageUrl: '/images/weapons/riot-shield.png',
     label: 'Riot Shield',
     type: 'melee',
+  },
+  {
+    classType: 'medium',
+    description: 'Hits like a truck every 30 seconds.',
+    id: 'cb-01-repeater',
+    imageUrl: '/images/weapons/cb-01-repeater.png',
+    label: 'CB-01 Repeater',
+    type: 'marksman-rifle',
   },
 ];
 

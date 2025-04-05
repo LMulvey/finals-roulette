@@ -1,13 +1,18 @@
 import { ALL_SEASON_FIVE_PATCHES } from './season-5';
+import { ALL_SEASON_SIX_PATCHES } from './season-6';
 import { type Patch, type PatchNote, type PatchNoteTarget } from './types';
 import { differenceInCalendarDays } from 'date-fns';
 
-type Season = 'seasonFive';
+type Season = 'seasonFive' | 'seasonSix';
 
-export const ALL_PATCHES: Patch[] = [...ALL_SEASON_FIVE_PATCHES];
+export const ALL_PATCHES: Patch[] = [
+  ...ALL_SEASON_SIX_PATCHES,
+  ...ALL_SEASON_FIVE_PATCHES,
+];
 
 export const PATCHES_BY_SEASON: Record<Season, Patch[]> = {
   seasonFive: ALL_SEASON_FIVE_PATCHES,
+  seasonSix: ALL_SEASON_SIX_PATCHES,
 };
 
 export const getPatchByVersion = (flatVersion: string) => {
@@ -28,9 +33,15 @@ const getRecentPatches = (numberOfDays?: number) => {
   }).sort((a, b) => b.date.getTime() - a.date.getTime());
 };
 
-export const getMostRecentPatch = () => {
+export const getMostRecentPatch = (guarantee?: boolean) => {
   const recentPatches = getRecentPatches();
-  return recentPatches[0];
+  const maybePatch = recentPatches[0];
+
+  if (guarantee) {
+    return maybePatch ?? ALL_PATCHES[0];
+  }
+
+  return maybePatch;
 };
 
 const findMostCommonAdjustmentType = (
@@ -90,7 +101,7 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
       patchDate: maybeAdjustmentPatches.date.toLocaleDateString(),
       patchUrl: `/patches/${maybeAdjustmentPatches.version.replaceAll('.', '')}`,
       patchVersion: maybeAdjustmentPatches.version,
-      sassyNotes: `${flattenedSassyNotes}.`,
+      sassyNotes: flattenedSassyNotes.length ? `${flattenedSassyNotes}.` : '',
     };
   }
 

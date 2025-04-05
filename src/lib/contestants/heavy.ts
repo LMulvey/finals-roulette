@@ -18,10 +18,6 @@ export const heavyClass: ContestantClass = {
 export const heavyWeapons: ContestantWeapon[] = [
   {
     classType: 'heavy',
-    damageBodyMax: 44,
-    damageBodyMin: 44,
-    damageCriticalMultiplier: 2,
-    damageCriticalType: 'headshot',
     description: 'Dual pistols that can also be used as snipers.',
     id: '50-akimbo',
     imageUrl: '/images/weapons/50-akimbo.png',
@@ -30,10 +26,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 30,
-    damageBodyMin: 30,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A flamethrower that is always more effective when used by your enemies.',
     id: 'flamethrower',
@@ -43,10 +35,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 100,
-    damageBodyMin: 100,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A shotgun with slugs that can destroy walls and floors in four shots.',
     id: 'ks-23',
@@ -56,10 +44,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 22,
-    damageBodyMin: 22,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'Similar to the M60 but with more accuracy and a smaller clip size.',
     id: 'lewis-gun',
@@ -69,10 +53,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 83,
-    damageBodyMin: 83,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description: 'A grenade launcher with bouncy grenades.',
     id: 'm32gl',
     imageUrl: '/images/weapons/m32gl.png',
@@ -81,10 +61,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 19,
-    damageBodyMin: 19,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description:
       'Less accurate than the Lewis Gun but with a larger clip size.',
     id: 'm60',
@@ -94,10 +70,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 78,
-    damageBodyMin: 13,
-    damageCriticalMultiplier: 1,
-    damageCriticalType: 'none',
     description:
       'A mysterious gun that is typically ineffective but can excel in the right hands.',
     id: 'sa1216',
@@ -107,10 +79,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 30,
-    damageBodyMin: 30,
-    damageCriticalMultiplier: 1.5,
-    damageCriticalType: 'headshot',
     description: 'A highly enjoyable weapon with excellent performance.',
     id: 'shak-50',
     imageUrl: '/images/weapons/shak-50.png',
@@ -119,10 +87,6 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 115,
-    damageBodyMin: 115,
-    damageCriticalMultiplier: 1.74,
-    damageCriticalType: 'alt',
     description: 'A massive hammer designed for delivering powerful strikes.',
     id: 'sledgehammer',
     imageUrl: '/images/weapons/sledgehammer.png',
@@ -131,15 +95,19 @@ export const heavyWeapons: ContestantWeapon[] = [
   },
   {
     classType: 'heavy',
-    damageBodyMax: 90,
-    damageBodyMin: 65,
-    damageCriticalMultiplier: 1.62,
-    damageCriticalType: 'alt',
     description: 'A large spear capable of wide swings and spinning attacks.',
     id: 'spear',
     imageUrl: '/images/weapons/spear.png',
     label: 'Spear',
     type: 'melee',
+  },
+  {
+    classType: 'heavy',
+    description: 'Mini-gun go brrrrrrrrrr',
+    id: 'm134-minigun',
+    imageUrl: '/images/weapons/m134-minigun.png',
+    label: 'M134 Minigun',
+    type: 'assault-rifle',
   },
 ];
 

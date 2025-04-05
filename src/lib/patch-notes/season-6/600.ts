@@ -1,0 +1,398 @@
+import { type Patch } from '../types';
+
+export const patch600: Patch = {
+  date: new Date('2025-03-20 11:00:00'),
+  description:
+    'Season 6 is here! This update brings a host of balance changes, bug fixes, and new features to enhance gameplay and address community feedback. Dive into the patch notes below for all the details.',
+  originalUrl: 'https://www.reachthefinals.com/patchnotes/600',
+  patchNotes: [
+    // New weapons
+    {
+      adjustmentType: 'addition',
+      category: 'weapons',
+      note: "The lightweight contender's best friend! This zippy assault rifle keeps you in the fight with lightning-fast reloads thanks to its secondary magazine. With a smooth recoil and a blistering fire rate, it’s built to shred mid-range targets before they know what hit 'em!",
+      section: 'additions',
+      target: 'arn-220',
+    },
+    {
+      adjustmentType: 'addition',
+      category: 'weapons',
+      note: 'This hard-hitting lever-action rifle is built for precision. Empty the clip, snap in a speed-loader, and get back to landing high-caliber shots in no time! High risk, high reward!',
+      section: 'additions',
+      target: 'cb-01-repeater',
+    },
+    {
+      adjustmentType: 'addition',
+      category: 'weapons',
+      note: 'A bullet-spewing beast with an insane fire rate and massive ammo reserves. Hold down the fort, spin up the barrel, and let it rip. Just don’t expect to run anywhere fast!',
+      section: 'additions',
+      target: 'm134-minigun',
+    },
+    // Gadgets
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Decreased cooldown from 40s to 35s',
+      section: 'balance',
+      target: 'anti-gravity-cube',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Increased effect radius from 3.5m to 4m',
+      section: 'balance',
+      target: 'anti-gravity-cube',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      devNote:
+        'APS usage has dropped considerably since we moved to having blocked projectiles consume the deployable’s health. This change nudges the APS’s power slightly, hopefully making it a more popular choice.',
+      note: 'Decreased damage taken per projectile destroyed from 40% to 31.25% of total health, allowing the APS to block 4 projectiles instead of 3',
+      section: 'balance',
+      target: 'aps-turret',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'gadget',
+      devNote:
+        'The Data Reshaper became too effective as a counter to long cooldown deployables. This change aims to balance its usability.',
+      note: 'Decreased ammo count from 3 to 2',
+      section: 'balance',
+      target: 'data-reshaper',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      devNote:
+        'This change should help the Glitch Grenade feel more responsive and desirable to use.',
+      note: 'Decreased the fuse time from 1.8s to 1.5s',
+      section: 'balance',
+      target: 'glitch-grenade',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Increased the maximum duration of the vortex from 8s to 10s',
+      section: 'balance',
+      target: 'gravity-vortex',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      note: 'Increased the minimum duration of the vortex from 5s to 7s',
+      section: 'balance',
+      target: 'gravity-vortex',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'gadget',
+      note: 'Decreased throw velocity from 16.5m/s to 15m/s',
+      section: 'balance',
+      target: 'gravity-vortex',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'gadget',
+      devNote:
+        "These changes aim to buff the Gravity Vortex's impact while avoiding its use as a long-range grenade.",
+      note: 'Increased projectile gravity modifier from 1 to 1.7, giving the projectile a steeper arc and reducing maximum throw distance from ~29m to ~15m',
+      section: 'balance',
+      target: 'gravity-vortex',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'gadget',
+      devNote:
+        'This is a small buff to make the Tracking Dart slightly more desirable.',
+      note: 'Increased tracking duration on targets from 10s to 13s',
+      section: 'balance',
+      target: 'tracking-dart',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'gadget',
+      devNote:
+        'The previous fuse time hurt usability, especially for new players. This change improves reliability.',
+      note: 'Reduced the fuse time of Explosive Canisters for more reliable detonation',
+      section: 'content-and-bug-fixes',
+      target: 'explosive-canisters',
+    },
+
+    // Specializations
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      note: 'Increased "Cloak Max Blend" from 1.5 to 1.75, making cloaked players slightly more visible',
+      section: 'balance',
+      target: 'cloaking-device',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      note: 'Increased "Delay Before Transitioning Into Cloak" from 0 to 0.5s, increasing the time it takes for a player to disappear',
+      section: 'balance',
+      target: 'cloaking-device',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'specializations',
+      devNote:
+        'These changes aim to make cloaked players more visible and encourage a sneaky playstyle over run-and-gun tactics.',
+      note: 'Increased "First Person Cloak Multiplier" from 0.9 to 1.0, making the first-person cloaking effect match third-person visibility',
+      section: 'balance',
+      target: 'cloaking-device',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      note: 'Increased max range from 10m to 12m',
+      section: 'balance',
+      target: 'winch-claw',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      note: 'Added scaling of stun duration versus Weapons and Gadgets based on distance, with longer range hits stunning for longer',
+      section: 'balance',
+      target: 'winch-claw',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      note: 'Increased maximum Weapon/Gadget stun duration at max range from 0.55s to 0.65s',
+      section: 'balance',
+      target: 'winch-claw',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'specializations',
+      devNote:
+        'These changes aim to make the Winch Claw less frustrating for targets while improving its ranged capabilities.',
+      note: 'Added minimum Weapon/Gadget stun duration at min range (3m or less) of 0.3s',
+      section: 'balance',
+      target: 'winch-claw',
+    },
+
+    // Weapons
+    {
+      adjustmentType: 'neutral',
+      category: 'weapons',
+      devNote:
+        'This is a quality of life change to make the AKM feel nicer to use.',
+      note: 'Improved recoil interpolation for smoother first-person camera movement',
+      section: 'balance',
+      target: 'akm',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased inner blast radius from 30cm to 60cm for easier maximum damage',
+      section: 'balance',
+      target: 'cl-40',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased grenade projectile speed from 35m/s to 42m/s',
+      section: 'balance',
+      target: 'cl-40',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote: 'These changes aim to make the CL-40 more desirable.',
+      note: 'Decreased projectile gravity modifier from 1 to 0.9, giving projectiles a flatter arc',
+      section: 'balance',
+      target: 'cl-40',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage of regular attacks from 50 to 60',
+      section: 'balance',
+      target: 'dagger',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote:
+        "This buff makes the Dagger's non-backstab attacks more viable in combat.",
+      note: 'Increased damage of non-backstab secondary attacks from 50 to 75',
+      section: 'balance',
+      target: 'dagger',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'weapons',
+      devNote:
+        'This is a quality of life change to make the FAMAS feel nicer to use.',
+      note: 'Improved recoil interpolation for smoother first-person camera movement',
+      section: 'balance',
+      target: 'famas',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote: "This buff improves the KS-23's usability and competitiveness.",
+      note: 'Decreased pump-action duration from 0.82s to 0.7s, increasing fire rate from 73RPM to 85RPM',
+      section: 'balance',
+      target: 'ks-23',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      devNote:
+        "This change addresses the LH1's strong performance this season, especially at close range.",
+      note: 'Decreased damage from 46 to 40',
+      section: 'balance',
+      target: 'lh1',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage from 19 to 20',
+      section: 'balance',
+      target: 'm60',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage falloff max range from 32m to 35m for a slightly longer effective range',
+      section: 'balance',
+      target: 'm60',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      devNote:
+        'These buffs aim to bring the M60 closer to other weapons in effectiveness.',
+      note: 'Increased damage falloff multiplier from 0.4 to 0.5, meaning the weapon now does slightly more damage at range',
+      section: 'balance',
+      target: 'm60',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased damage falloff minimum range from 50m to 45m, reducing effective range',
+      section: 'balance',
+      target: 'pike-556',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      note: 'Decreased damage falloff max range from 55m to 50m, reducing effective range',
+      section: 'balance',
+      target: 'pike-556',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      devNote: 'These changes bring the Pike-556 in line with other weapons.',
+      note: 'Decreased damage falloff multiplier from 0.85 to 0.75, meaning the weapon now does slightly less damage at range',
+      section: 'balance',
+      target: 'pike-556',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage from 16 to 17',
+      section: 'balance',
+      target: 'xp-54',
+    },
+    {
+      adjustmentType: 'buff',
+      category: 'weapons',
+      note: 'Increased damage falloff minimum range from 20m to 22.5m for a slightly longer effective range',
+      section: 'balance',
+      target: 'xp-54',
+    },
+    {
+      adjustmentType: 'nerf',
+      category: 'weapons',
+      devNote:
+        "These changes aim to improve the XP-54's performance compared to similar weapons.",
+      note: 'Decreased damage falloff multiplier from 0.62 to 0.52, meaning the weapon now does slightly less damage at range',
+      section: 'balance',
+      target: 'xp-54',
+    },
+
+    // Content and Bug Fixes
+    {
+      adjustmentType: 'neutral',
+      category: 'animation',
+      note: 'Made all transitions to aim down sight while sprinting feel much smoother',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'audio',
+      note: 'Reset the player’s Music Playlist to play the Season 6 Soundtrack',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'game-mode',
+      devNote:
+        "Bank It has struggled with low player counts. With TDM's popularity, we feel this is the right time to remove it from rotation.",
+      note: 'Removed Bank It from the Quick Play menu; it remains available in Private Matches',
+      section: 'content-and-bug-fixes',
+      target: 'bank-it',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Fixed visible seam in Bernal landscape',
+      section: 'content-and-bug-fixes',
+      target: 'bernal',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Performance improvements for Kyoto',
+      section: 'content-and-bug-fixes',
+      target: 'kyoto',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'maps',
+      note: 'Reworked destruction in Las Vegas Stadium for better optimization',
+      section: 'content-and-bug-fixes',
+      target: 'las-vegas-stadium',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'ui',
+      note: 'Added the ability to inspect weapon skin animations in the store and customization screen',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'vfx',
+      note: 'Made the spawn sequence shorter and less intrusive',
+      section: 'content-and-bug-fixes',
+      target: 'general',
+    },
+
+    // Security and Anti-Cheat
+    {
+      adjustmentType: 'neutral',
+      category: 'general',
+      note: 'Improved messaging for AHK violations',
+      section: 'security-and-anti-cheat',
+      target: 'general',
+    },
+    {
+      adjustmentType: 'neutral',
+      category: 'general',
+      note: 'Implemented hardware bans',
+      section: 'security-and-anti-cheat',
+      target: 'general',
+    },
+  ],
+  title: 'Welcome to Season 6!',
+  version: '6.0.0',
+};
