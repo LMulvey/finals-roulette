@@ -166,7 +166,7 @@ export const Page = () => {
           <time className="text-gray-400">
             {patch.date.toLocaleDateString()}
           </time>
-          <div className="w-px h-4 bg-white flex-shrink-0" />
+          <div className="w-px h-4 bg-white shrink-0" />
           <a
             className="flex flex-row items-center gap-2 text-white text-md"
             href={patch.originalUrl}
@@ -222,7 +222,7 @@ export const Page = () => {
                                 className="flex gap-2"
                                 key={`${note.category}-${note.note}`}
                               >
-                                <div className="w-4 h-4 flex-shrink-0 mt-1">
+                                <div className="w-4 h-4 shrink-0 mt-1">
                                   <AdjustmentIcon type={note.adjustmentType} />
                                 </div>
                                 <div className="space-y-2">

@@ -39,11 +39,11 @@ export const Header = () => {
             src="/images/logos/the-finals-logo-horizontal.crop.png"
           />
           <div className="flex flex-row items-center gap-2 h-[36px] w-full">
-            <div className="text-3xl font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-red flex-grow">
+            <div className="text-3xl font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-secondary grow">
               Roulette
             </div>
             <a
-              className="text-xl text-finals-red font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-finals-white whitespace-nowrap h-full flex items-center"
+              className="text-xl text-background font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-foreground whitespace-nowrap h-full flex items-center"
               href="https://www.reachthefinals.com/patchnotes/5100"
               rel="noreferrer noopener"
               target="_blank"

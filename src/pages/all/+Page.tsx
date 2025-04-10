@@ -187,7 +187,7 @@ export const Page = () => {
 
           return (
             <div
-              className="border rounded-lg p-6 shadow-sm"
+              className="border rounded-lg p-6 shadow-xs"
               key={contestantClass.label}
             >
               <h2 className="text-2xl font-semibold mb-4">

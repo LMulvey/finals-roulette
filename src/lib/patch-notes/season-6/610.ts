@@ -129,7 +129,7 @@ export const patch610: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'stability-and-performance',
-      note: 'Fixed motion blur artifacts for some Intel and AMD GPUs.',
+      note: 'Fixed motion blur-sm artifacts for some Intel and AMD GPUs.',
       section: 'content-and-bug-fixes',
       target: 'general',
     },

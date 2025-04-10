@@ -194,7 +194,7 @@ export const LoadoutDisplay = ({
                 <div className="flex items-center justify-center gap-2 w-full">
                   <input
                     autoFocus
-                    className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-none"
+                    className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-hidden"
                     onChange={(event) => setEditedName(event.target.value)}
                     type="text"
                     value={editedName ?? ''}
