@@ -181,7 +181,7 @@ export const LoadoutDisplay = ({
           >
             <motion.div
               animate="animate"
-              className="relative w-full flex flex-row gap-2 items-center justify-center"
+              className="min-h-[124px] relative w-full flex flex-row gap-8 items-center justify-center"
               exit="initial"
               initial="initial"
               key={loadout.loadoutName}
@@ -224,7 +224,7 @@ export const LoadoutDisplay = ({
                 </div>
               ) : (
                 <h2
-                  className="min-h-[124px] text-4xl md:text-5xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
+                  className="text-4xl md:text-5xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={
                     onUpdateLoadoutName ? () => setIsEditing(true) : undefined
                   }
