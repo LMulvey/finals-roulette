@@ -224,7 +224,7 @@ export const LoadoutDisplay = ({
                 </div>
               ) : (
                 <h2
-                  className="text-4xl md:text-7xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
+                  className="text-4xl md:text-5xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
                   onClick={
                     onUpdateLoadoutName ? () => setIsEditing(true) : undefined
                   }

@@ -42,7 +42,7 @@ export const ALL_GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['light'],
-    description: "Don't taze me, bruh.",
+    description: "Don't taze me, bro.",
     disabled: true,
     id: 'stun-gun',
     imageUrl: '/images/gadgets/stun-gun.png',
@@ -82,7 +82,7 @@ export const ALL_GADGETS: ContestantGadget[] = [
   {
     classType: ['medium'],
     description:
-      'A deployable that destroys incoming projectiles – but self-damages every time.',
+      'A deployable that destroys incoming projectiles but takes damage every time.',
     id: 'aps-turret',
     imageUrl: '/images/gadgets/aps-turret.png',
     label: 'APS Turret',

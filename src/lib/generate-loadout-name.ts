@@ -89,6 +89,16 @@ const adjectives = {
     'Chaos-Driven',
     'Excessively-Prickly',
     'Over-The-Top-Huffy',
+    'Angry-Potato',
+    'Rage-Noodle',
+    'Frothing-Mad',
+    'Yelling-Yeti',
+    'Tantrum-Tornado',
+    'Explosive-Pickle',
+    'Shouty-Sprout',
+    'Fuming-Ferret',
+    'Stompy-Sasquatch',
+    'Grumpy-Goose',
   ],
   defensive: [
     'Skibidi',
@@ -169,6 +179,16 @@ const adjectives = {
     'Timidly-Holding',
     'Recoil-Ready',
     'Deflection-Prone',
+    'Pillow-Fortified',
+    'Turtle-Tastic',
+    'Bubble-Buddy',
+    'Shield-Snuggler',
+    'Armor-Armadillo',
+    'Cautious-Cucumber',
+    'Hedgehog-Hero',
+    'Paranoid-Penguin',
+    'Barricade-Bear',
+    'Retreating-Rabbit',
   ],
   sneaky: [
     'Negative Aura',
@@ -253,6 +273,16 @@ const adjectives = {
     'Outfoxing',
     'Subversive',
     'Little Stinker',
+    'Sneaky-Snake',
+    'Shadow-Ferret',
+    'Cloak-And-Dagger',
+    'Tiptoe-Tiger',
+    'Stealthy-Sloth',
+    'Undercover-Unicorn',
+    'Spy-Squirrel',
+    'Devious-Duck',
+    'Mischievous-Mongoose',
+    'Cunning-Chameleon',
   ],
   technical: [
     'Over-Engineered',
@@ -337,6 +367,16 @@ const adjectives = {
     'Utility-Focused',
     'Binary-Oriented',
     'Scalably-Architected',
+    'Techno-Wizard',
+    'Code-Cruncher',
+    'Algorithm-Alpaca',
+    'Processor-Panda',
+    'Circuit-Slinger',
+    'Data-Dolphin',
+    'Binary-Buffalo',
+    'Logic-Llama',
+    'Tech-Tiger',
+    'Gadget-Giraffe',
   ],
 };
 
@@ -351,6 +391,7 @@ const patterns = {
     if (
       weaponName.includes('m11') ||
       weaponName.includes('flamethrower') ||
+      weaponName.includes('minigun') ||
       weaponName.includes('sword')
     ) {
       return ['Left Click Legend', 'EZ Mode', 'Fuck-O'];
@@ -409,7 +450,7 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Meta-chaser`,
     `${item.label} Nooblord`,
     `${item.label} Trashlord`,
-    `${item.label} Sigma Simp`,
+    `${item.label} Simp`,
     `${item.label} Cringe`,
     `${item.label} Clutchyboy`,
     `${item.label} Feeder`,
@@ -428,7 +469,7 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Sandbagger`,
     `${item.label} Int Lord`,
     `${item.label} W Keyer`,
-    `${item.label} Cheese Lover`,
+    `${item.label} Cheese`,
     `${item.label} Spawn Camper`,
     `${item.label} Rage Quitter`,
     `${item.label} Tryhard-slayer`,
@@ -468,8 +509,8 @@ const countItemsWithKeywords = (
 const determineLoadoutStyle = (loadout: Loadout): keyof typeof adjectives => {
   const defensiveItems = countItemsWithKeywords(loadout, [
     'shield',
-    'armor',
-    'block',
+    'barricade',
+    'goo',
   ]);
   const aggressiveItems = countItemsWithKeywords(loadout, [
     'sword',
@@ -479,13 +520,14 @@ const determineLoadoutStyle = (loadout: Loadout): keyof typeof adjectives => {
   const sneakyItems = countItemsWithKeywords(loadout, [
     'stealth',
     'fire',
-    'flame',
+    'pyro',
     'trap',
+    'mine',
   ]);
   const technicalItems = countItemsWithKeywords(loadout, [
-    'tech',
     'gadget',
-    'hack',
+    'demat',
+    'reshape',
   ]);
 
   const scores = {
