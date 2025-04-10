@@ -24,6 +24,10 @@
 }
 
 @theme {
+  --color-finals-black: var(--color-finals-black);
+  --color-finals-red: var(--color-finals-red);
+  --color-finals-white: var(--color-finals-white);
+
   --color-background: var(--color-finals-black);
   --color-foreground: var(--color-finals-white);
 
