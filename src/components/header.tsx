@@ -23,7 +23,7 @@ const linkClasses = cvu(
 
 export const Header = () => {
   const pageContext = usePageContext();
-  const mostRecentPatch = getMostRecentPatch();
+  const mostRecentPatch = getMostRecentPatch(true);
 
   return (
     <header className="w-full p-8">
@@ -42,16 +42,18 @@ export const Header = () => {
             <div className="text-3xl font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-secondary grow">
               Roulette
             </div>
-            <a
-              className="text-xl text-background font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-foreground whitespace-nowrap h-full flex items-center"
-              href="https://www.reachthefinals.com/patchnotes/5100"
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              {mostRecentPatch.updatedNote ?? (
-                <>Updated for {mostRecentPatch.version}</>
-              )}
-            </a>
+            {mostRecentPatch && (
+              <a
+                className="text-xl text-background font-bold w-full text-left px-2 -skew-x-6 rounded-md bg-foreground whitespace-nowrap h-full flex items-center"
+                href={mostRecentPatch.originalUrl}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
+                {mostRecentPatch?.updatedNote ?? (
+                  <>Updated for {mostRecentPatch.version}</>
+                )}
+              </a>
+            )}
           </div>
         </button>
         <div className="flex flex-col gap-2 lg:flex-row lg:gap-8 pt-8 border-t border-t-gray-500 lg:pt-0 lg:border-t-0 lg:pl-12 lg:border-l lg:border-l-gray-500 w-full">

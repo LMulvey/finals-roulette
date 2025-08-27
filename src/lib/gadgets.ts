@@ -249,4 +249,25 @@ export const ALL_GADGETS: ContestantGadget[] = [
     imageUrl: '/images/gadgets/smoke-grenade.png',
     label: 'Smoke Grenade',
   },
+  {
+    classType: ['light'],
+    description: 'Spam-heal fellow contesttants with perfect aim',
+    id: 'h-plus-infuser',
+    imageUrl: '/images/gadgets/h-plus-infuser.png',
+    label: 'H+ Infuser',
+  },
+  {
+    classType: ['heavy'],
+    description: 'A deployable ball named Chuck that heals you',
+    id: 'healing-emitter',
+    imageUrl: '/images/gadgets/healing-emitter.png',
+    label: 'Healing Emitter',
+  },
+  {
+    classType: ['medium'],
+    description: 'Get banged and bombed',
+    id: 'breach-drill',
+    imageUrl: '/images/gadgets/breach-drill.png',
+    label: 'Breach Drill',
+  },
 ];

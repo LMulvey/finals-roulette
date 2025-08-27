@@ -170,7 +170,7 @@ export const LoadoutDisplay = ({
         <AnimatePresence mode="wait">
           <motion.div
             animate="animate"
-            className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mt-10 mb-40"
+            className="w-full flex flex-col md:flex-row md:flex-wrap gap-4 max-w-80 md:max-w-3xl mb-40"
             exit="initial"
             initial="initial"
             key="loadout-container"

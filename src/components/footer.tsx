@@ -1,3 +1,4 @@
+import versionData from '../version.json';
 import {
   heavyClass,
   heavySpecializations,
@@ -64,7 +65,13 @@ export const Footer = () => {
         initial: { opacity: 0, y: 100 },
       }}
     >
-      <div className="container mx-auto px-4 text-sm text-center">
+      <div className="container mx-auto px-4 text-sm">
+        {versionData && (
+          <p className="mb-2">
+            vchan{versionData.commit.slice(-8)}:
+            {new Date(versionData.date).toLocaleDateString()}
+          </p>
+        )}
         <p className="mb-2">
           Thanks to{' '}
           <a

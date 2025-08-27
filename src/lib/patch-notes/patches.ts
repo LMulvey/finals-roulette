@@ -1,17 +1,20 @@
 import { ALL_SEASON_FIVE_PATCHES } from './season-5';
 import { ALL_SEASON_SIX_PATCHES } from './season-6';
+import { ALL_SEASON_SEVEN_PATCHES } from './season-7';
 import { type Patch, type PatchNote, type PatchNoteTarget } from './types';
 import { differenceInCalendarDays } from 'date-fns';
 
-type Season = 'seasonFive' | 'seasonSix';
+type Season = 'seasonFive' | 'seasonSeven' | 'seasonSix';
 
 export const ALL_PATCHES: Patch[] = [
+  ...ALL_SEASON_SEVEN_PATCHES,
   ...ALL_SEASON_SIX_PATCHES,
   ...ALL_SEASON_FIVE_PATCHES,
 ];
 
 export const PATCHES_BY_SEASON: Record<Season, Patch[]> = {
   seasonFive: ALL_SEASON_FIVE_PATCHES,
+  seasonSeven: ALL_SEASON_SEVEN_PATCHES,
   seasonSix: ALL_SEASON_SIX_PATCHES,
 };
 
@@ -97,7 +100,7 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
 
     return {
       adjustmentType,
-      note: `${flattenedNotes}.`,
+      note: `${flattenedNotes}.`.replace('..', '.'),
       patchDate: maybeAdjustmentPatches.date.toLocaleDateString(),
       patchUrl: `/patches/${maybeAdjustmentPatches.version.replaceAll('.', '')}`,
       patchVersion: maybeAdjustmentPatches.version,

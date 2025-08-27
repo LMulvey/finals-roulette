@@ -190,6 +190,16 @@ const adjectives = {
     'Barricade-Bear',
     'Retreating-Rabbit',
   ],
+  healing: [
+    'Heal-Bot',
+    'Medic-Machine',
+    'Health-Harvester',
+    'Support-Specialist',
+    'Nurse',
+    'Doctor',
+    'Healer',
+    'Positive Aura',
+  ],
   sneaky: [
     'Negative Aura',
     'Sketchy',
@@ -385,6 +395,14 @@ const patterns = {
     loadout.weapon.label.toLowerCase().includes('bow')
       ? ['Bow-zo', 'Heavy Hunter', 'Strung-Out', 'Bow-man']
       : [],
+  healer: (loadout: Loadout) =>
+    loadout.gadgets.some(
+      (gadget) =>
+        gadget.label.toLowerCase().includes('heal') ||
+        gadget.label.toLowerCase().includes('h+'),
+    )
+      ? ['EZ Healer', 'Heal Daddy', 'Healing Hero', 'Health-chunker']
+      : [],
   leftClick: (loadout: Loadout) => {
     const weaponName = loadout.weapon.label.toLowerCase();
 
@@ -392,6 +410,7 @@ const patterns = {
       weaponName.includes('m11') ||
       weaponName.includes('flamethrower') ||
       weaponName.includes('minigun') ||
+      weaponName.includes('sledge') ||
       weaponName.includes('sword')
     ) {
       return ['Left Click Legend', 'EZ Mode', 'Fuck-O'];
@@ -529,10 +548,12 @@ const determineLoadoutStyle = (loadout: Loadout): keyof typeof adjectives => {
     'demat',
     'reshape',
   ]);
+  const healingItems = countItemsWithKeywords(loadout, ['heal', 'h+']);
 
   const scores = {
     aggressive: aggressiveItems,
     defensive: defensiveItems,
+    healing: healingItems,
     sneaky: sneakyItems,
     technical: technicalItems,
   };
