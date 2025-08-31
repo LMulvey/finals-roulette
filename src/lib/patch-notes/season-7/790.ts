@@ -169,7 +169,7 @@ export const patch790: Patch = {
       category: 'gadget',
       note: 'Nullifier: Fixed an issue where nullified opponents could deal quick melee damage.',
       section: 'content-and-bug-fixes',
-      target: 'nullifier',
+      target: 'stun-gun',
     },
 
     // Gameplay

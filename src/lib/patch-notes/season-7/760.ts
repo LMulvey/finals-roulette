@@ -97,7 +97,7 @@ export const patch760: Patch = {
       devNote: 'Projectiles will be addressed in a future update.',
       note: 'Nullifier: Bullets will now pass through Nullified players (hitscan only for now).',
       section: 'balance',
-      target: 'nullifier',
+      target: 'stun-gun',
     },
 
     // Maps
