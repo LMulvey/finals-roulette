@@ -68,7 +68,7 @@ export const Footer = () => {
       <div className="container mx-auto px-4 text-sm">
         {versionData && (
           <p className="mb-2">
-            vchan{versionData.commit.slice(-8)}:
+            Hash: {versionData.commit.slice(-8)}:{' '}
             {new Date(versionData.date).toLocaleDateString()}
           </p>
         )}

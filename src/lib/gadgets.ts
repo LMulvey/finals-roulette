@@ -42,7 +42,7 @@ export const ALL_GADGETS: ContestantGadget[] = [
   },
   {
     classType: ['light'],
-    description: "Don't taze me, bro.",
+    description: "Don't null me, bro.",
     id: 'stun-gun',
     imageUrl: '/images/gadgets/stun-gun.png',
     label: 'Nullifier',
