@@ -26,16 +26,16 @@ export const RecentsToggle = () => {
           initial: { opacity: 0 },
         }}
       >
-        <PopoverTrigger className="h-16 flex flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
+        <PopoverTrigger className="flex h-full flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
           <Rewind
             size={24}
             weight="fill"
           />
         </PopoverTrigger>
       </motion.div>
-      <PopoverContent className="border-none font-sans w-84">
-        <h1 className="text-3xl">Recents Builds</h1>
-        <div className="flex flex-col gap-2">
+      <PopoverContent className="border-none font-sans w-80 p-2">
+        <h1 className="text-xl mb-1 pl-2">Recent Builds</h1>
+        <div className="flex flex-col gap-1">
           {recents.map((recentLoadout) => {
             const currentLoadoutKey = serializeLoadout(recentLoadout);
 
@@ -45,7 +45,7 @@ export const RecentsToggle = () => {
                 key={currentLoadoutKey}
               >
                 <a
-                  className="text-md text-white"
+                  className="text-xs text-white hover:bg-white/20 rounded-md px-2 py-1"
                   href={`/${currentLoadoutKey}`}
                 >
                   {recentLoadout.loadoutName}

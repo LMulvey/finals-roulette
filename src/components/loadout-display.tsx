@@ -179,59 +179,61 @@ export const LoadoutDisplay = ({
               exit: { transition: { staggerChildren: 0.1 } },
             }}
           >
-            <motion.div
-              animate="animate"
-              className="min-h-[124px] relative w-full flex flex-row gap-8 items-center justify-center"
-              exit="initial"
-              initial="initial"
-              key={loadout.loadoutName}
-              variants={{
-                animate: { opacity: 1, scale: 1 },
-                initial: { opacity: 0, scale: 0 },
-              }}
-            >
-              {isEditing ? (
-                <div className="flex items-center justify-center gap-2 w-full">
-                  <input
-                    autoFocus
-                    className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-hidden"
-                    onChange={(event) => setEditedName(event.target.value)}
-                    type="text"
-                    value={editedName ?? ''}
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      className="p-2 hover:text-green-500 transition-colors"
-                      onClick={() => {
-                        onUpdateLoadoutName?.(editedName ?? '');
-                        setIsEditing(false);
-                      }}
-                      type="button"
-                    >
-                      <Check size={24} />
-                    </button>
-                    <button
-                      className="p-2 hover:text-red-500 transition-colors"
-                      onClick={() => {
-                        setEditedName(loadout.loadoutName);
-                        setIsEditing(false);
-                      }}
-                      type="button"
-                    >
-                      <X size={24} />
-                    </button>
+            <div className="min-h-[124px] relative w-full flex flex-row gap-8 items-center justify-between">
+              <motion.div
+                animate="animate"
+                className="grow"
+                exit="initial"
+                initial="initial"
+                key={loadout.loadoutName}
+                variants={{
+                  animate: { opacity: 1, scale: 1 },
+                  initial: { opacity: 0, scale: 0 },
+                }}
+              >
+                {isEditing ? (
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <input
+                      autoFocus
+                      className="text-xl md:text-2xl w-full text-center bg-transparent border-b border-current focus:outline-hidden"
+                      onChange={(event) => setEditedName(event.target.value)}
+                      type="text"
+                      value={editedName ?? ''}
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        className="p-2 hover:text-green-500 transition-colors"
+                        onClick={() => {
+                          onUpdateLoadoutName?.(editedName ?? '');
+                          setIsEditing(false);
+                        }}
+                        type="button"
+                      >
+                        <Check size={24} />
+                      </button>
+                      <button
+                        className="p-2 hover:text-red-500 transition-colors"
+                        onClick={() => {
+                          setEditedName(loadout.loadoutName);
+                          setIsEditing(false);
+                        }}
+                        type="button"
+                      >
+                        <X size={24} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <h2
-                  className="text-4xl md:text-5xl text-center w-max cursor-pointer hover:opacity-80 transition-opacity"
-                  onClick={
-                    onUpdateLoadoutName ? () => setIsEditing(true) : undefined
-                  }
-                >
-                  {loadout.loadoutName}
-                </h2>
-              )}
+                ) : (
+                  <h2
+                    className="text-4xl md:text-5xl text-center cursor-pointer hover:opacity-80 transition-opacity w-full"
+                    onClick={
+                      onUpdateLoadoutName ? () => setIsEditing(true) : undefined
+                    }
+                  >
+                    {loadout.loadoutName}
+                  </h2>
+                )}
+              </motion.div>
               {onUpdateLoadoutName ? (
                 <button
                   className="bg-white/80 rounded-full p-4 flex items-center justify-center text-finals-black"
@@ -245,7 +247,7 @@ export const LoadoutDisplay = ({
                   <Dices size={18} />
                 </button>
               ) : null}
-            </motion.div>
+            </div>
             {items.map((item) => {
               return (
                 <ItemCard
