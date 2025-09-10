@@ -110,6 +110,15 @@ export const mediumWeapons: ContestantWeapon[] = [
     label: 'CB-01 Repeater',
     type: 'marksman-rifle',
   },
+  {
+    classType: 'medium',
+    description:
+      "Hey! It's that crutch gun that I know from that other game(s)!",
+    id: 'p90',
+    imageUrl: '/images/weapons/p90.png',
+    label: 'P90',
+    type: 'smg',
+  },
 ];
 
 export const mediumSpecializations: ContestantSpecialization[] = [

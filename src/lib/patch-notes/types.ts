@@ -44,6 +44,7 @@ export type PatchNoteSection =
   | 'additions'
   | 'balance'
   | 'content-and-bug-fixes'
+  | 'removals'
   | 'security-and-anti-cheat'
   | 'store';
 

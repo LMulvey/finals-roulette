@@ -109,6 +109,15 @@ export const heavyWeapons: ContestantWeapon[] = [
     label: 'M134 Minigun',
     type: 'assault-rifle',
   },
+  {
+    classType: 'heavy',
+    description:
+      'A handheld sniper, err, revolver for the Heavy that packs a punch.',
+    id: 'bfr-titan',
+    imageUrl: '/images/weapons/bfr-titan.png',
+    label: 'BFR Titan',
+    type: 'handgun',
+  },
 ];
 
 export const heavySpecializations: ContestantSpecialization[] = [

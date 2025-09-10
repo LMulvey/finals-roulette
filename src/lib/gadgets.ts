@@ -58,6 +58,7 @@ export const ALL_GADGETS: ContestantGadget[] = [
     classType: ['light'],
     description:
       'Formerly a specialization, this gadget allows the user to easily identify other contestants for a short duration.',
+    disabled: true,
     id: 'thermal-vision',
     imageUrl: '/images/gadgets/thermal-vision.png',
     label: 'Thermal Vision',
