@@ -131,6 +131,7 @@ const getSectionLabel = (section: PatchNoteSection): string => {
     additions: 'Additions',
     balance: 'Balance',
     'content-and-bug-fixes': 'Content & Bug Fixes',
+    removals: 'Removals',
     'security-and-anti-cheat': 'Security & Anti-Cheat',
     store: 'Store',
   };
