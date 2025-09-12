@@ -39,7 +39,7 @@ export const Layout = ({ children }: { readonly children: ReactNode }) => {
       <main className="w-screen min-h-screen relative">
         <Analytics />
         <Header />
-        {children}
+        <div className="pb-[264px]">{children}</div>
         <Toaster />
         <Footer />
       </main>
