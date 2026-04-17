@@ -28,6 +28,8 @@
 	--color-finals-black: var(--color-finals-black);
 	--color-finals-red: var(--color-finals-red);
 	--color-finals-white: var(--color-finals-white);
+	--font-sans:
+		var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial, sans-serif;
 
 	--color-background: var(--color-finals-black);
 	--color-foreground: var(--color-finals-white);
@@ -47,12 +49,15 @@
 }
 
 @layer utilities {
-	:root {
+	body {
 		font-family:
 			var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial,
 			sans-serif;
 		line-height: 1.5;
 		font-weight: 400;
+		margin: 0;
+		min-width: 375px;
+		min-height: 100vh;
 
 		color: #f1f2fa;
 		background-color: #1d1a20;
@@ -72,12 +77,6 @@
 
 	a:hover {
 		color: var(--color-link-hover);
-	}
-
-	body {
-		margin: 0;
-		min-width: 375px;
-		min-height: 100vh;
 	}
 
 	h1,
