@@ -1,5 +1,5 @@
 {
-	"name": "my-turborepo",
+	"name": "finals-roulette",
 	"private": true,
 	"scripts": {
 		"build": "turbo run build --filter=web --filter=@repo/ui --filter=@repo/roulette",
@@ -16,6 +16,6 @@
 	},
 	"packageManager": "pnpm@10.33.0",
 	"engines": {
-		"node": ">=22"
+		"node": ">=24"
 	}
 }
