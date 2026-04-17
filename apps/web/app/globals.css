@@ -30,6 +30,9 @@
 	--color-finals-white: var(--color-finals-white);
 	--font-sans:
 		var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--font-heading:
+		var(--font-saira-extra-condensed), system-ui, Avenir, Helvetica, Arial,
+		sans-serif;
 
 	--color-background: var(--color-finals-black);
 	--color-foreground: var(--color-finals-white);

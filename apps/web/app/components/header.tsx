@@ -8,6 +8,8 @@ import {
 } from "@phosphor-icons/react";
 import { getMostRecentPatch } from "@repo/patch-notes/patches";
 import { NotebookPenIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { cvu } from "@/lib/cvu";
@@ -30,8 +32,7 @@ export const Header = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	// Close menu on navigation (mobile)
-	const handleNav = (path: string) => {
-		router.push(path);
+	const handleNav = () => {
 		setMenuOpen(false);
 	};
 
@@ -43,12 +44,13 @@ export const Header = () => {
 					onClick={() => router.push("/")}
 					type="button"
 				>
+					{/** biome-ignore lint/performance/noImgElement: because */}
 					<img
 						alt="THE FINALS logo"
 						className="w-48 lg:w-72"
 						src="/images/logos/the-finals-logo-horizontal.crop.png"
 					/>
-					<div className="flex flex-row items-center gap-2 h-[26px] w-full">
+					<div className="flex flex-row items-center gap-2 h-6.5 w-full">
 						<div className="text-md flex items-center font-bold text-left px-2 -skew-x-6 rounded-md bg-secondary h-full">
 							Roulette
 						</div>
@@ -100,7 +102,7 @@ export const Header = () => {
               lg:static lg:translate-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:flex-row lg:gap-8 lg:pt-0 lg:px-0 lg:w-full lg:h-auto lg:top-auto lg:right-auto
             `}
 				>
-					<a
+					<Link
 						className={linkClasses({
 							active:
 								pathname !== "/all" &&
@@ -108,47 +110,52 @@ export const Header = () => {
 								!pathname.includes("/patches") &&
 								!pathname.includes("/saved"),
 						})}
-						onClick={() => handleNav("/")}
+						href="/"
+						onClick={handleNav}
 					>
 						<Person size={NAV_ITEM_ICON_SIZE} />
 						Loadouts
-					</a>
-					<a
+					</Link>
+					<Link
 						className={linkClasses({
 							active: pathname.startsWith("/saved"),
 						})}
-						onClick={() => handleNav("/saved")}
+						href="/saved"
+						onClick={handleNav}
 					>
 						<FloppyDiskBack size={NAV_ITEM_ICON_SIZE} />
 						Saved
-					</a>
-					<a
+					</Link>
+					<Link
 						className={linkClasses({
 							active: pathname === "/all",
 						})}
-						onClick={() => handleNav("/all")}
+						href="/all"
+						onClick={handleNav}
 					>
 						<SelectionAll size={NAV_ITEM_ICON_SIZE} />
 						Equipment
-					</a>
-					<a
+					</Link>
+					<Link
 						className={linkClasses({
 							active: pathname.includes("/patches"),
 						})}
-						onClick={() => handleNav("/patches")}
+						href="/patches"
+						onClick={handleNav}
 					>
 						<NotebookPenIcon size={NAV_ITEM_ICON_SIZE} />
 						Patches
-					</a>
-					<a
+					</Link>
+					<Link
 						className={linkClasses({
 							active: pathname === "/settings",
 						})}
-						onClick={() => handleNav("/settings")}
+						href="/settings"
+						onClick={handleNav}
 					>
 						<Gear size={NAV_ITEM_ICON_SIZE} />
 						Settings
-					</a>
+					</Link>
 				</nav>
 				{/* Overlay for mobile menu */}
 				{menuOpen && (
