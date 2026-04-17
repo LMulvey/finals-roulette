@@ -78,6 +78,14 @@ export const mediumWeapons: ContestantWeapon[] = [
 	},
 	{
 		classType: "medium",
+		description: "A semi-automatic crossbow that rewards precision and quick follow-up shots.",
+		id: "chimera-xb",
+		imageUrl: "/images/weapons/chimera-xb.png",
+		label: "Chimera XB",
+		type: "crossbow",
+	},
+	{
+		classType: "medium",
 		description: "A revolver-style handgun that doubles as a sniper rifle.",
 		id: "r-357",
 		imageUrl: "/images/weapons/r-357.png",
@@ -112,6 +120,13 @@ export const mediumWeapons: ContestantWeapon[] = [
 ];
 
 export const mediumSpecializations: ContestantSpecialization[] = [
+	{
+		classType: "medium",
+		description: "Launches an impact orb that displaces contestants and deployables for disruption and traversal.",
+		id: "shockwave",
+		imageUrl: "/images/specializations/shockwave.png",
+		label: "Shockwave",
+	},
 	{
 		classType: "medium",
 		description: "A turret that shoots targets automatically and has a ton of health.",

@@ -38,6 +38,7 @@ type FilterOption = (typeof FILTER_OPTIONS)[number];
 const WEAPON_TYPES = [
   'All Weapons',
   'Assault Rifle',
+  'Crossbow',
   'Grenade Launcher',
   'Handgun',
   'LMG',
@@ -70,6 +71,7 @@ export const Page = () => {
     const map: Record<(typeof WEAPON_TYPES)[number], undefined | WeaponType> = {
       'All Weapons': undefined,
       'Assault Rifle': 'assault-rifle',
+      Crossbow: 'crossbow',
       'Grenade Launcher': 'grenade-launcher',
       Handgun: 'handgun',
       LMG: 'lmg',
