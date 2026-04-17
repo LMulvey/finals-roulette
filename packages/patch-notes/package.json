@@ -1,0 +1,29 @@
+{
+  "name": "@repo/patch-notes",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./*": {
+      "types": "./src/*.ts",
+      "default": "./dist/*.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsup src/*.ts src/**/*.ts --format esm --target es2022 --out-dir dist --dts --watch",
+    "build": "tsup src/*.ts src/**/*.ts --format esm --target es2022 --out-dir dist --dts --clean",
+    "lint": "biome check --write",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@repo/schema": "workspace:*",
+    "date-fns": "^4.1.0"
+  },
+  "devDependencies": {
+    "@repo/biome-config": "workspace:^",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "tsup": "catalog:",
+    "typescript": "catalog:"
+  }
+}
