@@ -1,12 +1,16 @@
 "use client";
 
-import { Rewind } from "@phosphor-icons/react";
-import { PopoverClose } from "@radix-ui/react-popover";
-import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/popover";
-import * as motion from "motion/react-client";
+import { ClockCounterClockwiseIcon } from "@phosphor-icons/react";
+import {
+	Popover,
+	PopoverClose,
+	PopoverContent,
+	PopoverTrigger,
+} from "@repo/ui/popover";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { CLASS_LABEL } from "@/lib/equipment";
 import { getRecentLoadouts } from "@/lib/recents-storage";
-import { serializeLoadout } from "@/lib/serialize";
 
 export const RecentsToggle = () => {
 	const [recents, setRecents] = useState<ReturnType<typeof getRecentLoadouts>>(
@@ -17,42 +21,47 @@ export const RecentsToggle = () => {
 		setRecents(getRecentLoadouts());
 	}, []);
 
-	if (!recents.length) {
-		return null;
-	}
-
 	return (
 		<Popover>
-			<motion.div
-				animate="animate"
-				initial="initial"
-				variants={{
-					animate: { opacity: 1 },
-					initial: { opacity: 0 },
-				}}
+			<PopoverTrigger
+				aria-label="Recent rolls"
+				className="press flex size-12 items-center justify-center rounded-md text-ink-soft transition-colors hover:bg-arena-high hover:text-ink disabled:cursor-default disabled:opacity-40 disabled:hover:bg-transparent"
+				disabled={recents.length < 2}
+				title="Recent rolls"
 			>
-				<PopoverTrigger className="flex h-full flex-row items-center gap-2 text-lg bg-gray-600 text-finals-white font-bold hover:bg-gray-500 transition-colors px-4 py-2 rounded-lg uppercase italic">
-					<Rewind size={24} weight="fill" />
-				</PopoverTrigger>
-			</motion.div>
-			<PopoverContent className="border-none font-sans w-80 p-2">
-				<h1 className="text-xl mb-1 pl-2">Recent Builds</h1>
-				<div className="flex flex-col gap-1">
-					{recents.map((recentLoadout) => {
-						const currentLoadoutKey = serializeLoadout(recentLoadout);
-
-						return (
-							<PopoverClose asChild key={currentLoadoutKey}>
-								<a
-									className="text-xs text-white hover:bg-white/20 rounded-md px-2 py-1"
-									href={`/${currentLoadoutKey}`}
+				<ClockCounterClockwiseIcon size={22} weight="duotone" />
+			</PopoverTrigger>
+			<PopoverContent
+				align="end"
+				className="w-80 p-1.5"
+				collisionPadding={16}
+				side="top"
+				sideOffset={8}
+			>
+				<p className="eyebrow px-2 pt-1 pb-2">Recent rolls</p>
+				<ol className="flex flex-col">
+					{recents.map((recent, index) => (
+						<li key={recent.loadoutKey}>
+							<PopoverClose asChild>
+								<Link
+									className="flex items-baseline gap-2 rounded-md px-2 py-1.5 transition-colors hover:bg-arena-top"
+									href={`/${recent.loadoutKey}`}
 								>
-									{recentLoadout.loadoutName}
-								</a>
+									<span className="w-4 shrink-0 font-heading text-xs font-bold italic tabular-nums text-ink-ghost">
+										{index + 1}
+									</span>
+									<span className="min-w-0 grow truncate text-sm text-ink">
+										{recent.loadoutName ?? "Unnamed"}
+									</span>
+									<span className="shrink-0 text-xs text-ink-faint">
+										{CLASS_LABEL[recent.contestant.type]} ·{" "}
+										{recent.weapon.label}
+									</span>
+								</Link>
 							</PopoverClose>
-						);
-					})}
-				</div>
+						</li>
+					))}
+				</ol>
 			</PopoverContent>
 		</Popover>
 	);

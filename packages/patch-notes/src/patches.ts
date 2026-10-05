@@ -5,11 +5,20 @@ import { ALL_SEASON_SEVEN_PATCHES } from "./season-7";
 import { ALL_SEASON_EIGHT_PATCHES } from "./season-8";
 import { ALL_SEASON_NINE_PATCHES } from "./season-9";
 import { ALL_SEASON_TEN_PATCHES } from "./season-10";
+import { ALL_SEASON_ELEVEN_PATCHES } from "./season-11";
 import type { Patch, PatchNote, PatchNoteTarget } from "./types";
 
-type Season = "seasonEight" | "seasonFive" | "seasonNine" | "seasonSeven" | "seasonSix" | "seasonTen";
+type Season =
+	| "seasonEight"
+	| "seasonEleven"
+	| "seasonFive"
+	| "seasonNine"
+	| "seasonSeven"
+	| "seasonSix"
+	| "seasonTen";
 
 export const ALL_PATCHES: Patch[] = [
+	...ALL_SEASON_ELEVEN_PATCHES,
 	...ALL_SEASON_TEN_PATCHES,
 	...ALL_SEASON_NINE_PATCHES,
 	...ALL_SEASON_EIGHT_PATCHES,
@@ -20,6 +29,7 @@ export const ALL_PATCHES: Patch[] = [
 
 export const PATCHES_BY_SEASON: Record<Season, Patch[]> = {
 	seasonEight: ALL_SEASON_EIGHT_PATCHES,
+	seasonEleven: ALL_SEASON_ELEVEN_PATCHES,
 	seasonFive: ALL_SEASON_FIVE_PATCHES,
 	seasonNine: ALL_SEASON_NINE_PATCHES,
 	seasonSeven: ALL_SEASON_SEVEN_PATCHES,
@@ -85,12 +95,12 @@ export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
 	const recentPatches = getRecentPatches();
 	const sortedPatches = [...recentPatches].sort((a, b) => b.date.getTime() - a.date.getTime());
 
-	const maybeAdjustmentPatches = sortedPatches.find((patch) =>
-		patch.patchNotes.some((patchNote) => patchNote.target === target),
-	);
+	const isPermanentNoteForTarget = (patchNote: PatchNote) => patchNote.target === target && !patchNote.temporary;
+
+	const maybeAdjustmentPatches = sortedPatches.find((patch) => patch.patchNotes.some(isPermanentNoteForTarget));
 
 	if (maybeAdjustmentPatches) {
-		const filteredByTarget = maybeAdjustmentPatches.patchNotes.filter((patchNote) => patchNote.target === target);
+		const filteredByTarget = maybeAdjustmentPatches.patchNotes.filter(isPermanentNoteForTarget);
 		const flattenedNotes = filteredByTarget.map((patchNote) => patchNote.note).join(". ");
 		const flattenedSassyNotes = filteredByTarget
 			.map((patchNote) => patchNote.sassyNote)

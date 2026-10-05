@@ -5,6 +5,8 @@ import {
   type ContestantWeapon,
 } from '@repo/schema/roulette';
 
+type Random = () => number;
+
 type Loadout = {
   contestant: ContestantClass;
   gadgets: ContestantGadget[];
@@ -55,7 +57,7 @@ const adjectives = {
     'Volatile',
     'Rabid',
     'Stomping-Mad',
-    "Adderall'd",
+    'Over-Caffeinated',
     'Puffed-Up',
     'Thunderous',
     'Tantrum-Y',
@@ -99,6 +101,31 @@ const adjectives = {
     'Fuming-Ferret',
     'Stompy-Sasquatch',
     'Grumpy-Goose',
+    'Unstoppable',
+    'Full-Send',
+    'No-Brakes',
+    'Wall-Kicking',
+    'Head-First',
+    'Point-Blank',
+    'Overcommitted',
+    'Third-Partying',
+    'Kamikaze',
+    'Pushy',
+    'Rampaging',
+    'Trigger-Happy',
+    'Bulldozing',
+    'Door-Kicking',
+    'Glass-Breaking',
+    'Elbows-Out',
+    'Mid-Fight-Reloading',
+    'Zero-Patience',
+    'Rush-B',
+    'Hyper-Aggro',
+    'Lead-Spitting',
+    'Crowd-Surfing',
+    'Never-Retreating',
+    'Cash-Hungry',
+    'Vault-Rushing',
   ],
   defensive: [
     'Skibidi',
@@ -189,6 +216,58 @@ const adjectives = {
     'Paranoid-Penguin',
     'Barricade-Bear',
     'Retreating-Rabbit',
+    'Corner-Camping',
+    'Cashbox-Hugging',
+    'Objective-Sitting',
+    'Stall-Happy',
+    'Door-Holding',
+    'Overtime-Loving',
+    'Shield-Stacking',
+    'Turtle-Shelled',
+    'Wall-Hugging',
+    'Barricaded-In',
+    'Fort-Building',
+    'Anchor-Dropping',
+    'Hold-The-Line',
+    'Siege-Minded',
+    'Last-Stand',
+    'Clock-Running',
+    'Cover-Crawling',
+    'Bunkered',
+    'Plate-Armored',
+    'Statue-Still',
+  ],
+  explosive: [
+    'Kaboom',
+    'Boom-Happy',
+    'Blast-Radius',
+    'Demolition-Derby',
+    'Splash-Damage',
+    'Fuse-Lighting',
+    'Short-Fused',
+    'Detonating',
+    'Shrapnel-Spraying',
+    'Building-Deleting',
+    'Floor-Removing',
+    'Wall-Erasing',
+    'Collateral-Damage',
+    'Self-Damage-Enjoying',
+    'Concussive',
+    'Rubble-Making',
+    'Structurally-Unsound',
+    'Destruction-Loving',
+    'Pyrotechnic',
+    'Blast-Proof-Ish',
+    'Crater-Making',
+    'Earth-Shattering',
+    'Ear-Ringing',
+    'Ka-Blammo',
+    'Overkill',
+    'Explosive-Personality',
+    'Remote-Detonated',
+    'Sticky-Bomb',
+    'Chain-Reaction',
+    'Volatile-Cargo',
   ],
   healing: [
     'Heal-Bot',
@@ -199,6 +278,32 @@ const adjectives = {
     'Doctor',
     'Healer',
     'Positive Aura',
+    'Band-Aid',
+    'First-Aid',
+    'Medic-Bag',
+    'Revive-Spamming',
+    'Beam-Tethered',
+    'Life-Support',
+    'Pocket-Medic',
+    'Triage-Ready',
+    'Bedside-Manner',
+    'Wholesome',
+    'Patch-You-Up',
+    'Clutch-Reviving',
+    'Health-Topping',
+    'Ambulance-Chasing',
+    'Get-Well-Soon',
+    'Hippocratic',
+    'Overhealing',
+    'Nurturing',
+    'Caring',
+    'Soothing',
+    'Comfort-Food',
+    'Emotional-Support',
+    'Healing-Factor',
+    'Second-Chance',
+    'Defib-Happy',
+    'Stretcher-Bearing',
   ],
   sneaky: [
     'Negative Aura',
@@ -293,6 +398,26 @@ const adjectives = {
     'Devious-Duck',
     'Mischievous-Mongoose',
     'Cunning-Chameleon',
+    'Flanking',
+    'Rotating',
+    'Back-Door',
+    'Off-Angle',
+    'Ninja-Mode',
+    'Ghosting',
+    'Vault-Snatching',
+    'Steal-Happy',
+    'Last-Second',
+    'Cashout-Sniping',
+    'Sleight-Of-Hand',
+    'Smoke-And-Mirrors',
+    'Pickpocketing',
+    'Footstep-Muffled',
+    'Invisible-Ish',
+    'Peekaboo',
+    'Wall-Phasing',
+    'Window-Diving',
+    'Rooftop-Lurking',
+    'Shadow-Dancing',
   ],
   technical: [
     'Over-Engineered',
@@ -387,6 +512,26 @@ const adjectives = {
     'Logic-Llama',
     'Tech-Tiger',
     'Gadget-Giraffe',
+    'Frame-Perfect',
+    'Pixel-Peeking',
+    'Spreadsheet-Driven',
+    'Min-Maxed',
+    'Theorycrafted',
+    'Patch-Note-Reading',
+    'Meta-Slaving',
+    'Tier-Listed',
+    'Optimized-To-Death',
+    'Calculated-Risk',
+    'Overclocked',
+    'Benchmark-Chasing',
+    'Laser-Guided',
+    'Gadget-Brained',
+    'Diagram-Drawing',
+    'Over-Planned',
+    'Settings-Tweaking',
+    'High-Refresh',
+    'Latency-Obsessed',
+    'Blueprint-Bound',
   ],
 };
 
@@ -413,11 +558,44 @@ const patterns = {
       weaponName.includes('sledge') ||
       weaponName.includes('sword')
     ) {
-      return ['Left Click Legend', 'EZ Mode', 'Fuck-O'];
+      return ['Left Click Legend', 'EZ Mode', 'Button Masher'];
     }
 
     return [];
   },
+  explosives: (loadout: Loadout) =>
+    countItemsWithKeywords(loadout, ['c4', 'rpg', 'breach', 'mgl', 'cl-40', 'explosive-mine']) >= 2
+      ? ['Demolition Expert', 'Bomb Squad Reject', 'Structural Engineer', 'Mr. Kaboom', 'Arena Remodeler']
+      : [],
+  invisible: (loadout: Loadout) =>
+    loadout.specialization.id === 'cloaking-device' || loadout.gadgets.some((gadget) => gadget.id === 'vanishing-bomb')
+      ? ['Now-You-See-Me', 'Peekaboo Pro', 'Professional Ghost', 'Invisible Menace']
+      : [],
+  melee: (loadout: Loadout) =>
+    loadout.weapon.type === 'melee'
+      ? ['Bring-A-Knife-To-A-Gunfight', 'Up Close And Personal', 'Personal Space Invader', 'Hug Enthusiast']
+      : [],
+  minigun: (loadout: Loadout) =>
+    ['m134-minigun', 'lewis-gun', 'm60'].includes(loadout.weapon.id)
+      ? ['Bullet Hose', 'Lead Sprinkler', 'Suppressing Fire Fan', 'Ammo Budget Destroyer']
+      : [],
+  mobility: (loadout: Loadout) =>
+    ['grappling-hook', 'evasive-dash'].includes(loadout.specialization.id) ||
+    loadout.gadgets.some((gadget) => ['jump-pad', 'zipline', 'gateway', 'hover-pad'].includes(gadget.id))
+      ? ['Frequent Flyer', 'Parkour Prodigy', 'Never Touches Grass', 'Gravity Optional']
+      : [],
+  reviver: (loadout: Loadout) =>
+    loadout.gadgets.some((gadget) => gadget.id === 'defibrillator')
+      ? ['Clear!', 'Paddle Master', 'Second Chance Dealer', 'Resurrection Specialist']
+      : [],
+  shield: (loadout: Loadout) =>
+    loadout.specialization.id === 'mesh-shield' || loadout.weapon.id === 'riot-shield'
+      ? ['Human Wall', 'Mobile Fortress', 'Bullet Sponge', 'Shield Bearer']
+      : [],
+  shotgun: (loadout: Loadout) =>
+    loadout.weapon.type === 'shotgun'
+      ? ['Point-Blank Poet', 'Door Greeter', 'Close Quarters Connoisseur', 'Buckshot Barista']
+      : [],
   sniper: (loadout: Loadout) =>
     loadout.weapon.type === 'marksman-rifle'
       ? [
@@ -443,7 +621,7 @@ const patterns = {
   },
 };
 
-const pickItemReference = (loadout: Loadout): string => {
+const pickItemReference = (loadout: Loadout, random: Random): string => {
   const items = [
     loadout.contestant,
     loadout.weapon,
@@ -451,18 +629,16 @@ const pickItemReference = (loadout: Loadout): string => {
     ...loadout.gadgets,
   ];
 
-  const item = items[Math.floor(Math.random() * items.length)] ?? loadout.weapon;
+  const item = items[Math.floor(random() * items.length)] ?? loadout.weapon;
 
   const variations = [
     `${item.label}-enjoyer`,
     `${item.label}-enthusiast`,
-    `${item.label} Shitter`,
+    `${item.label} Goblin`,
     `${item.label} Sweat`,
     `${item.label} Expert`,
     `${item.label} Tryhard`,
-    `${item.label} Sweat`,
-    `${item.label} Expert`,
-    `${item.label} Shitter`,
+    `${item.label} Menace`,
     `${item.label} Haystack`,
     `${item.label} Carry`,
     `${item.label} Tank`,
@@ -492,10 +668,50 @@ const pickItemReference = (loadout: Loadout): string => {
     `${item.label} Spawn Camper`,
     `${item.label} Rage Quitter`,
     `${item.label} Tryhard-slayer`,
+    `${item.label} Main`,
+    `${item.label} Specialist`,
+    `${item.label} Connoisseur`,
+    `${item.label} Apprentice`,
+    `${item.label} Aficionado`,
+    `${item.label} Merchant`,
+    `${item.label} Fanatic`,
+    `${item.label} Evangelist`,
+    `${item.label} Truther`,
+    `${item.label} Defender`,
+    `${item.label} Hoarder`,
+    `${item.label} Collector`,
+    `${item.label} Whisperer`,
+    `${item.label} Tourist`,
+    `${item.label} Enjoyer`,
+    `${item.label} Maximalist`,
+    `${item.label} Purist`,
+    `${item.label} Diehard`,
+    `${item.label} Loyalist`,
+    `${item.label} Scholar`,
+    `${item.label} Professor`,
+    `${item.label} Intern`,
+    `${item.label} Rookie`,
+    `${item.label} Veteran`,
+    `${item.label} Prodigy`,
+    `${item.label} Superfan`,
+    `${item.label} Influencer`,
+    `${item.label} Streamer`,
+    `${item.label} Sponsor Darling`,
+    `${item.label} Cashout Thief`,
+    `${item.label} Vault Hoarder`,
+    `${item.label} Highlight Reel`,
+    `${item.label} Clip Farmer`,
+    `${item.label} Ranked Refugee`,
+    `${item.label} Quick Cash Regular`,
+    `${item.label} World Tour Tourist`,
+    `${item.label} Final Round Hero`,
+    `${item.label} Last-Second Steal`,
+    `${item.label} Arena Regular`,
+    `${item.label} Fan Favorite`,
   ];
 
   return (
-    variations[Math.floor(Math.random() * variations.length)] ??
+    variations[Math.floor(random() * variations.length)] ??
     `${item.label} Enthusiast`
   );
 };
@@ -528,49 +744,30 @@ const countItemsWithKeywords = (
   return count;
 };
 
-const determineLoadoutStyle = (loadout: Loadout): keyof typeof adjectives => {
-  const defensiveItems = countItemsWithKeywords(loadout, [
-    'shield',
-    'barricade',
-    'goo',
-  ]);
-  const aggressiveItems = countItemsWithKeywords(loadout, [
-    'sword',
-    'damage',
-    'attack',
-  ]);
-  const sneakyItems = countItemsWithKeywords(loadout, [
-    'stealth',
-    'fire',
-    'pyro',
-    'trap',
-    'mine',
-  ]);
-  const technicalItems = countItemsWithKeywords(loadout, [
-    'gadget',
-    'demat',
-    'reshape',
-  ]);
-  const healingItems = countItemsWithKeywords(loadout, ['heal', 'h+']);
-
-  const scores = {
-    aggressive: aggressiveItems,
-    defensive: defensiveItems,
-    healing: healingItems,
-    sneaky: sneakyItems,
-    technical: technicalItems,
-  };
-
-  // eslint-disable-next-line unicorn/no-array-reduce
-  return Object.entries(scores).reduce((a, b) =>
-    a[1] > b[1] ? a : b,
-  )[0] as keyof typeof adjectives;
+const STYLE_KEYWORDS: Record<keyof typeof adjectives, string[]> = {
+  aggressive: ['sword', 'damage', 'attack', 'shotgun', 'melee', 'sledge', 'charge', 'dash'],
+  defensive: ['shield', 'barricade', 'goo', 'dome', 'aps', 'mesh', 'block'],
+  explosive: ['c4', 'rpg', 'explos', 'grenade', 'breach', 'launcher', 'boom'],
+  healing: ['heal', 'h+', 'defib', 'revive', 'infuser'],
+  sneaky: ['stealth', 'cloak', 'invisib', 'vanish', 'fire', 'pyro', 'trap', 'mine', 'gas', 'gateway'],
+  technical: ['gadget', 'demat', 'reshape', 'turret', 'sensor', 'sonar', 'tracking', 'zipline', 'pad'],
 };
 
-const generateSassyName = (loadout: Loadout): string => {
+const determineLoadoutStyle = (loadout: Loadout, random: Random): keyof typeof adjectives => {
+  const scores = Object.entries(STYLE_KEYWORDS).map(
+    ([style, keywords]) => [style as keyof typeof adjectives, countItemsWithKeywords(loadout, keywords)] as const,
+  );
+  const best = Math.max(...scores.map(([, score]) => score));
+  const tied = scores.filter(([, score]) => score === best).map(([style]) => style);
+
+  // Break ties with the (seeded) random source so it isn't always the same style.
+  return tied[Math.floor(random() * tied.length)] ?? 'aggressive';
+};
+
+const generateSassyName = (loadout: Loadout, random: Random): string => {
   const namePool: string[] = [];
 
-  const style = determineLoadoutStyle(loadout);
+  const style = determineLoadoutStyle(loadout, random);
   namePool.push(...adjectives[style]);
 
   for (const pattern of Object.values(patterns)) {
@@ -578,18 +775,42 @@ const generateSassyName = (loadout: Loadout): string => {
     namePool.push(...matches);
   }
 
-  const adjective = namePool[Math.floor(Math.random() * namePool.length)];
+  const adjective = namePool[Math.floor(random() * namePool.length)];
 
-  const itemReference = pickItemReference(loadout);
+  const itemReference = pickItemReference(loadout, random);
   return `The ${adjective} ${itemReference}`;
 };
 
-export const generateLoadoutName = (loadout: Loadout): string => {
+export const generateLoadoutName = (loadout: Loadout, random: Random = Math.random): string => {
   // Generate 3 names and pick the funniest one (longest)
   const names = Array.from({ length: 3 })
     .fill(null)
-    .map(() => generateSassyName(loadout))
+    .map(() => generateSassyName(loadout, random))
     .sort((a, b) => b.length - a.length);
 
   return names[0] ?? 'Mystery Loadout';
+};
+
+/** 18 bits: fits in three base64url characters in a share URL. */
+export const LOADOUT_NAME_SEED_MAX = 2 ** 18;
+
+/** Small deterministic PRNG (mulberry32) so a seed always produces the same name. */
+export const createSeededRandom = (seed: number): Random => {
+  let state = seed >>> 0;
+  return () => {
+    state = (state + 0x6d_2b_79_f5) >>> 0;
+    let t = state;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4_294_967_296;
+  };
+};
+
+export const generateLoadoutNameFromSeed = (loadout: Loadout, seed: number): string =>
+  generateLoadoutName(loadout, createSeededRandom(seed));
+
+/** Rolls a fresh name along with the seed that reproduces it. */
+export const rollLoadoutName = (loadout: Loadout) => {
+  const loadoutNameSeed = Math.floor(Math.random() * LOADOUT_NAME_SEED_MAX);
+  return { loadoutName: generateLoadoutNameFromSeed(loadout, loadoutNameSeed), loadoutNameSeed };
 };

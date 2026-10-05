@@ -13,7 +13,7 @@ import {
   mediumSpecializations,
   mediumWeapons,
 } from './contestants/medium';
-import { generateLoadoutName } from './generate-loadout-name';
+import { rollLoadoutName } from './generate-loadout-name';
 import { getGadgetsForClass } from './get-gadgets-for-class';
 import { maybeGetRecentAdjustmentForTarget } from '@repo/patch-notes/patches';
 import {
@@ -334,12 +334,13 @@ export const getRandomLoadout = (
     getDefaultWeaponForClass(contestant.type);
 
   const loadout = { contestant, gadgets, specialization, weapon };
-  const loadoutName = generateLoadoutName(loadout);
+  const { loadoutName, loadoutNameSeed } = rollLoadoutName(loadout);
 
   return {
     contestant,
     gadgets,
     loadoutName,
+    loadoutNameSeed,
     specialization,
     weapon,
   };

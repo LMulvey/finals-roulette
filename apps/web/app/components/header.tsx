@@ -1,170 +1,130 @@
 "use client";
 
 import {
-	FloppyDiskBack,
-	Gear,
-	Person,
-	SelectionAll,
+	FloppyDiskBackIcon,
+	GearSixIcon,
+	type Icon,
+	NotebookIcon,
+	ShuffleIcon,
+	SquaresFourIcon,
 } from "@phosphor-icons/react";
 import { getMostRecentPatch } from "@repo/patch-notes/patches";
-import { NotebookPenIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
-import { cvu } from "@/lib/cvu";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/cvu";
 
-const NAV_ITEM_ICON_SIZE = 18;
+type NavItem = {
+	href: string;
+	icon: Icon;
+	isActive: (pathname: string) => boolean;
+	label: string;
+};
 
-const linkClasses = cvu(
-	"hover:yellow-300 hover:cursor-pointer text-gray-500 text-2xl font-bold transition-colors flex flex-row items-center gap-2",
+const NAV_ITEMS: NavItem[] = [
 	{
-		variants: {
-			active: { true: ["text-yellow-300"] },
-		},
+		href: "/",
+		icon: ShuffleIcon,
+		isActive: (pathname) =>
+			!/^\/(all|settings|patches|saved)(\/|$)/u.test(pathname),
+		label: "Roll",
 	},
-);
+	{
+		href: "/saved",
+		icon: FloppyDiskBackIcon,
+		isActive: (pathname) => pathname.startsWith("/saved"),
+		label: "Saved",
+	},
+	{
+		href: "/all",
+		icon: SquaresFourIcon,
+		isActive: (pathname) => pathname === "/all",
+		label: "Equipment",
+	},
+	{
+		href: "/patches",
+		icon: NotebookIcon,
+		isActive: (pathname) => pathname.startsWith("/patches"),
+		label: "Patches",
+	},
+	{
+		href: "/settings",
+		icon: GearSixIcon,
+		isActive: (pathname) => pathname === "/settings",
+		label: "Settings",
+	},
+];
 
 export const Header = () => {
 	const pathname = usePathname();
-	const router = useRouter();
-	const mostRecentPatch = getMostRecentPatch(true);
-	const [menuOpen, setMenuOpen] = useState(false);
-
-	// Close menu on navigation (mobile)
-	const handleNav = () => {
-		setMenuOpen(false);
-	};
+	const latestPatch = getMostRecentPatch(true);
 
 	return (
-		<header className="w-full px-8 py-4 border-b border-b-finals-white/30">
-			<div className="w-full flex flex-col lg:flex-row items-start lg:items-center gap-8 text-white relative">
-				<button
-					className="flex flex-col gap-2"
-					onClick={() => router.push("/")}
-					type="button"
-				>
-					{/** biome-ignore lint/performance/noImgElement: because */}
-					<img
-						alt="THE FINALS logo"
-						className="w-48 lg:w-72"
-						src="/images/logos/the-finals-logo-horizontal.crop.png"
-					/>
-					<div className="flex flex-row items-center gap-2 h-6.5 w-full">
-						<div className="text-md flex items-center font-bold text-left px-2 -skew-x-6 rounded-md bg-secondary h-full">
-							Roulette
-						</div>
-						{mostRecentPatch && (
-							<a
-								className="text-md text-background font-bold  text-left px-2 -skew-x-6 rounded-md bg-foreground whitespace-nowrap h-full flex items-center"
-								href={mostRecentPatch.originalUrl}
-								rel="noreferrer noopener"
-								target="_blank"
-							>
-								{mostRecentPatch?.updatedNote ?? (
-									<>Updated for {mostRecentPatch.version}</>
-								)}
-							</a>
-						)}
-					</div>
-				</button>
-
-				{/* Hamburger button (mobile only) */}
-				<button
-					aria-label={menuOpen ? "Close menu" : "Open menu"}
-					className="lg:hidden absolute right-0 top-0 mt-2 mr-2 z-30 p-2"
-					onClick={() => setMenuOpen((open) => !open)}
-					type="button"
-				>
-					<span
-						className="block w-7 h-1 bg-white rounded mb-1 transition-transform"
-						style={{
-							transform: menuOpen ? "rotate(45deg) translateY(10px)" : "none",
-						}}
-					/>
-					<span
-						className={`block w-7 h-1 bg-white rounded mb-1 transition-opacity ${menuOpen ? "opacity-0" : "opacity-100"}`}
-					/>
-					<span
-						className="block w-7 h-1 bg-white rounded transition-transform"
-						style={{
-							transform: menuOpen ? "rotate(-45deg) translateY(-10px)" : "none",
-						}}
-					/>
-				</button>
-
-				{/* Slide-out menu (mobile) and inline (desktop) */}
-				<nav
-					className={`
-              fixed top-0 right-0 h-full w-64 bg-finals-black border-l border-l-finals-white/20 z-20 transform transition-transform duration-300 ease-in-out
-              flex flex-col gap-2 pt-24 px-6 shadow-2xl
-              ${menuOpen ? "translate-x-0" : "translate-x-full"}
-              lg:static lg:translate-0 lg:bg-transparent lg:border-0 lg:shadow-none lg:flex-row lg:gap-8 lg:pt-0 lg:px-0 lg:w-full lg:h-auto lg:top-auto lg:right-auto
-            `}
-				>
+		<header className="border-b border-line">
+			<div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-4 md:flex-row md:items-end md:justify-between md:gap-8 md:px-8 md:pt-5">
+				<div className="flex items-center gap-3 md:pb-4">
 					<Link
-						className={linkClasses({
-							active:
-								pathname !== "/all" &&
-								pathname !== "/settings" &&
-								!pathname.includes("/patches") &&
-								!pathname.includes("/saved"),
-						})}
+						aria-label="THE FINALS Roulette home"
+						className="shrink-0"
 						href="/"
-						onClick={handleNav}
 					>
-						<Person size={NAV_ITEM_ICON_SIZE} />
-						Loadouts
+						{/* biome-ignore lint/performance/noImgElement: static logo */}
+						<img
+							alt=""
+							className="h-7 w-auto md:h-9"
+							src="/images/logos/the-finals-logo-horizontal.crop.png"
+						/>
 					</Link>
-					<Link
-						className={linkClasses({
-							active: pathname.startsWith("/saved"),
+					<div className="flex items-center gap-1.5">
+						<span className="tag bg-broadcast text-sm text-ink">
+							<span>Roulette</span>
+						</span>
+						{latestPatch ? (
+							<Link
+								className="tag bg-ink text-sm text-arena transition-colors hover:bg-cashout"
+								href={`/patches/${latestPatch.version.replaceAll(".", "")}`}
+								title={latestPatch.title}
+							>
+								<span>{latestPatch.updatedNote ?? latestPatch.version}</span>
+							</Link>
+						) : null}
+					</div>
+				</div>
+
+				<nav
+					aria-label="Main"
+					className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0"
+				>
+					<ul className="flex min-w-max gap-1 md:gap-2">
+						{NAV_ITEMS.map(({ href, icon: NavIcon, isActive, label }) => {
+							const active = isActive(pathname);
+
+							return (
+								<li key={href}>
+									<Link
+										aria-current={active ? "page" : undefined}
+										className={cn(
+											"group relative flex items-center gap-1.5 px-2.5 pt-2 pb-3 font-heading text-lg font-bold uppercase italic transition-colors md:px-3 md:pb-4 md:text-xl",
+											active ? "text-ink" : "text-ink-faint hover:text-ink",
+										)}
+										href={href}
+									>
+										<NavIcon size={18} weight={active ? "fill" : "bold"} />
+										{label}
+										<span
+											aria-hidden
+											className={cn(
+												"absolute inset-x-1 -bottom-px h-1 origin-left -skew-x-12 bg-broadcast transition-transform duration-200 ease-(--ease-snap)",
+												active
+													? "scale-x-100"
+													: "scale-x-0 group-hover:scale-x-50",
+											)}
+										/>
+									</Link>
+								</li>
+							);
 						})}
-						href="/saved"
-						onClick={handleNav}
-					>
-						<FloppyDiskBack size={NAV_ITEM_ICON_SIZE} />
-						Saved
-					</Link>
-					<Link
-						className={linkClasses({
-							active: pathname === "/all",
-						})}
-						href="/all"
-						onClick={handleNav}
-					>
-						<SelectionAll size={NAV_ITEM_ICON_SIZE} />
-						Equipment
-					</Link>
-					<Link
-						className={linkClasses({
-							active: pathname.includes("/patches"),
-						})}
-						href="/patches"
-						onClick={handleNav}
-					>
-						<NotebookPenIcon size={NAV_ITEM_ICON_SIZE} />
-						Patches
-					</Link>
-					<Link
-						className={linkClasses({
-							active: pathname === "/settings",
-						})}
-						href="/settings"
-						onClick={handleNav}
-					>
-						<Gear size={NAV_ITEM_ICON_SIZE} />
-						Settings
-					</Link>
+					</ul>
 				</nav>
-				{/* Overlay for mobile menu */}
-				{menuOpen && (
-					<div
-						aria-hidden="true"
-						className="fixed inset-0 bg-finals-black/20 backdrop-blur-lg animate-fade-in z-10 lg:hidden"
-						onClick={() => setMenuOpen(false)}
-					/>
-				)}
 			</div>
 		</header>
 	);

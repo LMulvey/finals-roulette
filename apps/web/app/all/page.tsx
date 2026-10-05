@@ -1,229 +1,261 @@
 "use client";
 
-import { ItemCard } from '@/components/item-card';
-import { heavyClass } from '@/lib/contestants/heavy';
-import { lightClass } from '@/lib/contestants/light';
-import { mediumClass } from '@/lib/contestants/medium';
-import { cvu } from '@/lib/cvu';
-import { getContestantMeta } from '@/lib/get-random-items';
-import {
-  type BaseItemType,
-  type ContestantGadget,
-  type ContestantSpecialization,
-  type ContestantWeapon,
-  type WeaponType,
-} from '@repo/schema/roulette';
-import { maybeGetRecentAdjustmentForTarget } from '@repo/patch-notes/patches';
-import { getSettings } from '@/lib/settings-storage';
-import { Fire, MagicWand, Sword } from '@phosphor-icons/react';
-import { useState } from 'react';
-
-type SectionItem =
-  | ContestantGadget
-  | ContestantSpecialization
-  | ContestantWeapon;
+import { maybeGetRecentAdjustmentForTarget } from "@repo/patch-notes/patches";
+import type {
+	ClassType,
+	ContestantWeapon,
+	WeaponType,
+} from "@repo/schema/roulette";
+import { useMemo, useState } from "react";
+import { EquipmentTile } from "@/components/equipment-tile";
+import { FilterTabs, SearchField } from "@/components/filter-controls";
+import { PageHeading } from "@/components/page-heading";
+import { heavyClass } from "@/lib/contestants/heavy";
+import { lightClass } from "@/lib/contestants/light";
+import { mediumClass } from "@/lib/contestants/medium";
+import { type EquipmentItem, WEAPON_TYPE_LABEL } from "@/lib/equipment";
+import { getContestantMeta } from "@/lib/get-random-items";
+import { getSettings } from "@/lib/settings-storage";
+import { useHydrated } from "@/lib/use-hydrated";
 
 const CONTESTANTS = [lightClass, mediumClass, heavyClass];
-const FILTER_OPTIONS = [
-  'All',
-  'Recently Buffed',
-  'Recently Nerfed',
-  'Weapons',
-  'Specializations',
-  'Gadgets',
-  'Disabled Equipment',
-] as const;
-type FilterOption = (typeof FILTER_OPTIONS)[number];
 
-const WEAPON_TYPES = [
-  'All Weapons',
-  'Assault Rifle',
-  'Crossbow',
-  'Grenade Launcher',
-  'Handgun',
-  'LMG',
-  'Marksman Rifle',
-  'Melee',
-  'Shotgun',
-  'SMG',
-] as const;
+type KindFilter = "all" | "gadgets" | "specializations" | "weapons";
+type StatusFilter = "all" | "buff" | "disabled" | "nerf" | "recent";
+type ClassFilter = "all" | ClassType;
 
-const sectionClasses = cvu(
-  'pb-6 border-b border-b-gray-500 last-of-type:border-b-0',
-);
-const filterButton = cvu('px-4 py-2 rounded-lg text-white', {
-  variants: {
-    active: {
-      false: ['bg-gray-500 hover:bg-gray-300'],
-      true: ['bg-finals-red text-white'],
-    },
-  },
-});
+const KIND_SECTIONS: Array<{ key: Exclude<KindFilter, "all">; label: string }> =
+	[
+		{ key: "weapons", label: "Weapons" },
+		{ key: "specializations", label: "Specializations" },
+		{ key: "gadgets", label: "Gadgets" },
+	];
 
 export const Page = () => {
-  const [activeFilter, setActiveFilter] = useState<FilterOption>('All');
-  const [activeWeaponType, setActiveWeaponType] =
-    useState<(typeof WEAPON_TYPES)[number]>('All Weapons');
+	const hydrated = useHydrated();
+	const disabledIds = hydrated ? getSettings().disabledEquipmentIds : [];
+	const showDescription = hydrated
+		? getSettings().showEquipmentDescriptions
+		: true;
 
-  const getWeaponTypeId = (
-    type: (typeof WEAPON_TYPES)[number],
-  ): undefined | WeaponType => {
-    const map: Record<(typeof WEAPON_TYPES)[number], undefined | WeaponType> = {
-      'All Weapons': undefined,
-      'Assault Rifle': 'assault-rifle',
-      Crossbow: 'crossbow',
-      'Grenade Launcher': 'grenade-launcher',
-      Handgun: 'handgun',
-      LMG: 'lmg',
-      'Marksman Rifle': 'marksman-rifle',
-      Melee: 'melee',
-      Shotgun: 'shotgun',
-      SMG: 'smg',
-    };
-    return map[type];
-  };
+	const [classFilter, setClassFilter] = useState<ClassFilter>("all");
+	const [kindFilter, setKindFilter] = useState<KindFilter>("all");
+	const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+	const [weaponType, setWeaponType] = useState<"all" | WeaponType>("all");
+	const [search, setSearch] = useState("");
 
-  const renderSection = (
-    items: SectionItem[],
-    title: string,
-    Icon: typeof Sword,
-    shouldShow: boolean,
-  ) => {
-    if (!shouldShow) return null;
+	const metaByClass = useMemo(
+		() =>
+			CONTESTANTS.map((contestant) => ({
+				contestant,
+				meta: getContestantMeta(contestant.type, {
+					returnIfDisabledByEmbark: true,
+					returnIfDisabledByUser: true,
+				}),
+			})),
+		[],
+	);
 
-    let filteredItems = items;
-    if (title === 'Weapon' && activeWeaponType !== 'All Weapons') {
-      const weaponTypeId = getWeaponTypeId(activeWeaponType);
-      filteredItems = (items as ContestantWeapon[]).filter(
-        (item) => item.type === weaponTypeId,
-      );
-    }
+	const matches = (item: EquipmentItem) => {
+		if (search) {
+			const needle = search.toLowerCase();
+			if (
+				!item.label.toLowerCase().includes(needle) &&
+				!item.description.toLowerCase().includes(needle)
+			)
+				return false;
+		}
 
-    return (
-      <div className={title === 'Gadget' ? '' : sectionClasses()}>
-        <div className="flex flex-row flex-wrap gap-2">
-          {filteredItems.map((item) => (
-            <ItemCard
-              icon={<Icon size={16} />}
-              key={item.id}
-              title={title}
-              {...item}
-            />
-          ))}
-        </div>
-      </div>
-    );
-  };
+		if (statusFilter === "disabled") {
+			return (
+				disabledIds.includes(item.id) ||
+				Boolean("disabled" in item && item.disabled)
+			);
+		}
 
-  const settings = getSettings();
+		if (statusFilter !== "all") {
+			const adjustment = maybeGetRecentAdjustmentForTarget(
+				item.id,
+			)?.adjustmentType;
+			if (statusFilter === "recent") return Boolean(adjustment);
+			return adjustment === statusFilter;
+		}
 
-  const isAllFilter =
-    activeFilter === 'All' ||
-    activeFilter === 'Recently Buffed' ||
-    activeFilter === 'Recently Nerfed' ||
-    activeFilter === 'Disabled Equipment';
+		return true;
+	};
 
-  const applyFilters = <TItem extends BaseItemType<string>>(item: TItem) => {
-    const maybeRecentlyAdjusted = maybeGetRecentAdjustmentForTarget(item.id);
+	const sections = metaByClass
+		.filter(
+			({ contestant }) =>
+				classFilter === "all" || contestant.type === classFilter,
+		)
+		.map(({ contestant, meta }) => {
+			const groups = {
+				gadgets: meta.gadgets.filter(matches),
+				specializations: meta.specializations.filter(matches),
+				weapons: meta.weapons
+					.filter(
+						(weapon: ContestantWeapon) =>
+							weaponType === "all" || weapon.type === weaponType,
+					)
+					.filter(matches),
+			};
+			return { contestant, groups };
+		});
 
-    if (activeFilter === 'Recently Buffed') {
-      return maybeRecentlyAdjusted?.adjustmentType === 'buff';
-    }
+	const total = sections.reduce(
+		(sum, { groups }) =>
+			sum +
+			KIND_SECTIONS.filter(
+				({ key }) => kindFilter === "all" || kindFilter === key,
+			).reduce((inner, { key }) => inner + groups[key].length, 0),
+		0,
+	);
 
-    if (activeFilter === 'Recently Nerfed') {
-      return maybeRecentlyAdjusted?.adjustmentType === 'nerf';
-    }
+	return (
+		<div className="mx-auto w-full max-w-6xl px-4 pt-6 md:px-8 md:pt-10">
+			<PageHeading count={total} eyebrow="The armory" title="Equipment">
+				<SearchField
+					onChange={setSearch}
+					placeholder="Search equipment"
+					value={search}
+				/>
+			</PageHeading>
 
-    if (activeFilter === 'Disabled Equipment') {
-      return settings.disabledEquipmentIds.includes(item.id) || item.disabled;
-    }
+			<div className="mb-8 flex flex-col gap-2 lg:flex-row lg:flex-wrap">
+				<FilterTabs
+					label="Class"
+					onChange={setClassFilter}
+					options={[
+						{ label: "All classes", value: "all" },
+						{ label: "Light", value: "light" },
+						{ label: "Medium", value: "medium" },
+						{ label: "Heavy", value: "heavy" },
+					]}
+					value={classFilter}
+				/>
+				<FilterTabs
+					label="Equipment type"
+					onChange={(value) => {
+						setKindFilter(value);
+						if (value !== "weapons") setWeaponType("all");
+					}}
+					options={[
+						{ label: "Everything", value: "all" },
+						...KIND_SECTIONS.map(({ key, label }) => ({ label, value: key })),
+					]}
+					value={kindFilter}
+				/>
+				<FilterTabs
+					label="Status"
+					onChange={setStatusFilter}
+					options={[
+						{ label: "Any status", value: "all" },
+						{ label: "Recently changed", value: "recent" },
+						{ label: "Buffed", value: "buff" },
+						{ label: "Nerfed", value: "nerf" },
+						{ label: "Disabled", value: "disabled" },
+					]}
+					value={statusFilter}
+				/>
+				{kindFilter === "weapons" ? (
+					<FilterTabs
+						label="Weapon type"
+						onChange={setWeaponType}
+						options={[
+							{ label: "All types", value: "all" as const },
+							...(
+								Object.entries(WEAPON_TYPE_LABEL) as Array<[WeaponType, string]>
+							).map(([value, label]) => ({
+								label,
+								value,
+							})),
+						]}
+						value={weaponType}
+					/>
+				) : null}
+			</div>
 
-    return true;
-  };
+			{total === 0 ? (
+				<div className="notch bg-arena-raised p-10 text-center">
+					<p className="font-heading text-3xl font-extrabold uppercase italic">
+						Nothing matches
+					</p>
+					<p className="mt-1 text-ink-soft">
+						{statusFilter === "all"
+							? "Try a different search or filter."
+							: "No equipment has that status right now."}
+					</p>
+				</div>
+			) : (
+				<div className="space-y-12">
+					{sections.map(({ contestant, groups }) => {
+						const visibleKinds = KIND_SECTIONS.filter(
+							({ key }) =>
+								(kindFilter === "all" || kindFilter === key) &&
+								groups[key].length,
+						);
+						if (!visibleKinds.length) return null;
 
-  return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-8">All Classes</h1>
-
-      {/* Filter Bar */}
-      <div className="flex flex-col gap-4 mb-8">
-        <div className="flex gap-4 flex-wrap">
-          {FILTER_OPTIONS.map((filter) => (
-            <button
-              className={filterButton({ active: activeFilter === filter })}
-              key={filter}
-              onClick={() => {
-                setActiveFilter(filter);
-                if (filter !== 'Weapons') {
-                  setActiveWeaponType('All Weapons');
-                }
-              }}
-              type="button"
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
-
-        {/* Weapon Type Filter */}
-        {activeFilter === 'Weapons' && (
-          <div className="flex flex-wrap gap-2">
-            {WEAPON_TYPES.map((type) => (
-              <button
-                className={filterButton({ active: activeWeaponType === type })}
-                key={type}
-                onClick={() => setActiveWeaponType(type)}
-                type="button"
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      <div className="grid gap-8 mb-40">
-        {CONTESTANTS.map((contestantClass) => {
-          const meta = getContestantMeta(contestantClass.type, {
-            returnIfDisabledByEmbark: true,
-            returnIfDisabledByUser: true,
-          });
-
-          return (
-            <div
-              className="border rounded-lg p-6 shadow-xs"
-              key={contestantClass.label}
-            >
-              <h2 className="text-2xl font-semibold mb-4">
-                {contestantClass.label}
-              </h2>
-
-              <div className="flex flex-col gap-6">
-                {renderSection(
-                  meta.weapons.filter(applyFilters),
-                  'Weapon',
-                  Sword,
-                  isAllFilter || activeFilter === 'Weapons',
-                )}
-                {renderSection(
-                  meta.specializations.filter(applyFilters),
-                  'Specialization',
-                  MagicWand,
-                  isAllFilter || activeFilter === 'Specializations',
-                )}
-                {renderSection(
-                  meta.gadgets.filter(applyFilters),
-                  'Gadget',
-                  Fire,
-                  isAllFilter || activeFilter === 'Gadgets',
-                )}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+						return (
+							<section
+								aria-labelledby={`class-${contestant.type}`}
+								key={contestant.id}
+							>
+								<div className="mb-4 flex items-center gap-4 border-b border-line pb-3">
+									{contestant.imageUrl ? (
+										// biome-ignore lint/performance/noImgElement: static contestant art
+										<img
+											alt=""
+											className="h-14 w-auto object-contain"
+											src={contestant.imageUrl}
+										/>
+									) : null}
+									<div>
+										<h2
+											className="text-4xl leading-none"
+											id={`class-${contestant.type}`}
+										>
+											{contestant.label}
+										</h2>
+										<p className="text-sm text-ink-faint tabular-nums">
+											{contestant.healthPoints} HP ·{" "}
+											{contestant.regenerationSeconds}s regen delay
+										</p>
+									</div>
+								</div>
+								<div className="space-y-6">
+									{visibleKinds.map(({ key, label }) => (
+										<div key={key}>
+											<h3 className="eyebrow mb-2 not-italic">
+												{label}{" "}
+												<span className="tabular-nums text-ink-ghost">
+													{groups[key].length}
+												</span>
+											</h3>
+											<div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+												{groups[key].map((item) => (
+													<EquipmentTile
+														excluded={
+															disabledIds.includes(item.id) ||
+															Boolean(item.disabled)
+														}
+														item={item}
+														key={item.id}
+														showDescription={showDescription}
+													/>
+												))}
+											</div>
+										</div>
+									))}
+								</div>
+							</section>
+						);
+					})}
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default Page;

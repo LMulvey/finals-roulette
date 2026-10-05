@@ -1,6 +1,5 @@
 "use client";
 
-import * as motion from "motion/react-client";
 import {
 	heavyClass,
 	heavySpecializations,
@@ -75,37 +74,38 @@ export const Footer = () => {
 	const randomRequest = embarkRequests[FOOTER_SEED % embarkRequests.length];
 
 	return (
-		<motion.footer
-			animate="animate"
-			className="w-full bg-black text-gray-300 py-4 align-end absolute bottom-0"
-			initial="initial"
-			transition={{ duration: 1 }}
-			variants={{
-				animate: { opacity: 1, y: 0 },
-				initial: { opacity: 0, y: 100 },
-			}}
-		>
-			<div className="container mx-auto px-4 text-sm">
-				{versionData && (
-					<p className="mb-2">
-						Hash: {versionData.commit.slice(-8)}
-						{new Date(versionData.date).getTime()}
+		<footer className="mt-16 border-t border-line bg-arena-sunken">
+			<div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm md:flex-row md:items-end md:justify-between md:px-8">
+				<div className="space-y-2">
+					<p className="font-heading text-lg font-bold uppercase italic leading-tight text-ink-soft">
+						&ldquo;{randomRequest}&rdquo;
 					</p>
-				)}
-				<p className="mb-2">
-					Thanks to{" "}
-					<a
-						className="text-gray-100 hover:text-white underline"
-						href="https://thefinals.wiki"
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						thefinals.wiki
-					</a>{" "}
-					for equipment content and data
+					<p className="text-ink-faint">
+						Equipment content and data from{" "}
+						<a
+							className="font-semibold text-ink-soft underline decoration-line-strong underline-offset-2 hover:text-ink"
+							href="https://thefinals.wiki"
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							thefinals.wiki
+						</a>
+						. Not affiliated with Embark Studios.
+					</p>
+					<p className="text-ink-faint">
+						Created by{" "}
+						<span className="font-semibold text-ink-soft">jjjangus</span> +{" "}
+						<span className="line-through decoration-broadcast decoration-2">
+							yuri
+						</span>{" "}
+						<span className="font-semibold text-ink-soft">yiru</span>
+					</p>
+				</div>
+				<p className="font-mono text-xs text-ink-ghost tabular-nums">
+					build {versionData.commit.slice(0, 7)} ·{" "}
+					{versionData.date.slice(0, 10)}
 				</p>
-				<p className="text-gray-400">{randomRequest}</p>
 			</div>
-		</motion.footer>
+		</footer>
 	);
 };

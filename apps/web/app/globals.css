@@ -3,68 +3,103 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@layer base {
-	:root {
-		--color-finals-black: #1d1a20;
-		--color-finals-red: #d21f3c;
-		--color-finals-white: #f1f2fa;
-		--radius: 0.5rem;
-	}
+/*
+ * Arena palette — THE FINALS is a televised game show. Surfaces are the dark
+ * arena floor, red is the "on air" broadcast colour, yellow is cashout money.
+ * Surfaces step up in lightness only; borders are low-opacity ink.
+ */
+@theme {
+	--color-finals-black: #1d1a20;
+	--color-finals-red: #d21f3c;
+	--color-finals-white: #f1f2fa;
 
+	--color-arena: #1d1a20;
+	--color-arena-sunken: #161419;
+	--color-arena-raised: #25212a;
+	--color-arena-high: #2f2a35;
+	--color-arena-top: #3a3441;
+
+	--color-ink: #f1f2fa;
+	--color-ink-soft: rgb(241 242 250 / 0.72);
+	--color-ink-faint: rgb(241 242 250 / 0.48);
+	--color-ink-ghost: rgb(241 242 250 / 0.28);
+
+	--color-line: rgb(241 242 250 / 0.08);
+	--color-line-strong: rgb(241 242 250 / 0.16);
+
+	--color-broadcast: #d21f3c;
+	--color-broadcast-soft: rgb(210 31 60 / 0.16);
+	--color-cashout: #facc15;
+	--color-cashout-hover: #fde047;
+	--color-cashout-soft: rgb(250 204 21 / 0.14);
+
+	--color-buff: #3fcf7f;
+	--color-buff-soft: rgb(63 207 127 / 0.14);
+	--color-nerf: #f0506a;
+	--color-nerf-soft: rgb(240 80 106 / 0.14);
+	--color-tweak: #a39fae;
+	--color-tweak-soft: rgb(163 159 174 / 0.14);
+	--color-added: #5aa9ff;
+	--color-added-soft: rgb(90 169 255 / 0.14);
+
+	--color-background: var(--color-arena);
+	--color-foreground: var(--color-ink);
+	--color-primary: var(--color-ink);
+	--color-secondary: var(--color-broadcast);
+
+	--color-link-primary: var(--color-cashout);
+	--color-link-hover: var(--color-cashout-hover);
+
+	--font-sans: var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial, sans-serif;
+	--font-heading: var(--font-saira-extra-condensed), system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+	--radius: 0.375rem;
+	--radius-lg: var(--radius);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) - 4px);
+
+	--ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+
+	--animate-reel: reel 520ms var(--ease-snap);
+
+	@keyframes reel {
+		0% {
+			opacity: 0;
+			transform: translateY(-14px) skewY(-2deg);
+		}
+		100% {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}
+
+@layer base {
 	*,
 	::after,
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentcolor);
+		border-color: var(--color-line);
 	}
 
-	button:hover {
-		cursor: pointer;
+	html {
+		color-scheme: dark;
+		background-color: var(--color-arena);
 	}
-}
 
-@theme {
-	--color-finals-black: var(--color-finals-black);
-	--color-finals-red: var(--color-finals-red);
-	--color-finals-white: var(--color-finals-white);
-	--font-sans:
-		var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial, sans-serif;
-	--font-heading:
-		var(--font-saira-extra-condensed), system-ui, Avenir, Helvetica, Arial,
-		sans-serif;
-
-	--color-background: var(--color-finals-black);
-	--color-foreground: var(--color-finals-white);
-
-	--color-primary: var(--color-finals-white);
-	--color-secondary: var(--color-finals-red);
-
-	--color-btn-primary-background: var(--color-yellow-400);
-	--color-btn-primary-foreground: var(--color-finals-black);
-
-	--color-link-primary: var(--color-yellow-400);
-	--color-link-hover: var(--color-yellow-600);
-
-	--radius-lg: var(--radius);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-sm: calc(var(--radius) - 4px);
-}
-
-@layer utilities {
 	body {
-		font-family:
-			var(--font-saira-condensed), system-ui, Avenir, Helvetica, Arial,
-			sans-serif;
+		font-family: var(--font-sans);
 		line-height: 1.5;
 		font-weight: 400;
 		margin: 0;
-		min-width: 375px;
+		min-width: 360px;
 		min-height: 100vh;
-
-		color: #f1f2fa;
-		background-color: #1d1a20;
-
+		color: var(--color-ink);
+		background-color: var(--color-arena);
+		/* A single stage light from above — the only atmospheric touch. */
+		background-image: radial-gradient(120% 60% at 50% -10%, rgb(210 31 60 / 0.1), transparent 60%);
+		background-repeat: no-repeat;
 		font-synthesis: none;
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
@@ -72,14 +107,12 @@
 	}
 
 	a {
-		font-weight: 500;
-		color: var(--color-primary);
+		color: inherit;
 		text-decoration: inherit;
-		transition: color 75ms ease-out;
 	}
 
-	a:hover {
-		color: var(--color-link-hover);
+	button:not(:disabled) {
+		cursor: pointer;
 	}
 
 	h1,
@@ -88,11 +121,107 @@
 	h4,
 	h5,
 	h6 {
-		font-family:
-			var(--font-saira-extra-condensed), system-ui, Avenir, Helvetica, Arial,
-			sans-serif;
+		font-family: var(--font-heading);
 		text-transform: uppercase;
 		font-style: italic;
 		font-weight: 800;
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-cashout);
+		outline-offset: 2px;
+	}
+
+	::selection {
+		background: var(--color-broadcast);
+		color: var(--color-ink);
+	}
+}
+
+@layer components {
+	/* Signature: equipment panels have a clipped top-right corner, like an in-game loadout slot. */
+	.notch {
+		clip-path: polygon(0 0, calc(100% - var(--notch, 18px)) 0, 100% var(--notch, 18px), 100% 100%, 0 100%);
+	}
+
+	.notch-sm {
+		--notch: 10px;
+	}
+
+	/* Equipment renders ship with opaque backgrounds; fade them into the panel instead of boxing them. */
+	.slot-art {
+		-webkit-mask-image: linear-gradient(to left, black 30%, transparent 95%);
+		mask-image: linear-gradient(to left, black 30%, transparent 95%);
+	}
+
+	/* Stage light behind equipment renders — they're dark objects on transparent backgrounds. */
+	.spotlight {
+		background:
+			radial-gradient(ellipse 75% 70% at 50% 45%, rgb(241 242 250 / 0.3), rgb(241 242 250 / 0.06) 75%),
+			var(--color-arena-high);
+	}
+
+	.slot-stage {
+		background: radial-gradient(ellipse 55% 50% at 55% 50%, rgb(241 242 250 / 0.14), transparent 75%);
+		-webkit-mask-image: linear-gradient(to left, black 55%, transparent);
+		mask-image: linear-gradient(to left, black 55%, transparent);
+	}
+
+	.equipment-render {
+		filter: drop-shadow(0 6px 14px rgb(0 0 0 / 0.55)) brightness(1.15);
+	}
+
+	/* Broadcast lower-third tag: skewed block, upright text. */
+	.tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.375rem;
+		padding: 0.125rem 0.5rem;
+		transform: skewX(-10deg);
+		font-family: var(--font-heading);
+		font-weight: 800;
+		font-style: italic;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		line-height: 1.25;
+		white-space: nowrap;
+	}
+
+	.tag > * {
+		transform: skewX(10deg);
+	}
+
+	.eyebrow {
+		font-family: var(--font-heading);
+		font-weight: 700;
+		font-style: italic;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		font-size: 0.75rem;
+		line-height: 1rem;
+		color: var(--color-ink-faint);
+	}
+
+	.press {
+		transition: transform 120ms var(--ease-snap);
+	}
+
+	.press:active:not(:disabled) {
+		transform: scale(0.97);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 1ms !important;
+		transition-duration: 1ms !important;
 	}
 }

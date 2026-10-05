@@ -18,6 +18,8 @@ export type PatchNote = {
 	sassyNote?: string;
 	section: PatchNoteSection;
 	target?: PatchNoteTarget;
+	/** Limited-time change (e.g. Respec Order). Shown on the patch page but ignored for "recently adjusted" badges. */
+	temporary?: boolean;
 };
 
 export type PatchNoteCategory =

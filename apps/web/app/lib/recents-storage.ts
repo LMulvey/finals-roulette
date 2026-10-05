@@ -1,30 +1,32 @@
-import { isTruthy } from './is-truthy';
-import { deserializeLoadout } from './serialize';
-import { storage } from './storage';
-import { type ContestantLoadout } from '@repo/schema/roulette';
+import type { ContestantLoadout } from "@repo/schema/roulette";
+import { isTruthy } from "./is-truthy";
+import { deserializeLoadout } from "./serialize";
+import { storage } from "./storage";
 
-type RecentLoadout = string;
-type RecentLoadouts = RecentLoadout[];
+type RecentLoadouts = string[];
 
-const RECENT_LOADOUTS_STORAGE_KEY = 'recent_loadouts';
+const RECENT_LOADOUTS_STORAGE_KEY = "recent_loadouts";
+const MAX_RECENT_LOADOUTS = 10;
 
-export const getRecentLoadouts = (): ContestantLoadout[] => {
-  const loadoutKeys = storage.get<RecentLoadouts>(RECENT_LOADOUTS_STORAGE_KEY);
-  const loadouts =
-    loadoutKeys
-      ?.map((loadoutKey) => deserializeLoadout(loadoutKey))
-      ?.filter(isTruthy) ?? [];
-  return loadouts;
-};
+export const getRecentLoadoutKeys = (): RecentLoadouts =>
+	storage.get<RecentLoadouts>(RECENT_LOADOUTS_STORAGE_KEY) ?? [];
+
+export const getRecentLoadouts = (): Array<
+	ContestantLoadout & { loadoutKey: string }
+> =>
+	getRecentLoadoutKeys()
+		.map((loadoutKey) => {
+			const loadout = deserializeLoadout(loadoutKey);
+			return loadout ? { ...loadout, loadoutKey } : null;
+		})
+		.filter(isTruthy);
 
 export const saveRecentLoadout = (loadoutKey: string) => {
-  const currentLoadoutKeys =
-    storage.get<RecentLoadouts>(RECENT_LOADOUTS_STORAGE_KEY) ?? [];
-  const newLoadoutKeys = [
-    loadoutKey,
-    // Maximum of ten loadouts saved
-    ...currentLoadoutKeys.slice(0, 10),
-  ];
-
-  storage.set<RecentLoadouts>(RECENT_LOADOUTS_STORAGE_KEY, newLoadoutKeys);
+	const currentLoadoutKeys = getRecentLoadoutKeys().filter(
+		(key) => key !== loadoutKey,
+	);
+	storage.set<RecentLoadouts>(
+		RECENT_LOADOUTS_STORAGE_KEY,
+		[loadoutKey, ...currentLoadoutKeys].slice(0, MAX_RECENT_LOADOUTS),
+	);
 };

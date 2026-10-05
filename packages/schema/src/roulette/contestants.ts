@@ -37,6 +37,8 @@ export type ContestantLoadout = {
 	contestant: ContestantClass;
 	gadgets: ContestantGadget[];
 	loadoutName: null | string;
+	/** Seed that regenerates `loadoutName`; lets share URLs carry a few chars instead of the name text. */
+	loadoutNameSeed?: null | number;
 	specialization: ContestantSpecialization;
 	weapon: ContestantWeapon;
 };

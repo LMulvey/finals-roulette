@@ -1,1 +1,1 @@
-export { generateLoadoutName } from '@repo/roulette/generate-loadout-name';
+export { generateLoadoutName, rollLoadoutName } from '@repo/roulette/generate-loadout-name';

@@ -1,112 +1,160 @@
 "use client";
 
+import { ShareNetworkIcon, TrashIcon } from "@phosphor-icons/react";
+import type { ContestantLoadout } from "@repo/schema/roulette";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@repo/ui/alert-dialog';
-import { deleteSavedLoadout } from '@/lib/saved-loadouts';
-import { type ContestantLoadout } from '@repo/schema/roulette';
-import { useToast } from '@repo/ui/use-toast';
-import { ShareFat, Trash } from '@phosphor-icons/react';
-import * as motion from 'motion/react-client';
-import { useRouter } from 'next/navigation';
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@repo/ui/alert-dialog";
+import { useToast } from "@repo/ui/use-toast";
+import * as motion from "motion/react-client";
+import Link from "next/link";
+import { cn } from "@/lib/cvu";
+import { CLASS_LABEL } from "@/lib/equipment";
+
+const actionClass =
+	"press relative z-10 flex size-9 items-center justify-center rounded-md text-ink-faint transition-colors hover:bg-arena-top hover:text-ink";
 
 export const LoadoutCard = ({
-  loadoutKey,
-  loadout,
+	active,
+	loadout,
+	loadoutKey,
+	onDelete,
 }: {
-  readonly loadoutKey: string;
-  readonly loadout: ContestantLoadout;
+	readonly active?: boolean;
+	readonly loadout: ContestantLoadout;
+	readonly loadoutKey: string;
+	readonly onDelete: (loadoutKey: string) => void;
 }) => {
-  const router = useRouter();
-  const { toast } = useToast();
+	const { toast } = useToast();
+	const thumbnails = [
+		loadout.weapon,
+		loadout.specialization,
+		...loadout.gadgets,
+	];
 
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      toast({
-        description:
-          "Post to Reddit, Discord, Friendster, Bluesky, whatever. I don't give a shit I'm not your dad.",
-        title: 'Copied shareable URL to clipboard',
-      });
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Failed to copy URL:', error);
-      toast({
-        description: 'Worked fine on my machine so I am blaming you.',
-        title: 'Failed to copy',
-      });
-    }
-  };
+	const copyLink = async () => {
+		try {
+			await navigator.clipboard.writeText(
+				`${window.location.origin}/${loadoutKey}`,
+			);
+			toast({
+				description:
+					"Post to Reddit, Discord, Friendster, Bluesky, whatever. I don't give a sh*t, I'm not your dad.",
+				title: "Copied shareable URL to clipboard",
+			});
+		} catch {
+			toast({
+				description: "Worked fine on my machine so I am blaming you.",
+				title: "Failed to copy",
+			});
+		}
+	};
 
-  const deleteLoadout = async () => {
-    deleteSavedLoadout(loadoutKey);
-    router.push('/saved');
-  };
+	return (
+		<motion.article
+			className={cn(
+				"notch group relative flex flex-col gap-4 bg-arena-raised p-4 transition-colors hover:bg-arena-high",
+				active && "bg-arena-high shadow-[inset_3px_0_0_var(--color-broadcast)]",
+			)}
+			layout
+			variants={{
+				animate: {
+					opacity: 1,
+					transition: { duration: 0.25, ease: [0.23, 1, 0.32, 1] },
+					y: 0,
+				},
+				initial: { opacity: 0, y: 12 },
+			}}
+		>
+			<Link
+				aria-current={active ? "true" : undefined}
+				aria-label={`View ${loadout.loadoutName ?? "saved loadout"}`}
+				className="absolute inset-0"
+				href={`/saved/${loadoutKey}`}
+				scroll={false}
+			/>
+			<div className="pointer-events-none flex items-start justify-between gap-3">
+				<div className="min-w-0">
+					<span className="tag mb-2 bg-broadcast text-xs text-ink">
+						<span>{CLASS_LABEL[loadout.contestant.type]}</span>
+					</span>
+					<h2 className="line-clamp-2 text-2xl leading-none">
+						{loadout.loadoutName ?? "Saved loadout"}
+					</h2>
+				</div>
+				<div className="pointer-events-auto -mt-1 -mr-1 flex shrink-0">
+					<button
+						aria-label="Copy share link"
+						className={actionClass}
+						onClick={copyLink}
+						title="Copy share link"
+						type="button"
+					>
+						<ShareNetworkIcon size={18} weight="bold" />
+					</button>
+					<AlertDialog>
+						<AlertDialogTrigger
+							aria-label="Delete loadout"
+							className={cn(actionClass, "hover:text-nerf")}
+							title="Delete"
+						>
+							<TrashIcon size={18} weight="bold" />
+						</AlertDialogTrigger>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								<AlertDialogTitle>
+									Delete {loadout.loadoutName ?? "this loadout"}?
+								</AlertDialogTitle>
+								<AlertDialogDescription>
+									It'll be gone from your Saved list. If you've got the share
+									link you can still open it, otherwise you'll have to roll it
+									again.
+								</AlertDialogDescription>
+							</AlertDialogHeader>
+							<AlertDialogFooter>
+								<AlertDialogCancel>Keep it</AlertDialogCancel>
+								<AlertDialogAction onClick={() => onDelete(loadoutKey)}>
+									Delete
+								</AlertDialogAction>
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialog>
+				</div>
+			</div>
 
-  return (
-    <motion.div
-      className="rounded-lg bg-gray-800 text-yellow-400 font-bold flex md:flex-col gap-4 items-center w-full md:w-60 h-40 bg-cover bg-no-repeat"
-      key={loadoutKey}
-      style={{
-        backgroundImage: loadout.contestant.imageUrl
-          ? `url(${loadout.contestant.imageUrl})`
-          : '',
-      }}
-      variants={{
-        animate: { opacity: 1, scale: 1 },
-        initial: { opacity: 0, scale: 0 },
-      }}
-    >
-      <div className="flex flex-col justify-between gap-1 p-6 bg-finals-black/70 h-full w-full rounded-lg">
-        <p className="text-xl">{loadout.loadoutName ?? 'Saved Loadout'}</p>
-        <div className="rounded-md flex flex-row items-center justify-center px-2 py-1 gap-8 bg-finals-black/90">
-          <button
-            className="rounded-full h-6 w-6 text-finals-black bg-white flex items-center justify-center hover:bg-gray-500"
-            onClick={copyToClipboard}
-            type="button"
-          >
-            <ShareFat
-              size={18}
-              weight="fill"
-            />
-          </button>
-          <AlertDialog>
-            <AlertDialogTrigger className="rounded-full h-6 w-6 bg-finals-red text-white flex items-center justify-center hover:bg-red-500">
-              <Trash
-                size={18}
-                weight="fill"
-              />
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will remove this loadout
-                  from your saved list. If you save the code, you'll be able to
-                  recover but otherwise you'll have to roll it again.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction
-                  className="text-white bg-finals-red"
-                  onClick={deleteLoadout}
-                >
-                  Delete
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </div>
-      </div>
-    </motion.div>
-  );
+			<ul
+				aria-label="Equipment"
+				className="pointer-events-none mt-auto flex gap-1"
+			>
+				{thumbnails.map((item, index) => (
+					<li
+						className="notch notch-sm spotlight flex size-11 items-center justify-center"
+						key={`${item.id}-${index}`}
+						title={item.label}
+					>
+						{item.imageUrl ? (
+							// biome-ignore lint/performance/noImgElement: static equipment renders
+							<img
+								alt={item.label}
+								className="equipment-render size-9 object-contain"
+								draggable={false}
+								src={item.imageUrl}
+							/>
+						) : null}
+					</li>
+				))}
+			</ul>
+			<p className="pointer-events-none -mt-2 truncate text-xs text-ink-faint">
+				{loadout.weapon.label} · {loadout.specialization.label}
+			</p>
+		</motion.article>
+	);
 };

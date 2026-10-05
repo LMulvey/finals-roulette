@@ -13,7 +13,8 @@
     "dev": "tsup src/*.ts src/**/*.ts --format esm --target es2022 --out-dir dist --dts --watch",
     "build": "tsup src/*.ts src/**/*.ts --format esm --target es2022 --out-dir dist --dts --clean",
     "lint": "biome check --write",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "node --test \"test/*.test.mjs\""
   },
   "dependencies": {
     "@repo/patch-notes": "workspace:*",
