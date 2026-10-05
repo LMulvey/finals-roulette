@@ -60,7 +60,7 @@ export const Header = () => {
 
 	return (
 		<header className="border-b border-line">
-			<div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-4 md:flex-row md:items-end md:justify-between md:gap-8 md:px-8 md:pt-5">
+			<div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 pt-4 md:flex-row md:items-end md:justify-between md:gap-6 md:px-8 md:pt-5">
 				<div className="flex items-center gap-3 md:pb-4">
 					<Link
 						aria-label="THE FINALS Roulette home"
@@ -92,9 +92,9 @@ export const Header = () => {
 
 				<nav
 					aria-label="Main"
-					className="-mx-4 overflow-x-auto px-4 md:mx-0 md:px-0"
+					className="-mx-4 -mb-px overflow-x-auto px-4 md:mx-0 md:px-0"
 				>
-					<ul className="flex min-w-max gap-1 md:gap-2">
+					<ul className="flex min-w-max gap-1">
 						{NAV_ITEMS.map(({ href, icon: NavIcon, isActive, label }) => {
 							const active = isActive(pathname);
 
@@ -103,7 +103,7 @@ export const Header = () => {
 									<Link
 										aria-current={active ? "page" : undefined}
 										className={cn(
-											"group relative flex items-center gap-1.5 px-2.5 pt-2 pb-3 font-heading text-lg font-bold uppercase italic transition-colors md:px-3 md:pb-4 md:text-xl",
+											"group relative flex items-center gap-1.5 px-2.5 pt-2 pb-3 font-heading text-lg font-bold uppercase italic transition-colors md:pb-4 md:text-xl",
 											active ? "text-ink" : "text-ink-faint hover:text-ink",
 										)}
 										href={href}
@@ -113,7 +113,7 @@ export const Header = () => {
 										<span
 											aria-hidden
 											className={cn(
-												"absolute inset-x-1 -bottom-px h-1 origin-left -skew-x-12 bg-broadcast transition-transform duration-200 ease-(--ease-snap)",
+												"absolute inset-x-1 bottom-0 h-1 origin-left -skew-x-12 bg-broadcast transition-transform duration-200 ease-(--ease-snap)",
 												active
 													? "scale-x-100"
 													: "scale-x-0 group-hover:scale-x-50",
