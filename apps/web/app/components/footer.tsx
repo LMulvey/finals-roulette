@@ -15,7 +15,9 @@ import {
 	mediumSpecializations,
 	mediumWeapons,
 } from "@/lib/contestants/medium";
+import { cn } from "@/lib/cvu";
 import { ALL_GADGETS } from "@/lib/gadgets";
+import { useHydrated } from "@/lib/use-hydrated";
 import versionData from "../version.json";
 
 const ALL_ITEMS = [
@@ -31,17 +33,6 @@ const ALL_ITEMS = [
 	...ALL_GADGETS,
 ];
 
-const hashString = (value: string) => {
-	let hash = 0;
-
-	for (let i = 0; i < value.length; i++) {
-		hash = (hash << 5) - hash + value.charCodeAt(i);
-		hash |= 0;
-	}
-
-	return Math.abs(hash);
-};
-
 const getItemBySeed = (seed: number) => {
 	if (!ALL_ITEMS.length) {
 		return null;
@@ -50,10 +41,17 @@ const getItemBySeed = (seed: number) => {
 	return ALL_ITEMS[seed % ALL_ITEMS.length] ?? null;
 };
 
-const FOOTER_SEED = hashString(`${versionData.commit}-${versionData.date}`);
+// Picked once per page load in the browser: stable across client-side navigation, new on refresh.
+// Only read after hydration, since the server can't know it.
+const FOOTER_SEED =
+	typeof window === "undefined" ? 0 : Math.floor(Math.random() * 2 ** 31);
 
-const generateBalanceRequest = (type: "BUFF" | "NERF", seedOffset: number) => {
-	const seededItem = getItemBySeed(FOOTER_SEED + seedOffset);
+const generateBalanceRequest = (
+	type: "BUFF" | "NERF",
+	seed: number,
+	seedOffset: number,
+) => {
+	const seededItem = getItemBySeed(seed + seedOffset);
 
 	if (!seededItem) {
 		return `Love the game Embark but PLEASE ${type.toLowerCase()} something.`;
@@ -63,21 +61,30 @@ const generateBalanceRequest = (type: "BUFF" | "NERF", seedOffset: number) => {
 };
 
 export const Footer = () => {
+	const hydrated = useHydrated();
+	const seed = hydrated ? FOOTER_SEED : 0;
+
 	const embarkRequests = [
 		"Embark please add more dance emotes.",
 		"Embark, please add an event that spawns a giant turtle that you can ride and flips over to reveal a whole island",
 		"EMBARK, ICE ZONE WHEN?",
-		generateBalanceRequest("BUFF", 1),
-		generateBalanceRequest("NERF", 2),
+		generateBalanceRequest("BUFF", seed, 1),
+		generateBalanceRequest("NERF", seed, 2),
 	];
 
-	const randomRequest = embarkRequests[FOOTER_SEED % embarkRequests.length];
+	const randomRequest = embarkRequests[seed % embarkRequests.length];
 
 	return (
 		<footer className="mt-16 border-t border-line bg-arena-sunken">
 			<div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-sm md:flex-row md:items-end md:justify-between md:px-8">
 				<div className="space-y-2">
-					<p className="font-heading text-lg font-bold uppercase italic leading-tight text-ink-soft">
+					{/* Invisible until hydrated so the server's placeholder pick never flashes. */}
+					<p
+						className={cn(
+							"font-heading text-lg font-bold uppercase italic leading-tight text-ink-soft transition-opacity",
+							!hydrated && "opacity-0",
+						)}
+					>
 						&ldquo;{randomRequest}&rdquo;
 					</p>
 					<p className="text-ink-faint">
