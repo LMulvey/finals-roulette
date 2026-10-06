@@ -9,6 +9,7 @@ export const patch790: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 20, stat: 'cooldown', to: 30 }],
       devNote:
         'Goo prevalence has increased to the point of being disruptive. This change should reduce goo usage frequency.',
       note: 'Goo Grenade: Cooldown increased from 20s to 30s.',
@@ -31,6 +32,7 @@ export const patch790: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 220, stat: 'fire-rate', to: 210 }],
       devNote:
         'The previous buff made the 93R a bit too strong. This change better aligns it with other Light weapons.',
       note: '93R: Decreased rate of fire from 220 to 210.',
@@ -40,6 +42,7 @@ export const patch790: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 2.5, label: 'Heat applied to world objects', stat: 'other', to: 7.5 }],
       devNote:
         'These changes should buff Cerberus viability without returning it to an overpowered state.',
       note: 'Cerberus 12GA: Decreased pellet distribution radius by ~10% (more accurate). Increased heat applied to world objects from 2.5 to 7.5, igniting toxic gas clouds in a single shot.',
@@ -49,6 +52,7 @@ export const patch790: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 6, stat: 'magazine-size', to: 7 }],
       devNote: 'A subtle buff to improve Model 1887 viability.',
       note: 'Model 1887: Increased maximum ammo capacity from 6 to 7.',
       section: 'balance',
@@ -57,6 +61,7 @@ export const patch790: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 154, label: 'Secondary damage', stat: 'other', to: 175 }],
       devNote:
         'This buff boosts the value of the Sledgehammer’s secondary attack. Hit registration issues are under investigation.',
       note: 'Sledgehammer: Secondary attack damage increased from 154 to 175.',
@@ -66,6 +71,9 @@ export const patch790: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 40, label: 'Lunge vertical rotation clamp', stat: 'other', to: 90, unit: '°' },
+      ],
       devNote:
         'This should make the lunge feel better and less restrictive for vertical movements.',
       note: 'Sword: Increased vertical component of secondary attack rotation clamping from 40° to 90°, making lunges less constrained when aiming up or down.',
@@ -155,7 +163,7 @@ export const patch790: Patch = {
       category: 'gadget',
       note: 'H+ Infuser: Fixed an issue where getting eliminated while ADS could result in a broken weapon model.',
       section: 'content-and-bug-fixes',
-      target: 'hplus-infuser',
+      target: 'h-plus-infuser',
     },
     {
       adjustmentType: 'neutral',

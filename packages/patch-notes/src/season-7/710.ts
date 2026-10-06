@@ -22,7 +22,7 @@ export const patch710: Patch = {
       category: 'gadget',
       note: 'Fixed the issue where the animation when placing the Breach Drill would not play correctly.',
       section: 'content-and-bug-fixes',
-      target: 'breaching-drill',
+      target: 'breach-drill',
     },
     {
       adjustmentType: 'neutral',

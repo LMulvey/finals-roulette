@@ -14,6 +14,7 @@ Expect smaller, more frequent updates for the rest of Season 5 as we transition 
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 180, label: 'Backstab angle', stat: 'other', to: 150, unit: '°' }],
       devNote:
         "This change addresses concerns about the Dagger's backstab being inaccurate and the frustration around how easily it can land backstabs, seemingly from the side. With this change, this should be less of an issue.\n\nOn a related note, we've noticed some community members testing melee mechanics in the Practice Range using target dummies. However, these dummies use slightly different hit detection logic compared to real players, making them an unreliable test for certain interactions. For example, we've seen reports of players landing melee hits on dummies while facing away from them. This is a quirk of the dummies and does not apply to actual players.\n\nTo improve testing accuracy, we plan to replace the current target dummies with updated versions soon. This will ensure that the dummies provide more reliable feedback, especially for testing certain Gadgets. However, this change will take some time and testing before it is ready to deploy.",
       note: "Decreased the backstab angle on the Dagger's secondary attack from 180 degrees to 150",
@@ -23,6 +24,7 @@ Expect smaller, more frequent updates for the rest of Season 5 as we transition 
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.6, stat: 'falloff-multiplier', to: 0.7 }],
       note: 'Increased min damage falloff multiplier from 0.6 to 0.7, meaning the weapon now does slightly more damage at long-range',
       section: 'balance',
       target: 'ks-23',

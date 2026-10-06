@@ -32,6 +32,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 40, stat: 'cooldown', to: 35 }],
       note: 'Decreased cooldown from 40s to 35s',
       section: 'balance',
       target: 'anti-gravity-cube',
@@ -39,6 +40,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 3.5, stat: 'radius', to: 4 }],
       note: 'Increased effect radius from 3.5m to 4m',
       section: 'balance',
       target: 'anti-gravity-cube',
@@ -46,6 +48,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 40, label: 'Damage per projectile blocked', stat: 'other', to: 31.25, unit: '%' }],
       devNote:
         'APS usage has dropped considerably since we moved to having blocked projectiles consume the deployable’s health. This change nudges the APS’s power slightly, hopefully making it a more popular choice.',
       note: 'Decreased damage taken per projectile destroyed from 40% to 31.25% of total health, allowing the APS to block 4 projectiles instead of 3',
@@ -55,6 +58,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 3, stat: 'charges', to: 2 }],
       devNote:
         'The Data Reshaper became too effective as a counter to long cooldown deployables. This change aims to balance its usability.',
       note: 'Decreased ammo count from 3 to 2',
@@ -64,6 +68,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 1.8, label: 'Fuse time', stat: 'other', to: 1.5, unit: 's' }],
       devNote:
         'This change should help the Glitch Grenade feel more responsive and desirable to use.',
       note: 'Decreased the fuse time from 1.8s to 1.5s',
@@ -73,6 +78,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 8, label: 'Max duration', stat: 'other', to: 10, unit: 's' }],
       note: 'Increased the maximum duration of the vortex from 8s to 10s',
       section: 'balance',
       target: 'gravity-vortex',
@@ -80,6 +86,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 5, label: 'Min duration', stat: 'other', to: 7, unit: 's' }],
       note: 'Increased the minimum duration of the vortex from 5s to 7s',
       section: 'balance',
       target: 'gravity-vortex',
@@ -87,6 +94,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 16.5, label: 'Throw velocity', stat: 'other', to: 15, unit: 'm/s' }],
       note: 'Decreased throw velocity from 16.5m/s to 15m/s',
       section: 'balance',
       target: 'gravity-vortex',
@@ -94,6 +102,10 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [
+        { from: 1, label: 'Projectile gravity', stat: 'other', to: 1.7, unit: '×' },
+        { from: 29, label: 'Max throw distance', stat: 'other', to: 15, unit: 'm' },
+      ],
       devNote:
         "These changes aim to buff the Gravity Vortex's impact while avoiding its use as a long-range grenade.",
       note: 'Increased projectile gravity modifier from 1 to 1.7, giving the projectile a steeper arc and reducing maximum throw distance from ~29m to ~15m',
@@ -103,6 +115,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 10, stat: 'duration', to: 13 }],
       devNote:
         'This is a small buff to make the Tracking Dart slightly more desirable.',
       note: 'Increased tracking duration on targets from 10s to 13s',
@@ -123,6 +136,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 1.5, label: 'Cloak max blend', stat: 'other', to: 1.75 }],
       note: 'Increased "Cloak Max Blend" from 1.5 to 1.75, making cloaked players slightly more visible',
       section: 'balance',
       target: 'cloaking-device',
@@ -130,6 +144,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 0, label: 'Cloak transition delay', stat: 'other', to: 0.5, unit: 's' }],
       note: 'Increased "Delay Before Transitioning Into Cloak" from 0 to 0.5s, increasing the time it takes for a player to disappear',
       section: 'balance',
       target: 'cloaking-device',
@@ -137,6 +152,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 0.9, label: 'First-person cloak multiplier', stat: 'other', to: 1.0, unit: '×' }],
       devNote:
         'These changes aim to make cloaked players more visible and encourage a sneaky playstyle over run-and-gun tactics.',
       note: 'Increased "First Person Cloak Multiplier" from 0.9 to 1.0, making the first-person cloaking effect match third-person visibility',
@@ -146,6 +162,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 10, stat: 'range', to: 12 }],
       note: 'Increased max range from 10m to 12m',
       section: 'balance',
       target: 'winch-claw',
@@ -160,6 +177,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 0.55, label: 'Max stun duration', stat: 'other', to: 0.65, unit: 's' }],
       note: 'Increased maximum Weapon/Gadget stun duration at max range from 0.55s to 0.65s',
       section: 'balance',
       target: 'winch-claw',
@@ -187,6 +205,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.3, label: 'Inner blast radius', stat: 'other', to: 0.6, unit: 'm' }],
       note: 'Increased inner blast radius from 30cm to 60cm for easier maximum damage',
       section: 'balance',
       target: 'cl-40',
@@ -194,6 +213,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 35, label: 'Projectile speed', stat: 'other', to: 42, unit: 'm/s' }],
       note: 'Increased grenade projectile speed from 35m/s to 42m/s',
       section: 'balance',
       target: 'cl-40',
@@ -201,6 +221,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 1, label: 'Projectile gravity', stat: 'other', to: 0.9, unit: '×' }],
       devNote: 'These changes aim to make the CL-40 more desirable.',
       note: 'Decreased projectile gravity modifier from 1 to 0.9, giving projectiles a flatter arc',
       section: 'balance',
@@ -209,6 +230,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 50, stat: 'damage', to: 60 }],
       note: 'Increased damage of regular attacks from 50 to 60',
       section: 'balance',
       target: 'dagger',
@@ -216,6 +238,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 50, label: 'Secondary damage', stat: 'other', to: 75 }],
       devNote:
         "This buff makes the Dagger's non-backstab attacks more viable in combat.",
       note: 'Increased damage of non-backstab secondary attacks from 50 to 75',
@@ -234,6 +257,10 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 0.82, label: 'Pump-action duration', stat: 'other', to: 0.7, unit: 's' },
+        { from: 73, stat: 'fire-rate', to: 85 },
+      ],
       devNote: "This buff improves the KS-23's usability and competitiveness.",
       note: 'Decreased pump-action duration from 0.82s to 0.7s, increasing fire rate from 73RPM to 85RPM',
       section: 'balance',
@@ -242,6 +269,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 46, stat: 'damage', to: 40 }],
       devNote:
         "This change addresses the LH1's strong performance this season, especially at close range.",
       note: 'Decreased damage from 46 to 40',
@@ -251,6 +279,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 19, stat: 'damage', to: 20 }],
       note: 'Increased damage from 19 to 20',
       section: 'balance',
       target: 'm60',
@@ -258,6 +287,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 32, stat: 'falloff-max-range', to: 35 }],
       note: 'Increased damage falloff max range from 32m to 35m for a slightly longer effective range',
       section: 'balance',
       target: 'm60',
@@ -265,6 +295,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.4, stat: 'falloff-multiplier', to: 0.5 }],
       devNote:
         'These buffs aim to bring the M60 closer to other weapons in effectiveness.',
       note: 'Increased damage falloff multiplier from 0.4 to 0.5, meaning the weapon now does slightly more damage at range',
@@ -274,6 +305,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 50, stat: 'falloff-min-range', to: 45 }],
       note: 'Decreased damage falloff minimum range from 50m to 45m, reducing effective range',
       section: 'balance',
       target: 'pike-556',
@@ -281,6 +313,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 55, stat: 'falloff-max-range', to: 50 }],
       note: 'Decreased damage falloff max range from 55m to 50m, reducing effective range',
       section: 'balance',
       target: 'pike-556',
@@ -288,6 +321,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.85, stat: 'falloff-multiplier', to: 0.75 }],
       devNote: 'These changes bring the Pike-556 in line with other weapons.',
       note: 'Decreased damage falloff multiplier from 0.85 to 0.75, meaning the weapon now does slightly less damage at range',
       section: 'balance',
@@ -296,6 +330,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 16, stat: 'damage', to: 17 }],
       note: 'Increased damage from 16 to 17',
       section: 'balance',
       target: 'xp-54',
@@ -303,6 +338,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 20, stat: 'falloff-min-range', to: 22.5 }],
       note: 'Increased damage falloff minimum range from 20m to 22.5m for a slightly longer effective range',
       section: 'balance',
       target: 'xp-54',
@@ -310,6 +346,7 @@ export const patch600: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.62, stat: 'falloff-multiplier', to: 0.52 }],
       devNote:
         "These changes aim to improve the XP-54's performance compared to similar weapons.",
       note: 'Decreased damage falloff multiplier from 0.62 to 0.52, meaning the weapon now does slightly less damage at range',

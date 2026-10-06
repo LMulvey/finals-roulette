@@ -9,6 +9,7 @@ export const patch990: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 90, stat: 'damage', to: 88 }],
       note: 'Reduced base damage (90 to 88), fire rate, and effective long-range profile.',
       section: 'balance',
       target: 'bfr-titan',
@@ -16,6 +17,7 @@ export const patch990: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 88, stat: 'damage', to: 84 }],
       note: 'Reduced damage (88 to 84), fire rate, and long-range effectiveness.',
       section: 'balance',
       target: 'cb-01-repeater',

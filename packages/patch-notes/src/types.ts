@@ -1,4 +1,5 @@
 import type { GadgetId, SpecializationId, WeaponId } from "@repo/schema/roulette";
+import type { StatKey } from "./stats";
 
 export type Patch = {
 	date: Date;
@@ -10,9 +11,15 @@ export type Patch = {
 	version: string;
 };
 
+/** Machine-readable mirror of a numeric "from X to Y" change in `PatchNote.note`. */
+export type StatChange =
+	| { from: number; stat: StatKey; to: number }
+	| { from: number; label: string; stat: "other"; to: number; unit?: string };
+
 export type PatchNote = {
 	adjustmentType: "addition" | "buff" | "nerf" | "neutral" | "removal";
 	category: PatchNoteCategory;
+	changes?: StatChange[];
 	devNote?: string;
 	note: string;
 	sassyNote?: string;

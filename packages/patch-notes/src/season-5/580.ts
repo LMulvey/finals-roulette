@@ -10,6 +10,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 0.9, label: 'Throw delay', stat: 'other', to: 0.6, unit: 's' }],
       note: 'Decreased the delay between throwing multiple Breach Charges from 0.9s to 0.6s',
       section: 'balance',
       target: 'breach-charge',
@@ -24,6 +25,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 0.8, label: 'Activation grace period', stat: 'other', to: 1, unit: 's' }],
       note: 'Increased activation grace period from 0.8s to 1s, making it slightly easier to lock on to targets',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -31,6 +33,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 8, label: 'Min pull distance', stat: 'other', to: 6, unit: 'm' }],
       note: 'Decreased the minimum pull distance from 8m to 6m, giving locked players slightly less room to maneuver',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -38,6 +41,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 10, label: 'Max pull distance', stat: 'other', to: 6, unit: 'm' }],
       note: 'Decreased the maximum pull distance from 10m to 6m, giving locked players less room to maneuver',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -52,6 +56,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 0, stat: 'damage', to: 5 }],
       note: 'Increased the damage the Lockbolt applies to targets from 0 to 5',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -93,6 +98,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 130, label: 'Initial impact damage', stat: 'other', to: 100 }],
       devNote:
         "The damage applied by Charge N' Slam has been quite high for some time and is especially punishing for Light players, especially when repeatedly hit by the charge. We feel these new values offer a fairer experience",
       note: 'Decreased the damage done by the initial impact on enemies from 130 to 100',
@@ -102,6 +108,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 50, label: 'Subsequent hit damage', stat: 'other', to: 40 }],
       note: 'Decreased the damage done by subsequent hits on enemies from 50 to 40',
       section: 'balance',
       target: 'charge-n-slam',
@@ -109,6 +116,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 80, label: 'Min slam damage', stat: 'other', to: 50 }],
       note: 'Decreased the minimum damage of the ground slam, based on fall height from 80 to 50',
       section: 'balance',
       target: 'charge-n-slam',
@@ -116,6 +124,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 30, stat: 'duration', to: 15 }],
       devNote:
         'This change should mean that the Dematerializer now makes clearer holes in the environment that are easier to move through',
       note: 'Decreased the duration of dematerialized objects from 30s to 15s, causing objects to rematerialize sooner',
@@ -132,6 +141,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 8, label: 'Pickup cooldown', stat: 'other', to: 3, unit: 's' }],
       note: 'Decreased the cooldown from 8s to 3s when manually picking up the Guardian Turret',
       section: 'balance',
       target: 'guardian-turret',
@@ -139,6 +149,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 12, stat: 'range', to: 10 }],
       note: 'Decreased the range of the Winch Claw from 12m to 10m',
       section: 'balance',
       target: 'winch-claw',
@@ -148,6 +159,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 9, stat: 'damage', to: 10 }],
       note: 'Increased damage from 9 to 10 per pellet',
       section: 'balance',
       target: 'cerberus',
@@ -162,6 +174,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 2.2, label: 'Reload (1 cartridge)', stat: 'other', to: 2.1, unit: 's' }],
       note: 'Decreased the reload time for reloading one cartridge from 2.2s to 2.1s',
       section: 'balance',
       target: 'cerberus',
@@ -169,6 +182,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 2.4, label: 'Reload (2 cartridges)', stat: 'other', to: 2.25, unit: 's' }],
       note: 'Decreased the reload time for reloading two cartridges from 2.4s to 2.25s',
       section: 'balance',
       target: 'cerberus',
@@ -176,6 +190,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 2.6, label: 'Reload (3 cartridges)', stat: 'other', to: 2.45, unit: 's' }],
       note: 'Decreased the reload time for reloading three cartridges from 2.6s to 2.45s',
       section: 'balance',
       target: 'cerberus',
@@ -183,6 +198,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.1, label: 'Projectile radius', stat: 'other', to: 0.05, unit: 'm' }],
       devNote:
         "While the CL-40 has been in a much better place recently than in the past, we feel these small 'quality of life' changes will improve the experience of using it",
       note: "Decreased the radius of the weapon's projectile from 10cm to 5cm, making it easier to avoid accidentally hitting nearby surfaces",
@@ -192,6 +208,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 1.6, label: 'Self-damage multiplier', stat: 'other', to: 1.25, unit: '×' }],
       note: 'Decreased self-damage multiplier from 1.6 to 1.25, meaning it will now do less damage to the player using it should they accidentally hit themselves',
       section: 'balance',
       target: 'cl-40',
@@ -206,6 +223,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 230, stat: 'fire-rate', to: 220 }],
       note: 'Decreased the fire rate from 230 RPM to 220 RPM',
       section: 'balance',
       target: 'famas',
@@ -213,6 +231,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 24, stat: 'damage', to: 23 }],
       note: 'Decreased damage per bullet from 24 to 23',
       section: 'balance',
       target: 'famas',
@@ -220,6 +239,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 48, stat: 'damage', to: 46 }],
       note: 'Decreased damage from 48 to 46',
       section: 'balance',
       target: 'lh1',
@@ -227,6 +247,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 280, stat: 'fire-rate', to: 270 }],
       note: 'Decreased rate of fire from 280 RPM to 270 RPM',
       section: 'balance',
       target: 'lh1',
@@ -234,6 +255,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 13, stat: 'damage', to: 11 }],
       note: 'Decreased damage from 13 to 11 per pellet',
       section: 'balance',
       target: 'model-1887',
@@ -241,6 +263,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.6, stat: 'falloff-multiplier', to: 0.7 }],
       note: 'Increased min damage falloff multiplier from 0.6 to 0.7, meaning the Model 1887 retains the same damage at max range as in update 5.7',
       section: 'balance',
       target: 'model-1887',
@@ -248,6 +271,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 47, stat: 'damage', to: 50 }],
       note: 'Increased damage from 47 to 50',
       section: 'balance',
       target: 'pike-556',
@@ -255,6 +279,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 1.25, label: 'Bolt-action duration', stat: 'other', to: 1.05, unit: 's' }],
       note: "Decreased the bolt action animation duration from 1.25s to 1.05s, slightly increasing the SR-84's rate of fire",
       section: 'balance',
       target: 'sr-84',
@@ -262,6 +287,7 @@ export const patch580: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 115, stat: 'damage', to: 118 }],
       note: 'Increased damage from 115 to 118',
       section: 'balance',
       target: 'sr-84',

@@ -14,6 +14,7 @@ Thank you for your feedback and reports, community input has been invaluable in 
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 1.9, label: 'Priming time', stat: 'other', to: 1.5, unit: 's' }],
       devNote:
         "With the change to three ammo, the Charge's priming time now feels a bit slow for its projectile count. This adjustment aims to improve that.",
       note: 'Decreased priming time from 1.9s to 1.5s',
@@ -24,6 +25,7 @@ Thank you for your feedback and reports, community input has been invaluable in 
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 2, stat: 'charges', to: 1 }],
       note: 'Decreased ammo from 2 to 1',
       sassyNote: 'Make grenades more noticeable but please bring back to two.',
       section: 'balance',
@@ -32,6 +34,7 @@ Thank you for your feedback and reports, community input has been invaluable in 
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 150, stat: 'damage', to: 140 }],
       note: 'Decreased damage from 150 to 140',
       section: 'balance',
       target: 'frag-grenade',
@@ -39,6 +42,7 @@ Thank you for your feedback and reports, community input has been invaluable in 
     {
       adjustmentType: 'neutral',
       category: 'gadget',
+      changes: [{ from: 600, stat: 'environmental-damage', to: 900 }],
       devNote:
         "Frag Grenades have been outperforming the RPG-7 in damage, ammo, and cooldown, which isn't ideal. We also recognize that grenades can be a pain point for players. These adjustments aim to bring grenades more in line with other explosives while slightly buffing their impact on the environment.\nAdditionally, our goal is to increase the readability of grenades in the future, which should help alleviate some of the frustration. When that update arrives, we'll revisit these changes and make any necessary adjustments.",
       note: 'Increased environmental damage from 600 to 900',

@@ -9,6 +9,7 @@ export const patch1030: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 8, label: 'Ammo regen delay', stat: 'other', to: 10, unit: 's' }],
       note: 'Increased delay before ammo regeneration from 8s to 10s.',
       section: 'balance',
       target: 'h-plus-infuser',
@@ -23,6 +24,7 @@ export const patch1030: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 300, stat: 'health', to: 350 }],
       note: 'Increased health from 300 to 350.',
       section: 'balance',
       target: 'hover-pad',
@@ -30,6 +32,7 @@ export const patch1030: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 24, stat: 'damage', to: 25 }, { from: 24, stat: 'magazine-size', to: 21 }],
       note: 'Increased damage from 24 to 25 while reducing ammo from 24 to 21.',
       section: 'balance',
       target: '93r',
@@ -44,6 +47,7 @@ export const patch1030: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 34, stat: 'magazine-size', to: 36 }],
       note: 'Increased ammo count from 34 to 36.',
       section: 'balance',
       target: 'xp-54',
@@ -51,16 +55,20 @@ export const patch1030: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'contestants',
+      changes: [{ from: 350, stat: 'health', to: 325 }],
       note: 'Heavy health decreased from 350 to 325.',
       section: 'balance',
-      target: 'general',
+      temporary: true,
+      target: 'heavy-contestant',
     },
     {
       adjustmentType: 'buff',
       category: 'contestants',
+      changes: [{ from: 150, stat: 'health', to: 175 }],
       note: 'Light health increased from 150 to 175.',
       section: 'balance',
-      target: 'general',
+      temporary: true,
+      target: 'light-contestant',
     },
   ],
   title: 'UPDATE 10.3.0',

@@ -16,6 +16,7 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 15, label: 'Healing per shot', stat: 'other', to: 14 }],
       devNote:
         'The Infuser was still slightly outperforming other healing items, this change is made to address that.',
       note: 'H+ Infuser: Decreased healing per shot from 15 to 14.',
@@ -43,6 +44,7 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 3, stat: 'charges', to: 2 }],
       devNote:
         'Our intent has been to reduce the number of charges available, to throttle the usage rate, but we felt we couldn’t make that change until we fixed how unreliable opening and closing wall segments could be.',
       note: 'Dematerializer: Decreased the number of charges from 3 to 2.',
@@ -80,6 +82,10 @@ export const patch800: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [
+        { from: 40, stat: 'cooldown', to: 35 },
+        { from: 20, label: 'Retrieval cooldown', stat: 'other', to: 17.5, unit: 's' },
+      ],
       devNote:
         'We want to increase its desirability without making it too frustrating. This change will buff its availability in-match.',
       note: 'Guardian Turret: Decreased cooldown from 40s to 35s; cooldown when retrieving turret from 20s to 17.5s.',
@@ -89,6 +95,7 @@ export const patch800: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 40, label: 'Healing rate', stat: 'other', to: 46, unit: 'HP/s' }],
       devNote:
         'This change allows the Healing Beam to go from 220 to 253 healing before overheating, which should buff it to where it should be.',
       note: 'Healing Beam: Increased healing rate from 40/s to 46/s.',
@@ -98,6 +105,11 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [
+        { from: 7, label: 'Cooldown (miss)', stat: 'other', to: 10, unit: 's' },
+        { from: 14, label: 'Cooldown (Cashout Station/contestant hit)', stat: 'other', to: 18, unit: 's' },
+        { from: 7, label: 'Cooldown (other objects)', stat: 'other', to: 14, unit: 's' },
+      ],
       devNote:
         'The power and impact of the Winch Claw is out of line with some of the other Heavy Specializations and that is reflected in the data.',
       note: 'Winch Claw: Increased cooldown when missing a target from 7s to 10s; hitting Cashout Station/Contestant from 14s to 18s; all other objects from 7s to 14s.',
@@ -109,6 +121,10 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 35, stat: 'falloff-min-range', to: 32 },
+        { from: 42.5, stat: 'falloff-max-range', to: 39 },
+      ],
       devNote:
         'We feel the akimbo pistols are performing slightly too well at longer ranges, so this is a small nudge to bring them more into their intended niche.',
       note: '.50 Akimbo: Decreased damage falloff minimum range from 35m to 32m; max range from 42.5m to 39m.',
@@ -118,6 +134,7 @@ export const patch800: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 84, stat: 'damage', to: 88 }],
       devNote:
         'The CB-01 has struggled to perform well across most modes and sees a very low pick rate. This change is intended to improve viability.',
       note: 'CB-01: Increased damage from 84 to 88.',
@@ -136,6 +153,7 @@ export const patch800: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 42, stat: 'damage', to: 44 }],
       devNote:
         'We’re still trying to get the LH1 to a place where it’s viable but not dominant.',
       note: 'LH1: Increased damage from 42 to 44.',
@@ -145,6 +163,11 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 50, stat: 'damage', to: 48 },
+        { from: 45, stat: 'falloff-min-range', to: 40 },
+        { from: 0.75, stat: 'falloff-multiplier', to: 0.8 },
+      ],
       devNote:
         'We feel the Pike currently has too much utility, being both good at long range but also very viable at close range.',
       note: 'Pike-556: Decreased damage from 50 to 48; decreased damage falloff min range from 45m to 40m; increased falloff multiplier from 0.75 to 0.8; increased bullet dispersion when firing from hip, especially while crouching.',
@@ -154,6 +177,11 @@ export const patch800: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 10, label: 'Max lunge speed', stat: 'other', to: 7, unit: 'm/s' },
+        { from: 7, label: 'Min lunge speed', stat: 'other', to: 5.5, unit: 'm/s' },
+        { from: 4, label: 'Lunge trigger range', stat: 'other', to: 2.5, unit: 'm' },
+      ],
       devNote:
         "These changes should address the Riot Shield's ability to too reliably keep attackers on top of enemies once they reached them.",
       note: 'Riot Shield: Decreased max lunge speed from 10m/s to 7m/s; min speed from 7m/s to 5.5m/s; trigger range from 4m to 2.5m.',

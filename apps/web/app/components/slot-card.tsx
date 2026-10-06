@@ -4,6 +4,7 @@ import {
 	ArrowsDownUpIcon,
 	CheckIcon,
 	DiceFiveIcon,
+	InfoIcon,
 	LockSimpleIcon,
 	LockSimpleOpenIcon,
 	ProhibitIcon,
@@ -32,6 +33,7 @@ import {
 	AdjustmentIcon,
 	adjustmentTone,
 } from "./adjustment-badge";
+import { EquipmentHistorySheet } from "./equipment-history-sheet";
 
 type SlotCardProps = {
 	readonly className?: string;
@@ -164,6 +166,16 @@ export const SlotCard = ({
 				<span className="eyebrow min-w-0 grow truncate">{title}</span>
 				<div className="pointer-events-auto flex shrink-0 items-center gap-1.5">
 					<AdjustmentBadge targetId={item.id} />
+					<EquipmentHistorySheet item={item}>
+						<button
+							aria-label={`${item.label} patch history`}
+							className="press relative z-10 flex size-8 items-center justify-center rounded-md text-ink-faint transition-colors hover:bg-arena-top hover:text-ink"
+							title="Patch history"
+							type="button"
+						>
+							<InfoIcon size={16} weight="bold" />
+						</button>
+					</EquipmentHistorySheet>
 					{isDisabledInSettings ? (
 						<StatusTip
 							content="Disabled in Settings. It won't show up in new rolls."

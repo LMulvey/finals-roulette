@@ -9,6 +9,7 @@ export const patch630: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 140, label: 'Secondary damage', stat: 'other', to: 105 }],
       devNote: `The Sword has increasingly become a source of frustration for many players, especially Light players, due to its one-shot potential when combined with Quick Melee. This change removes the one-shot potential of the Sword. Longer term, we’ll monitor its performance and explore alternative changes.`,
       note: 'Decreased secondary attack damage from 140 to 105',
       section: 'balance',
@@ -213,7 +214,7 @@ export const patch630: Patch = {
       category: 'weapons',
       note: 'Winding up the Minigun no longer uses the secondary fire input action. Instead, it uses the same keybind as aim down sight.',
       section: 'content-and-bug-fixes',
-      target: 'minigun',
+      target: 'm134-minigun',
     },
     {
       adjustmentType: 'neutral',

@@ -74,6 +74,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 35, stat: 'cooldown', to: 28 }],
       devNote:
         'This small adjustment should make the Cube more appealing given its lower usage despite strong impact.',
       note: 'Anti-Gravity Cube cooldown decreased from 35s to 28s.',
@@ -92,6 +93,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 3, label: 'Radial check', stat: 'other', to: 1, unit: 'm' }],
       devNote:
         'These changes hopefully make the Flashbang less punishing for players who actively countered it by looking away, and should reduce Flashbang spam in TDM.',
       note: 'Flashbang: Increased view angle falloff and decreased radial check from 3m to 1m, making players much less likely to be flashed when looking away.',
@@ -108,6 +110,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 300, label: 'Blob health', stat: 'other', to: 240 }],
       devNote:
         'These changes should tone down goo power slightly, making it easier to counter goo while still allowing defenders to slow attackers.',
       note: 'Goo Grenade blob health decreased from 300 to 240.',
@@ -117,6 +120,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 24, stat: 'cooldown', to: 20 }],
       note: 'Gravity Vortex cooldown decreased from 24s to 20s.',
       section: 'balance',
       target: 'gravity-vortex',
@@ -221,6 +225,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 300, label: 'Blob health', stat: 'other', to: 240 }],
       note: 'Goo Gun blob health decreased from 300 to 240.',
       section: 'balance',
       target: 'goo-gun',
@@ -260,6 +265,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 21, stat: 'magazine-size', to: 24 }],
       note: '93R magazine size increased from 21 to 24.',
       section: 'balance',
       target: '93r',
@@ -267,6 +273,10 @@ export const patch700: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 10, stat: 'damage', to: 9 },
+        { from: 110, label: 'Full shot damage', stat: 'other', to: 99 },
+      ],
       devNote:
         'This nudge should bring Cerberus more in line with other Medium weapons.',
       note: 'Cerberus: Damage per pellet decreased from 10 to 9 (full shot damage from 110 to 99).',
@@ -276,6 +286,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 700, stat: 'environmental-damage', to: 1000 }],
       devNote:
         'This increases the viability of the KS-23 while retaining its unique character.',
       note: 'KS-23: Environmental damage increased from 700 to 1000, making it easier to fracture wall segments.',
@@ -285,6 +296,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 40, stat: 'damage', to: 42 }],
       devNote:
         'This buff should move LH1 back into a more viable tier for Light, without returning to its previous overwhelming state.',
       note: 'LH1: Damage increased from 40 to 42.',
@@ -294,6 +306,7 @@ export const patch700: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 25, stat: 'environmental-damage', to: 30 }],
       note: 'M134 Minigun: Environmental damage increased from 25 to 30, allowing it to remove three wall segments per full magazine.',
       section: 'balance',
       target: 'm134-minigun',
@@ -301,6 +314,10 @@ export const patch700: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 115, stat: 'damage', to: 100 },
+        { from: 200, label: 'Secondary damage', stat: 'other', to: 154 },
+      ],
       devNote:
         'These targeted changes reduce the Sledgehammer’s dominance while keeping melee viable.',
       note: 'Sledgehammer: Primary attack damage decreased from 115 to 100; secondary attack damage decreased from 200 to 154.',

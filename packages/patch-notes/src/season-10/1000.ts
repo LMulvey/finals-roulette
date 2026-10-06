@@ -37,6 +37,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 40, stat: 'cooldown', to: 30 }],
       note: 'Decreased cooldown from 40s to 30s.',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -44,6 +45,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 25, stat: 'cooldown', to: 18 }],
       note: 'Decreased cooldown from 25s to 18s.',
       section: 'balance',
       target: 'stun-gun',
@@ -51,6 +53,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 40, stat: 'cooldown', to: 34 }],
       note: 'Decreased cooldown from 40s to 34s.',
       section: 'balance',
       target: 'sonar-grenade',
@@ -58,6 +61,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 35, stat: 'cooldown', to: 25 }],
       note: 'Decreased cooldown from 35s to 25s.',
       section: 'balance',
       target: 'thermal-bore',
@@ -72,6 +76,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'specializations',
+      changes: [{ from: 10, stat: 'cooldown', to: 20 }, { from: 2, stat: 'charges', to: 3 }],
       note: 'Increased cooldown from 10s to 20s and increased ammo count from 2 to 3.',
       section: 'balance',
       target: 'dematerializer',
@@ -79,6 +84,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 6.5, stat: 'cooldown', to: 7.5 }],
       note: 'Increased cooldown from 6.5s to 7.5s.',
       section: 'balance',
       target: 'evasive-dash',
@@ -86,6 +92,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 8, stat: 'cooldown', to: 7 }],
       note: 'Decreased cooldown from 8s to 7s.',
       section: 'balance',
       target: 'grappling-hook',
@@ -100,6 +107,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 32, stat: 'magazine-size', to: 34 }],
       note: 'Increased magazine size from 32 to 34.',
       section: 'balance',
       target: 'akm',
@@ -114,6 +122,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 520, stat: 'fire-rate', to: 540 }],
       note: 'Increased fire rate from 520 to 540 RPM.',
       section: 'balance',
       target: 'fcar',
@@ -121,6 +130,7 @@ export const patch1000: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 250, stat: 'magazine-size', to: 300 }],
       note: 'Increased magazine size from 250 to 300.',
       section: 'balance',
       target: 'm134-minigun',

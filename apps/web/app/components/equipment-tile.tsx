@@ -4,6 +4,7 @@ import { CheckIcon, ProhibitIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/cvu";
 import { type EquipmentItem, getEquipmentMeta } from "@/lib/equipment";
 import { AdjustmentBadge } from "./adjustment-badge";
+import { EquipmentHistorySheet } from "./equipment-history-sheet";
 
 type EquipmentTileProps = {
 	readonly className?: string;
@@ -94,10 +95,19 @@ export const EquipmentTile = ({
 	return (
 		<div
 			className={cn(
-				"notch flex items-center gap-3 bg-arena-raised p-2 pr-3",
+				"notch relative flex items-center gap-3 bg-arena-raised p-2 pr-3 transition-colors hover:bg-arena-high has-[button[data-history-trigger]:focus-visible]:bg-arena-high",
 				className,
 			)}
 		>
+			{/* Overlay trigger, so the badge's own tooltip button isn't nested inside it. */}
+			<EquipmentHistorySheet item={item}>
+				<button
+					aria-label={`${item.label} patch history`}
+					className="absolute inset-0 cursor-pointer outline-none"
+					data-history-trigger
+					type="button"
+				/>
+			</EquipmentHistorySheet>
 			{body}
 			<span className="flex shrink-0 flex-col items-end gap-1 self-start pt-1">
 				<AdjustmentBadge targetId={item.id} />

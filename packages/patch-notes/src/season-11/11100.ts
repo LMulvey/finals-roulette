@@ -9,6 +9,10 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'contestants',
+      changes: [
+        { from: 150, stat: 'health', to: 175 },
+        { from: 7, label: 'Regen delay', stat: 'other', to: 8, unit: 's' },
+      ],
       note: 'Light health increased from 150 to 175, regen delay increased from 7s to 8s, and movement speed reduced across the board.',
       section: 'balance',
       temporary: true,
@@ -17,6 +21,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'contestants',
+      changes: [{ from: 350, stat: 'health', to: 325 }],
       note: 'Heavy health decreased from 350 to 325, with faster sprint and run speeds.',
       section: 'balance',
       temporary: true,
@@ -25,6 +30,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 140, stat: 'damage', to: 150 }],
       note: 'Increased damage from 140 to 150.',
       section: 'balance',
       temporary: true,
@@ -33,6 +39,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 120, stat: 'damage', to: 140 }],
       note: 'Increased damage from 120 to 140.',
       section: 'balance',
       temporary: true,
@@ -41,6 +48,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 25, stat: 'cooldown', to: 30 }],
       note: 'Increased cooldown from 25s to 30s.',
       section: 'balance',
       temporary: true,
@@ -49,6 +57,10 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [
+        { from: 85, label: 'Secondary damage', stat: 'other', to: 90 },
+        { from: 340, label: 'Backstab damage', stat: 'other', to: 315 },
+      ],
       note: 'Secondary base damage increased from 85 to 90, backstab damage decreased from 340 to 315.',
       section: 'balance',
       temporary: true,
@@ -57,6 +69,10 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 50, stat: 'falloff-min-range', to: 35 },
+        { from: 55, stat: 'falloff-max-range', to: 45 },
+      ],
       note: 'Damage falloff now starts at 35m (from 50m) and ends at 45m (from 55m).',
       section: 'balance',
       temporary: true,
@@ -65,6 +81,10 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 71, stat: 'damage', to: 65 },
+        { from: 110, label: 'Precise damage', stat: 'other', to: 100 },
+      ],
       note: 'Base damage decreased from 71 to 65 and precise damage from 110 to 100.',
       section: 'balance',
       temporary: true,
@@ -73,6 +93,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 84, stat: 'damage', to: 88 }],
       note: 'Increased damage from 84 to 88.',
       section: 'balance',
       temporary: true,
@@ -81,6 +102,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 45, stat: 'damage', to: 47 }],
       note: 'Increased damage from 45 to 47.',
       section: 'balance',
       temporary: true,
@@ -97,6 +119,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 14, stat: 'damage', to: 15 }],
       note: 'Increased damage from 14 to 15.',
       section: 'balance',
       temporary: true,
@@ -105,6 +128,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 49, stat: 'damage', to: 56 }],
       note: 'Increased damage from 49 to 56.',
       section: 'balance',
       temporary: true,
@@ -121,6 +145,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 90, stat: 'damage', to: 95 }],
       note: 'Increased damage from 90 to 95 and decreased reload time.',
       section: 'balance',
       temporary: true,
@@ -129,6 +154,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 500, stat: 'fire-rate', to: 520 }],
       note: 'Increased fire rate from 500 to 520 RPM.',
       section: 'balance',
       temporary: true,
@@ -137,6 +163,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 580, stat: 'fire-rate', to: 590 }],
       note: 'Increased fire rate from 580 to 590 RPM.',
       section: 'balance',
       temporary: true,
@@ -145,6 +172,7 @@ export const patch11100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 83, stat: 'damage', to: 97 }],
       note: 'Increased damage from 83 to 97.',
       section: 'balance',
       temporary: true,

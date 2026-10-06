@@ -9,6 +9,7 @@ export const patch1190: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 37, stat: 'cooldown', to: 30 }, { from: 40, stat: 'range', to: 50 }],
       note: 'Decreased cooldown from 37s to 30s and increased max placement distance from 40m to 50m.',
       section: 'balance',
       target: 'zipline',
@@ -16,6 +17,7 @@ export const patch1190: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 6, stat: 'cooldown', to: 5 }],
       note: 'Decreased cooldown per charge from 6s to 5s.',
       section: 'balance',
       target: 'evasive-dash',

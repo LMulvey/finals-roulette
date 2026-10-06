@@ -9,6 +9,7 @@ export const patch610: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 15, stat: 'damage', to: 17 }],
       devNote:
         'The ARN has not performed as well as we initially expected since its release, so this change is a small nudge to make it more effective. We’re not 100% sure this solves its effectiveness, but it should help while we dig further into the performance data and figure out how else we might want to improve it.',
       note: 'Increased damage from 15 to 17',

@@ -9,6 +9,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 2.2, stat: 'reload-time', to: 1.75 }],
       note: 'Decreased reload time from 2.2s to 1.75s.',
       section: 'balance',
       target: 'lockbolt-launcher',
@@ -16,6 +17,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 20, stat: 'cooldown', to: 15 }],
       note: 'Decreased cooldown per charge from 20s to 15s and removed raise time.',
       section: 'balance',
       target: 'dematerializer',
@@ -23,6 +25,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 6.5, stat: 'cooldown', to: 6 }],
       note: 'Decreased cooldown per charge from 6.5s to 6s.',
       section: 'balance',
       target: 'evasive-dash',
@@ -30,6 +33,11 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [
+        { from: 3.5, label: 'Activation time', stat: 'other', to: 3, unit: 's' },
+        { from: 280, stat: 'health', to: 300 },
+        { from: 17.5, label: 'Remote retrieval cooldown', stat: 'other', to: 10, unit: 's' },
+      ],
       note: 'Decreased activation time from 3.5s to 3s, increased health from 280 to 300, and decreased remote retrieval cooldown from 17.5s to 10s.',
       section: 'balance',
       target: 'guardian-turret',
@@ -37,6 +45,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 20, stat: 'damage', to: 21 }],
       note: 'Increased damage from 20 to 21.',
       section: 'balance',
       target: 'akm',
@@ -44,6 +53,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 725, stat: 'fire-rate', to: 750 }],
       note: 'Increased fire rate from 725 to 750 RPM and sped up reloads.',
       section: 'balance',
       target: 'arn-220',
@@ -51,6 +61,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.65, stat: 'falloff-multiplier', to: 0.7 }],
       note: 'Increased damage falloff multiplier from 0.65 to 0.7.',
       section: 'balance',
       target: 'bfr-titan',
@@ -58,6 +69,10 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 8, stat: 'damage', to: 9 },
+        { from: 104, label: 'Full shot damage', stat: 'other', to: 117 },
+      ],
       note: 'Increased damage per pellet from 8 to 9 (full shot 104 to 117).',
       section: 'balance',
       target: 'cerberus',
@@ -65,6 +80,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 75, label: 'Secondary damage', stat: 'other', to: 85 }],
       note: 'Increased primary damage to 49 base / 70 precise and secondary base damage from 75 to 85; backstab now deals 340. Lunges last longer.',
       section: 'balance',
       target: 'dagger',
@@ -72,6 +88,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 9, label: 'Precision zone', stat: 'other', to: 12, unit: '°' }],
       note: 'Increased primary precision zone from 9 to 12 degrees.',
       section: 'balance',
       target: 'dual-blades',
@@ -79,6 +96,10 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.675, stat: 'falloff-multiplier', to: 0.58 },
+        { from: 18, stat: 'falloff-min-range', to: 12 },
+      ],
       devNote: 'Reduce its effective range so the BFR can own long-range Heavy fights.',
       note: 'Decreased damage falloff multiplier from 0.675 to 0.58 and falloff start range from 18m to 12m.',
       section: 'balance',
@@ -94,6 +115,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 124, stat: 'damage', to: 126 }],
       note: 'Increased max draw damage from 124 to 126.',
       section: 'balance',
       target: 'recurve-bow',
@@ -101,6 +123,10 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 40, label: 'Shield Bash damage', stat: 'other', to: 50 },
+        { from: 50, label: 'Shield Bash env. damage', stat: 'other', to: 100 },
+      ],
       note: 'Increased primary damage to 60 base / 86 precise. Shield Bash damage increased from 40 to 50 and environmental damage from 50 to 100.',
       section: 'balance',
       target: 'riot-shield',
@@ -108,6 +134,7 @@ export const patch1160: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 5, label: 'Lunge distance', stat: 'other', to: 6.5, unit: 'm' }],
       note: 'Increased primary sweep box by 60%, lunge distance from 5m to 6.5m, and lunge speed by 50%.',
       section: 'balance',
       target: 'spear',

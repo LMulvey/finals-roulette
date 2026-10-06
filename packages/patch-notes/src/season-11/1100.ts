@@ -25,6 +25,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 25, stat: 'damage', to: 24 }, { from: 21, stat: 'magazine-size', to: 27 }],
       devNote:
         'The 93R has been a strong outlier since its last buffs, so damage reverts while ammo goes up instead.',
       note: 'Decreased damage from 25 to 24 and increased ammo from 21 to 27.',
@@ -34,6 +35,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 44, stat: 'damage', to: 46 }],
       note: 'Increased damage from 44 to 46.',
       section: 'balance',
       target: '50-akimbo',
@@ -41,6 +43,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 540, stat: 'fire-rate', to: 530 }],
       note: 'Decreased fire rate from 540 to 530 RPM.',
       section: 'balance',
       target: 'fcar',
@@ -48,6 +51,10 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 100, stat: 'damage', to: 110 },
+        { from: 0.7, stat: 'falloff-multiplier', to: 0.64 },
+      ],
       note: 'Increased damage from 100 to 110 and decreased damage falloff multiplier from 0.7 to 0.64.',
       section: 'balance',
       target: 'ks-23',
@@ -55,6 +62,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 30, stat: 'environmental-damage', to: 35 }],
       note: 'Decreased dispersion in all aim states by 10%, reduced dispersion scaling during fast camera movement, and increased environmental damage from 30 to 35.',
       section: 'balance',
       target: 'm134-minigun',
@@ -62,6 +70,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 12, stat: 'damage', to: 13 }],
       note: 'Increased pellet damage from 12 to 13.',
       section: 'balance',
       target: 'model-1887',
@@ -69,6 +78,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 1.5, stat: 'headshot-multiplier', to: 1.75 }],
       note: 'Increased headshot multiplier from 1.5 to 1.75.',
       section: 'balance',
       target: 'pike-556',
@@ -76,6 +86,11 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [
+        { from: 3, label: 'Lunge distance', stat: 'other', to: 4.5, unit: 'm' },
+        { from: 4.26, label: 'Backstab multiplier', stat: 'other', to: 4.5, unit: '×' },
+        { from: 0.8, label: 'Backstab charge time', stat: 'other', to: 0.65, unit: 's' },
+      ],
       note: 'Added Stamina and Precision. Precise hits deal 60, glancing hits 42; lunge distance increased from 3m to 4.5m. Backstab multiplier increased from 4.26 to 4.5 and charge time reduced from 0.8s to 0.65s.',
       section: 'balance',
       target: 'dagger',
@@ -90,6 +105,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 3, label: 'Lunge distance', stat: 'other', to: 4, unit: 'm' }],
       note: 'Added Stamina and Precision. Precise hits deal 82, glancing 57; lunge distance increased from 3m to 4m. Shield block now gives full frontal protection at -25% movement speed. New Shield Bash deals 40 with ~5m knockback.',
       section: 'balance',
       target: 'riot-shield',
@@ -97,6 +113,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 4.5, label: 'Lunge distance', stat: 'other', to: 5, unit: 'm' }],
       note: 'Added Stamina and Precision. Primary deals 120 precise / 90 base, secondary 200 precise / 150 base. Lunge distance increased from 4.5m to 5m.',
       section: 'balance',
       target: 'sledgehammer',
@@ -104,6 +121,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 7.5, label: 'Lunge distance', stat: 'other', to: 5, unit: 'm' }],
       note: 'Added Stamina and Precision. Primary combo reduced to two attacks (74 precise / 55 base) and lunge distance decreased from 7.5m to 5m. Spin is now a stamina-gated 75/100/126 sequence.',
       section: 'balance',
       target: 'spear',
@@ -111,6 +129,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 3, label: 'Lunge distance', stat: 'other', to: 4.25, unit: 'm' }],
       note: 'Added Stamina and Precision. Precise hits deal 110, glancing 71; lunge distance increased from 3m to 4.25m. Secondary lunge reaches ~10m with Stamina, ~5m without.',
       section: 'balance',
       target: 'sword',
@@ -118,6 +137,10 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [
+        { from: 5, label: 'Projectiles blocked', stat: 'other', to: 6 },
+        { from: 160, stat: 'health', to: 175 },
+      ],
       note: 'Increased projectiles blocked from 5 to 6 and health from 160 to 175. Cooldown no longer regenerates while deployed (5s on pickup, 15s on remote retrieval, 30s on destruction).',
       section: 'balance',
       target: 'aps-turret',
@@ -125,6 +148,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 1.5, label: 'Arm time', stat: 'other', to: 1, unit: 's' }],
       note: 'Decreased arm time when deployed from 1.5s to 1s.',
       section: 'balance',
       target: 'breach-charge',
@@ -139,6 +163,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 350, stat: 'health', to: 425 }],
       note: 'Increased health from 350 to 425.',
       section: 'balance',
       target: 'hover-pad',
@@ -146,6 +171,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 13, label: 'Min cloak duration', stat: 'other', to: 11, unit: 's' }],
       devNote:
         'Stealth is meant for a slower hide-and-seek playstyle rather than high-speed use.',
       note: 'Decreased minimum cloak duration from ~13s to ~11s. Energy drain is now minimal below run speed and maximal at run speed or faster.',
@@ -155,6 +181,7 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [{ from: 3, stat: 'charges', to: 2 }, { from: 7.5, stat: 'cooldown', to: 6.5 }],
       note: 'Decreased charges from 3 to 2 and decreased cooldown from 7.5s to 6.5s.',
       section: 'balance',
       target: 'evasive-dash',
@@ -162,6 +189,11 @@ export const patch1100: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'specializations',
+      changes: [
+        { from: 0.25, label: 'Victim stun', stat: 'other', to: 0.1, unit: 's' },
+        { from: 0.15, label: 'Lock-in-place time', stat: 'other', to: 0.1, unit: 's' },
+        { from: 0.25, label: 'Post-grab action delay', stat: 'other', to: 0.1, unit: 's' },
+      ],
       note: 'Decreased victim stun from 0.25s to 0.1s, lock-in-place from 0.15s to 0.1s, and post-grab action delay from 0.25s to 0.1s.',
       section: 'balance',
       target: 'winch-claw',

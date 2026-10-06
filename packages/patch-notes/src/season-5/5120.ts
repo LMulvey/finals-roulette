@@ -10,6 +10,7 @@ export const patch5120: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 11, stat: 'damage', to: 12 }],
       note: 'Increased damage from 11 to 12 per pellet',
       section: 'balance',
       target: 'model-1887',
@@ -17,6 +18,10 @@ export const patch5120: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 0.85, label: 'Lever-action duration', stat: 'other', to: 0.8, unit: 's' },
+        { from: 70, stat: 'fire-rate', to: 75 },
+      ],
       devNote:
         'Having now had time to analyse the Model’s performance on live, following our last round of balance changes, we feel we’ve maybe weakened the weapon a little too much. These changes should nudge it back to a better place.',
       note: 'Decreased the duration of the lever-action animation from 0.85s to 0.8s, effectively increasing the weapon’s fire rate from 70RPM to 75RPM',
@@ -28,6 +33,7 @@ export const patch5120: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 120, stat: 'damage', to: 124 }],
       note: 'Increased damage per shot, when the bow is at max draw, from 120 to 124. The base damage per shot remains at 60 damage',
       sassyNote: "IT'S BOWZO TIME, BABY",
       section: 'balance',

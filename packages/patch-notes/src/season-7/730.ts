@@ -9,11 +9,12 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 20, label: 'Healing per shot', stat: 'other', to: 15 }],
       devNote:
         'The flat healing per second on stationary targets during a Cashout steal has been more impactful than we expected. This change will address that specific use case, while ensuring the H+ is still valuable.',
       note: 'H+ Infuser: Decreased health given per shot from 20 to 15.',
       section: 'balance',
-      target: 'hplus-infuser',
+      target: 'h-plus-infuser',
     },
     {
       adjustmentType: 'neutral',
@@ -25,6 +26,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 35, stat: 'cooldown', to: 30 }],
       note: 'Healing Emitter: Cooldown reduced from 35s to 30s.',
       section: 'balance',
       target: 'healing-emitter',
@@ -41,6 +43,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 0.5, label: 'Item re-entry cooldown', stat: 'other', to: 1, unit: 's' }],
       note: 'Gateway: Increased cooldown on items that travel through the gateway before they can re-enter from 0.5s to 1s.',
       section: 'balance',
       target: 'gateway',
@@ -50,6 +53,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 0.2, stat: 'equip-time', to: 0.15 },
+        { from: 0.2, stat: 'unequip-time', to: 0.15 },
+      ],
       note: '93R: Decreased equip and unequip time from 0.2s to 0.15s.',
       section: 'balance',
       target: '93r',
@@ -57,6 +64,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.23, stat: 'equip-time', to: 0.3 },
+        { from: 0.23, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'AKM: Increased equip time from 0.23s to 0.3s; decreased unequip time from 0.23s to 0.2s.',
       section: 'balance',
       target: 'akm',
@@ -64,6 +75,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'ARN-220: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'arn-220',
@@ -71,6 +83,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'CB-01 Repeater: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'cb-01-repeater',
@@ -78,6 +91,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'Cerberus 12GA: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'cerberus',
@@ -85,6 +99,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 1.25, label: 'Self-damage multiplier', stat: 'other', to: 1.35, unit: '×' },
+        { from: 0.6, label: 'Inner blast radius', stat: 'other', to: 0.5, unit: 'm' },
+      ],
       devNote:
         'CL-40 is now slightly less effective at close range and requires more accuracy for max damage.',
       note: 'CL-40: Increased self-damage multiplier from 1.25 to 1.35. Decreased inner blast radius from 60cm to 50cm.',
@@ -94,6 +112,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.2, stat: 'equip-time', to: 0.3 },
+        { from: 0.23, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'FAMAS: Increased equip time from 0.2s to 0.3s; decreased unequip time from 0.23s to 0.2s.',
       section: 'balance',
       target: 'famas',
@@ -101,6 +123,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.2, stat: 'equip-time', to: 0.3 },
+        { from: 0.23, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'FCAR: Increased equip time from 0.2s to 0.3s; decreased unequip time from 0.23s to 0.2s.',
       section: 'balance',
       target: 'fcar',
@@ -108,6 +134,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'KS-23: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'ks-23',
@@ -115,6 +142,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.23, stat: 'equip-time', to: 0.35 },
+        { from: 0.3, stat: 'unequip-time', to: 0.25 },
+      ],
       note: 'Lewis Gun: Increased equip time from 0.23s to 0.35s; decreased unequip time from 0.3s to 0.25s.',
       section: 'balance',
       target: 'lewis-gun',
@@ -122,6 +153,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.15, stat: 'equip-time', to: 0.3 },
+        { from: 0.15, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'LH1: Increased equip time from 0.15s to 0.3s; increased unequip time from 0.15s to 0.2s.',
       section: 'balance',
       target: 'lh1',
@@ -129,6 +164,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'unequip-time', to: 0.25 }],
       note: 'M134 Minigun: Increased unequip time from 0.2s to 0.25s.',
       section: 'balance',
       target: 'm134-minigun',
@@ -136,6 +172,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.15, stat: 'equip-time', to: 0.3 },
+        { from: 0.15, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'Model 1887: Increased equip time from 0.15s to 0.3s; increased unequip time from 0.15s to 0.2s.',
       section: 'balance',
       target: 'model-1887',
@@ -143,6 +183,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'Pike-556: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'pike-556',
@@ -150,6 +191,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.15, stat: 'equip-time', to: 0.3 },
+        { from: 0.15, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'SA1216: Increased equip time from 0.15s to 0.3s; increased unequip time from 0.15s to 0.2s.',
       section: 'balance',
       target: 'sa1216',
@@ -157,6 +202,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.15, stat: 'equip-time', to: 0.2 },
+        { from: 0.15, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'SH1900: Increased equip and unequip time from 0.15s to 0.2s.',
       section: 'balance',
       target: 'sh1900',
@@ -164,6 +213,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 0.2, stat: 'equip-time', to: 0.3 }],
       note: 'ShAK-50: Increased equip time from 0.2s to 0.3s.',
       section: 'balance',
       target: 'shak-50',
@@ -171,6 +221,7 @@ export const patch730: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.15, label: 'Primary sweep height', stat: 'other', to: 0.25, unit: 'm' }],
       devNote:
         'This update addresses melee hit detection and sweep accuracy for the Sledgehammer.',
       note: 'Sledgehammer: Increased height of primary attack hit sweep from 15cm to 25cm, making attacks more reliable.',
@@ -180,6 +231,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 0.23, stat: 'equip-time', to: 0.2 },
+        { from: 0.23, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'XP-54: Decreased equip time from 0.23s to 0.2s; decreased unequip time from 0.23s to 0.2s.',
       section: 'balance',
       target: 'xp-54',
@@ -187,6 +242,10 @@ export const patch730: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [
+        { from: 0.15, stat: 'equip-time', to: 0.3 },
+        { from: 0.15, stat: 'unequip-time', to: 0.2 },
+      ],
       note: 'SR-84: Increased equip time from 0.15s to 0.3s; increased unequip time from 0.15s to 0.2s.',
       section: 'balance',
       target: 'sr-84',
@@ -315,7 +374,7 @@ export const patch730: Patch = {
       category: 'cosmetics',
       note: 'Fixed Kanji being mirrored on the grips of the Shinjuku Slicer Revolver skin.',
       section: 'content-and-bug-fixes',
-      target: 'revolver',
+      target: 'r-357',
     },
     {
       adjustmentType: 'neutral',
@@ -347,7 +406,7 @@ export const patch730: Patch = {
       category: 'gadget',
       note: 'H+ Infuser: Fixed issue where it would look like it was out of ammo while it was not.',
       section: 'content-and-bug-fixes',
-      target: 'hplus-infuser',
+      target: 'h-plus-infuser',
     },
     {
       adjustmentType: 'neutral',

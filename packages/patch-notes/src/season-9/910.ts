@@ -8,6 +8,7 @@ export const patch910: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 40, stat: 'damage', to: 38 }],
       note: 'Decreased damage from 40 to 38.',
       section: 'balance',
       target: 'v9s',

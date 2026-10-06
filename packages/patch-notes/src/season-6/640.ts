@@ -13,6 +13,7 @@ Week 2 of Bunny Bash is also live now, with a new circuit of event contracts for
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 8, stat: 'environmental-damage', to: 18 }],
       devNote:
         'With the previous environmental damage value the Repeater had a tough time destroying ziplines. This change should help to address that.',
       note: 'Increased environmental damage from 8 to 18',

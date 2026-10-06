@@ -9,6 +9,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 30, stat: 'cooldown', to: 20 }],
       note: 'Decreased cooldown from 30s to 20s.',
       section: 'balance',
       target: 'breach-charge',
@@ -16,6 +17,10 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [
+        { from: 5, label: 'Outer blast radius', stat: 'other', to: 5.5, unit: 'm' },
+        { from: 2.5, label: 'Inner blast radius', stat: 'other', to: 2.75, unit: 'm' },
+      ],
       note: 'Increased outer radius from 5m to 5.5m and max damage radius from 2.5m to 2.75m.',
       section: 'balance',
       target: 'frag-grenade',
@@ -23,6 +28,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 30, stat: 'cooldown', to: 24 }],
       note: 'Decreased cooldown from 30s to 24s.',
       section: 'balance',
       target: 'gas-grenade',
@@ -30,6 +36,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 70, stat: 'range', to: 50 }],
       note: 'Decreased max range from 70m to 50m.',
       section: 'balance',
       target: 'gateway',
@@ -37,6 +44,10 @@ export const patch900: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'gadget',
+      changes: [
+        { from: 2, stat: 'charges', to: 1 },
+        { from: 20, stat: 'cooldown', to: 12 },
+      ],
       note: 'Decreased ammo from 2 to 1 and reduced cooldown from 20s to 12s.',
       section: 'balance',
       target: 'glitch-grenade',
@@ -44,6 +55,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 30, stat: 'cooldown', to: 24 }],
       note: 'Decreased cooldown from 30s to 24s.',
       section: 'balance',
       target: 'pyro-grenade',
@@ -51,6 +63,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 80, stat: 'damage', to: 55 }],
       note: 'Decreased explosive damage from 80 to 55.',
       section: 'balance',
       target: 'pyro-mine',
@@ -58,6 +71,10 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [
+        { from: 2.5, label: 'Fuse time', stat: 'other', to: 1.75, unit: 's' },
+        { from: 45, stat: 'cooldown', to: 35 },
+      ],
       note: 'Decreased fuse time from 2.5s to 1.75s and cooldown from 45s to 35s.',
       section: 'balance',
       target: 'thermal-bore',
@@ -65,6 +82,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 100, stat: 'damage', to: 110 }],
       note: 'Increased damage from 100 to 110.',
       section: 'balance',
       target: 'rpg-7',
@@ -72,6 +90,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'specializations',
+      changes: [{ from: 750, stat: 'health', to: 850 }],
       note: 'Increased max health from 750 to 850 and can now block Winch Claw.',
       section: 'balance',
       target: 'mesh-shield',
@@ -86,6 +105,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 26, stat: 'damage', to: 24 }],
       note: 'Decreased damage from 26 to 24 and tightened effective range profile.',
       section: 'balance',
       target: '93r',
@@ -100,6 +120,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 65, label: 'Third-hit combo damage', stat: 'other', to: 100 }],
       note: 'Increased third-hit combo damage from 65 to 100.',
       section: 'balance',
       target: 'dual-blades',
@@ -114,6 +135,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 22, stat: 'damage', to: 23 }],
       note: 'Increased damage from 22 to 23.',
       section: 'balance',
       target: 'lewis-gun',
@@ -135,6 +157,7 @@ export const patch900: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 2.2, label: 'Tactical reload intro', stat: 'other', to: 1.5, unit: 's' }],
       note: 'Shortened tactical reload intro from 2.2s to 1.5s.',
       section: 'balance',
       target: 'model-1887',

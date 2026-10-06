@@ -8,6 +8,7 @@ export const patch940: Patch = {
     {
       adjustmentType: 'buff',
       category: 'gadget',
+      changes: [{ from: 0.83, label: 'Drill length', stat: 'other', to: 1.08, unit: 'm' }],
       note: 'Increased drill length from 83cm to 108cm to improve deep-wall drilling reliability.',
       section: 'balance',
       target: 'breach-drill',
@@ -29,6 +30,10 @@ export const patch940: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 98, stat: 'fire-rate', to: 103 },
+        { from: 0.15, label: 'Min draw time', stat: 'other', to: 0.08, unit: 's' },
+      ],
       note: 'Increased rate of fire (98 to 103 RPM) and reduced minimum draw time (0.15s to 0.08s).',
       section: 'balance',
       target: 'recurve-bow',
@@ -36,6 +41,7 @@ export const patch940: Patch = {
     {
       adjustmentType: 'nerf',
       category: 'weapons',
+      changes: [{ from: 25, stat: 'falloff-max-range', to: 20 }],
       note: 'Reduced damage falloff end range from 25m to 20m.',
       section: 'balance',
       target: 'v9s',

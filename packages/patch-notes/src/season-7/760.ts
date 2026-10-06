@@ -11,28 +11,28 @@ export const patch760: Patch = {
       category: 'contestants',
       note: 'Replaced the Grapple Hook with the Evasive Dash in the default Light Loadout. Grapple Hook must now be unlocked for VRs if not already owned.',
       section: 'balance',
-      target: 'light',
+      target: 'light-contestant',
     },
     {
       adjustmentType: 'removal',
       category: 'weapons',
       note: 'Replaced the M11 with the XP-54 in the default Light Loadout. M11 must now be unlocked for VRs if not already owned.',
       section: 'balance',
-      target: 'light',
+      target: 'light-contestant',
     },
     {
       adjustmentType: 'addition',
       category: 'gadget',
       note: 'Moved the Frag Grenade and Sonar Grenade from Reserve into the default Light Loadout.',
       section: 'balance',
-      target: 'light',
+      target: 'light-contestant',
     },
     {
       adjustmentType: 'removal',
       category: 'gadget',
       note: 'Moved the Flashbang and Smoke Grenade from the default Light Loadout into the Reserve.',
       section: 'balance',
-      target: 'light',
+      target: 'light-contestant',
     },
 
     // Archetypes - Medium
@@ -41,28 +41,28 @@ export const patch760: Patch = {
       category: 'gadget',
       note: 'Moved the Goo Grenade from the default Medium Loadout into the Reserve.',
       section: 'balance',
-      target: 'medium',
+      target: 'medium-contestant',
     },
     {
       adjustmentType: 'addition',
       category: 'gadget',
       note: 'Moved the Frag Grenade from Reserve into the default Medium Loadout.',
       section: 'balance',
-      target: 'medium',
+      target: 'medium-contestant',
     },
     {
       adjustmentType: 'removal',
       category: 'gadget',
       note: 'Replaced the Glitch Trap with the Explosive Mine in the default Medium Loadout. Glitch Trap must now be unlocked for VRs if not already owned.',
       section: 'balance',
-      target: 'medium',
+      target: 'medium-contestant',
     },
     {
       adjustmentType: 'addition',
       category: 'weapons',
       note: 'Added the Compact Reflector sight to the default AKM and R .357 in the default Medium Loadout.',
       section: 'balance',
-      target: 'medium',
+      target: 'medium-contestant',
     },
 
     // Archetypes - Heavy
@@ -71,13 +71,14 @@ export const patch760: Patch = {
       category: 'weapons',
       note: 'Added the Compact Reflector Sight to the M60 in the default Heavy Loadout.',
       section: 'balance',
-      target: 'heavy',
+      target: 'heavy-contestant',
     },
 
     // Gadgets
     {
       adjustmentType: 'nerf',
       category: 'gadget',
+      changes: [{ from: 0.8, label: 'Charge time', stat: 'other', to: 1, unit: 's' }],
       devNote:
         'This nudge should encourage players to find a safe spot to defib more often, moving more risk onto the reviving player.',
       note: 'Defibrillator: Increased charge time from 0.8s to 1s.',
@@ -144,6 +145,7 @@ export const patch760: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [{ from: 0.07, label: 'Sweep duration', stat: 'other', to: 0.1, unit: 's' }],
       note: 'Dagger: Increased outer width of hit sweeps by ~40%, decreased inner width near camera, increased sweep duration from 0.07s to 0.1s for more reliable hits.',
       section: 'balance',
       target: 'dagger',
@@ -158,6 +160,7 @@ export const patch760: Patch = {
     {
       adjustmentType: 'neutral',
       category: 'weapons',
+      changes: [{ from: 300, label: 'Projectile velocity', stat: 'other', to: 280, unit: 'm/s' }],
       devNote: 'Should make KS-23 more reliable at intended ranges.',
       note: 'KS-23: Converted to hybrid hitscan-projectile weapon. Hitscan up to 25m, projectile after 25m. Projectile velocity reduced from 300m/s to 280m/s.',
       section: 'balance',
@@ -166,6 +169,10 @@ export const patch760: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 0.04, label: 'Sweep lifetime', stat: 'other', to: 0.12, unit: 's' },
+        { from: 0.9, label: 'Attack duration', stat: 'other', to: 0.81, unit: 's' },
+      ],
       note: 'Riot Shield: Updated hit sweeps for better reliability and animation match. Increased sweep range by ~50cm, lifetime from 0.04s to 0.12s, outer width by ~70%. Decreased inner width near camera and attack duration from 0.9s to 0.81s (10% faster).',
       section: 'balance',
       target: 'riot-shield',
@@ -187,6 +194,10 @@ export const patch760: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 74, stat: 'damage', to: 88 },
+        { from: 0.55, label: 'Primary attack duration', stat: 'other', to: 0.6, unit: 's' },
+      ],
       note: 'Sword (Primary): Increased damage from 74 to 88, attack duration from 0.55s to 0.6s, sweep height by ~5cm, decreased inner width near camera, and improved sweep alignment.',
       section: 'balance',
       target: 'sword',
@@ -194,6 +205,12 @@ export const patch760: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      changes: [
+        { from: 105, label: 'Secondary damage', stat: 'other', to: 120 },
+        { from: 1, label: 'Secondary attack duration', stat: 'other', to: 0.75, unit: 's' },
+        { from: 1500, label: 'Lunge speed', stat: 'other', to: 1750 },
+        { from: 5.5, label: 'Secondary range', stat: 'other', to: 7, unit: 'm' },
+      ],
       devNote:
         'These changes make the lunge more intuitive and powerful, while controlling momentum exploits.',
       note: 'Sword (Secondary): Increased damage from 105 to 120, decreased attack duration from 1s to 0.75s (faster), added rotation clamping to 40 degrees during lunge, increased lunge speed from 1500 to 1750, range from 5.5m to 7m, and improved “Super Dash” system.',
@@ -230,7 +247,7 @@ export const patch760: Patch = {
       category: 'characters',
       note: 'Improved appearance of Chromatique Dress for Heavy contestants.',
       section: 'content-and-bug-fixes',
-      target: 'heavy',
+      target: 'heavy-contestant',
     },
     {
       adjustmentType: 'neutral',
@@ -448,7 +465,7 @@ export const patch760: Patch = {
       category: 'vfx',
       note: 'Improved visibility of firework VFX in the Fourth of Mayhem RPG Skin to match Rocket Resolution RPG Skin.',
       section: 'content-and-bug-fixes',
-      target: 'rpg',
+      target: 'rpg-7',
     },
 
     // Weapons
