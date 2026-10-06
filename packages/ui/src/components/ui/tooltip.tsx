@@ -79,15 +79,18 @@ const TooltipContent = React.forwardRef<
 	React.ElementRef<typeof TooltipPrimitive.Content>,
 	React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
-	<TooltipPrimitive.Content
-		className={cn(
-			"z-50 max-w-72 origin-(--radix-tooltip-content-transform-origin) overflow-hidden rounded-md border border-line-strong bg-arena-top px-3 py-2 text-sm text-ink shadow-[0_12px_32px_-12px_rgb(0_0_0/0.7)] animate-in fade-in-0 zoom-in-95 duration-150 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
-			className,
-		)}
-		ref={ref}
-		sideOffset={sideOffset}
-		{...props}
-	/>
+	// Portaled so tooltips escape clipped/isolated parents (e.g. notched cards).
+	<TooltipPrimitive.Portal>
+		<TooltipPrimitive.Content
+			className={cn(
+				"z-50 max-w-72 origin-(--radix-tooltip-content-transform-origin) overflow-hidden rounded-md border border-line-strong bg-arena-top px-3 py-2 text-sm text-ink shadow-[0_12px_32px_-12px_rgb(0_0_0/0.7)] animate-in fade-in-0 zoom-in-95 duration-150 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+				className,
+			)}
+			ref={ref}
+			sideOffset={sideOffset}
+			{...props}
+		/>
+	</TooltipPrimitive.Portal>
 ));
 TooltipContent.displayName = TooltipPrimitive.Content.displayName;
 

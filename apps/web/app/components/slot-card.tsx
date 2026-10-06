@@ -161,8 +161,8 @@ export const SlotCard = ({
 				<span className="font-heading text-sm font-extrabold italic tabular-nums text-broadcast">
 					{String(slotNumber).padStart(2, "0")}
 				</span>
-				<span className="eyebrow grow">{title}</span>
-				<div className="pointer-events-auto flex items-center gap-1.5">
+				<span className="eyebrow min-w-0 grow truncate">{title}</span>
+				<div className="pointer-events-auto flex shrink-0 items-center gap-1.5">
 					<AdjustmentBadge targetId={item.id} />
 					{isDisabledInSettings ? (
 						<StatusTip

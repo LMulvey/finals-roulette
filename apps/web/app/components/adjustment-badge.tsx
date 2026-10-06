@@ -89,7 +89,10 @@ export const AdjustmentBadge = ({
 				>
 					<span className="flex items-center gap-1">
 						<AdjustmentIcon size={12} type={adjustment.adjustmentType} />
-						{ADJUSTMENT_LABEL[adjustment.adjustmentType]}
+						{/* Icon-only in narrow cards so header controls (e.g. lock) stay visible. */}
+						<span className="@max-2xs:sr-only">
+							{ADJUSTMENT_LABEL[adjustment.adjustmentType]}
+						</span>
 					</span>
 				</TooltipTrigger>
 				<TooltipContent className="w-72 space-y-2 p-3" side="bottom">
