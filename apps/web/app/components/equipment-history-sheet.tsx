@@ -120,7 +120,9 @@ const HistoryPanel = ({ item }: { readonly item: EquipmentItem }) => {
 					</SheetDescription>
 				</div>
 				<div className="flex shrink-0 items-center gap-1.5">
-					<AdjustmentBadge targetId={item.id} />
+					<div className="@container w-10">
+						<AdjustmentBadge targetId={item.id} />
+					</div>
 					<SheetClose
 						aria-label="Close"
 						className="press flex size-8 items-center justify-center rounded-md text-ink-faint transition-colors hover:bg-arena-top hover:text-ink"
