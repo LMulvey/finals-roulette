@@ -91,9 +91,30 @@ const findMostCommonAdjustmentType = (patchNotes: PatchNote[]): PatchNote["adjus
 	);
 };
 
+const RECENT_ADJUSTMENT_WINDOW_DAYS = 21;
+
+const hasPermanentBalanceNote = (patch: Patch) =>
+	patch.patchNotes.some((patchNote) => patchNote.target && !patchNote.temporary);
+
+// Anchored to the newest patch with permanent balance changes rather than today,
+// so badges don't vanish during quiet weeks or limited-time-only patches.
+const getRecentAdjustmentPatches = () => {
+	const balancePatches = ALL_PATCHES.filter(hasPermanentBalanceNote).sort(
+		(a, b) => b.date.getTime() - a.date.getTime(),
+	);
+	const anchorPatch = balancePatches[0];
+
+	if (!anchorPatch) {
+		return [];
+	}
+
+	return balancePatches.filter(
+		(patch) => differenceInCalendarDays(anchorPatch.date, patch.date) < RECENT_ADJUSTMENT_WINDOW_DAYS,
+	);
+};
+
 export const maybeGetRecentAdjustmentForTarget = (target: PatchNoteTarget) => {
-	const recentPatches = getRecentPatches();
-	const sortedPatches = [...recentPatches].sort((a, b) => b.date.getTime() - a.date.getTime());
+	const sortedPatches = getRecentAdjustmentPatches();
 
 	const isPermanentNoteForTarget = (patchNote: PatchNote) => patchNote.target === target && !patchNote.temporary;
 
