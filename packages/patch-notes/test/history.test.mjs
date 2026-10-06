@@ -68,7 +68,7 @@ test("baseline-only stats get a single point; unknown stats are omitted", () => 
 });
 
 test("timeline lists every touching patch newest first, temporary notes included", () => {
-	const { entries, otherChanges } = getItemHistory("gun", PATCHES, baseline({}));
+	const { entries, otherStats } = getItemHistory("gun", PATCHES, baseline({}));
 
 	assert.deepEqual(
 		entries.map((entry) => entry.patch.version),
@@ -76,8 +76,8 @@ test("timeline lists every touching patch newest first, temporary notes included
 	);
 	assert.equal(entries[1].notes.length, 3);
 	assert.deepEqual(
-		otherChanges.map((change) => [change.label, change.from, change.to]),
-		[["Pull distance", 1, 2]],
+		otherStats.map((series) => [series.label, series.unit, series.points.map((point) => point.value)]),
+		[["Pull distance", "m", [1, 2]]],
 	);
 });
 
@@ -144,4 +144,66 @@ test("a baseline that disagrees with the chain adds a 'By' point and wins as cur
 		],
 	);
 	assert.equal(damage.current, 52);
+});
+
+test("total damage multiplies each era's damage by that era's pellet count", () => {
+	const shotgunPatches = [
+		patch("11.2.0", [note("shotty", [{ from: 10, stat: "damage", to: 9 }])]),
+		patch("11.4.0", [note("shotty", [{ from: 11, stat: "pellets", to: 13 }, { from: 9, stat: "damage", to: 8 }])]),
+		patch("11.7.0", [note("shotty", [{ from: 8, stat: "damage", to: 9 }])]),
+	];
+	const { stats } = getItemHistory("shotty", shotgunPatches, baseline({ shotty: { damage: 8, pellets: 13 } }));
+	const total = stats.find((series) => series.stat === "total-damage");
+
+	assert.deepEqual(
+		total.points.map((point) => [point.label, point.value, point.breakdown]),
+		[
+			["Before 11.2.0", 110, { damage: 10, pellets: 11 }],
+			["11.2.0", 99, { damage: 9, pellets: 11 }],
+			["11.4.0", 104, { damage: 8, pellets: 13 }],
+			["11.7.0", 117, { damage: 9, pellets: 13 }],
+		],
+	);
+	assert.equal(total.current, 117);
+	assert.equal(stats[0].stat, "total-damage");
+});
+
+test("snapshot-only pellets apply to every past damage value", () => {
+	const { stats } = getItemHistory(
+		"shotty",
+		[patch("11.2.0", [note("shotty", [{ from: 12, stat: "damage", to: 13 }])])],
+		baseline({ shotty: { damage: 13, pellets: 9 } }),
+	);
+	const total = stats.find((series) => series.stat === "total-damage");
+
+	assert.deepEqual(
+		total.points.map((point) => point.value),
+		[108, 117],
+	);
+});
+
+test("single-projectile weapons get no total damage", () => {
+	const { stats } = getItemHistory("gun", PATCHES, baseline({ gun: { damage: 50 } }));
+	assert.equal(
+		stats.some((series) => series.stat === "total-damage"),
+		false,
+	);
+});
+
+test("validation rejects recorded derived stats and checks full-shot notes", () => {
+	const { errors } = validateStatHistory({
+		baseline: baseline({ shotty: { damage: 9, pellets: 11, "total-damage": 99 } }),
+		knownIds: new Set(["shotty"]),
+		patches: [
+			patch("11.2.0", [
+				note("shotty", [
+					{ from: 10, stat: "damage", to: 9 },
+					{ from: 110, label: "Full shot damage", stat: "other", to: 100 },
+				]),
+			]),
+		],
+	});
+
+	assert.ok(errors.some((error) => error.includes('"total-damage" is derived')));
+	assert.ok(errors.some((error) => error.includes("full shot damage 100 ≠ 9 × 11 pellets (99)")));
 });

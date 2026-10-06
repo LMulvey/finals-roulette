@@ -11,7 +11,8 @@ import {
 	type ItemHistory,
 	type StatSeries,
 } from "@repo/patch-notes/history";
-import { STAT_DEFINITIONS, type StatKey } from "@repo/patch-notes/stats";
+import { STAT_DEFINITIONS } from "@repo/patch-notes/stats";
+import type { StatChange } from "@repo/patch-notes/types";
 import {
 	Sheet,
 	SheetClose,
@@ -149,10 +150,49 @@ const HistoryPanel = ({ item }: { readonly item: EquipmentItem }) => {
 						<div className="space-y-3">
 							{trends.map((series) => (
 								<StatTrendChart
+									current={series.current}
+									direction={(from, to) =>
+										changeDirection(series.stat, from, to)
+									}
 									key={series.stat}
-									notesByVersion={notesForStat(history, series.stat)}
+									label={STAT_DEFINITIONS[series.stat].label}
+									notesByVersion={notesFor(history, (change) =>
+										series.stat === "total-damage"
+											? change.stat === "damage" || change.stat === "pellets"
+											: change.stat === series.stat,
+									)}
 									onSelectVersion={selectVersion}
-									series={series}
+									points={series.points}
+									unit={STAT_DEFINITIONS[series.stat].unit}
+								/>
+							))}
+						</div>
+					</section>
+				) : null}
+
+				{history.otherStats.length ? (
+					<section aria-labelledby="history-other">
+						<h3 className="eyebrow mb-2 not-italic" id="history-other">
+							Other stats{" "}
+							<span className="normal-case tracking-normal text-ink-ghost">
+								· from patch notes only
+							</span>
+						</h3>
+						<div className="space-y-3">
+							{history.otherStats.map((series) => (
+								<StatTrendChart
+									current={series.current}
+									direction={() => null}
+									key={series.label}
+									label={series.label}
+									notesByVersion={notesFor(
+										history,
+										(change) =>
+											change.stat === "other" && change.label === series.label,
+									)}
+									onSelectVersion={selectVersion}
+									points={series.points}
+									unit={series.unit}
 								/>
 							))}
 						</div>
@@ -172,6 +212,7 @@ const StatTile = ({ series }: { readonly series: StatSeries }) => {
 	const first = series.points[0]?.value ?? series.current;
 	const direction = changeDirection(series.stat, first, series.current);
 	const delta = series.current - first;
+	const current = series.points.at(-1);
 
 	return (
 		<div className="notch notch-sm bg-arena-raised px-3 py-2">
@@ -185,6 +226,12 @@ const StatTile = ({ series }: { readonly series: StatSeries }) => {
 					</span>
 				) : null}
 			</dd>
+			{current?.breakdown ? (
+				<dd className="text-xs text-ink-soft tabular-nums">
+					{formatNumber(current.breakdown.damage)} ×{" "}
+					{formatNumber(current.breakdown.pellets)} pellets
+				</dd>
+			) : null}
 			{direction ? (
 				<dd
 					className={cn(
@@ -210,16 +257,15 @@ const StatTile = ({ series }: { readonly series: StatSeries }) => {
 	);
 };
 
-/** Note text per patch for the notes that changed `stat`, for chart tooltips. */
-const notesForStat = (history: ItemHistory, stat: StatKey) =>
+/** Note text per patch for the notes with a matching change, for chart tooltips. */
+const notesFor = (
+	history: ItemHistory,
+	matches: (change: StatChange) => boolean,
+) =>
 	new Map(
 		history.entries.flatMap(({ notes, patch }) => {
 			const text = notes
-				.filter(
-					(note) =>
-						!note.temporary &&
-						note.changes?.some((change) => change.stat === stat),
-				)
+				.filter((note) => !note.temporary && note.changes?.some(matches))
 				.map((note) => note.note)
 				.join(" ");
 			return text ? [[patch.version, text] as const] : [];

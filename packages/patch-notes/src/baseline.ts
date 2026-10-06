@@ -24,8 +24,7 @@ export const STAT_BASELINE: StatBaseline = {
 	asOfVersion: "11.10.0",
 	exceptions: [
 		{ itemId: "breach-drill", reason: "10.9.0 cooldown 20s → 15s; no 10.9.0 patch file in repo", stat: "cooldown", version: "11.10.0" },
-		{ itemId: "cerberus", reason: "Unannounced per-pellet nerf 9 → 8 between 7.0.0 and 11.6.0", stat: "damage", version: "11.6.0" },
-		{ itemId: "cerberus", reason: "11.6.0 notes say from 104; 7.0.0 left it at 99", stat: "other:Full shot damage", version: "11.6.0" },
+		{ itemId: "cerberus", reason: "Full shot rose 99 → 104 in 9.9.0 via pellets 11 → 13 and damage 9 → 8; the note gives no full-shot figure", stat: "other:Full shot damage", version: "11.6.0" },
 		{ itemId: "dagger", reason: "11.0.0 melee rework redefined primary damage as base/precise hits", stat: "damage", version: "11.10.0" },
 		{ itemId: "ks-23", reason: "Wiki shows 78 RPM vs 85 after 6.0.0; change not in repo patch notes", stat: "fire-rate", version: "11.10.0" },
 		{ itemId: "model-1887", reason: "Wiki shows 0.65 vs 0.7 after 5.8.0; change not in repo patch notes", stat: "falloff-multiplier", version: "11.10.0" },
@@ -61,7 +60,7 @@ export const STAT_BASELINE: StatBaseline = {
 		// src: thefinals.wiki/wiki/CB-01_Repeater
 		"cb-01-repeater": { damage: 84, "equip-time": 0.3, "falloff-max-range": 40, "falloff-min-range": 35, "falloff-multiplier": 0.64, "fire-rate": 78, "headshot-multiplier": 1.5, "magazine-size": 8, "reload-time": 4.95 },
 		// src: thefinals.wiki/wiki/Cerberus_12GA — damage per pellet (×13)
-		cerberus: { damage: 9, "equip-time": 0.3, "falloff-max-range": 20, "falloff-min-range": 10, "falloff-multiplier": 0.65, "fire-rate": 100, "magazine-size": 3, "reload-time": 2.85 },
+		cerberus: { damage: 9, "equip-time": 0.3, "falloff-max-range": 20, "falloff-min-range": 10, "falloff-multiplier": 0.65, "fire-rate": 100, "magazine-size": 3, pellets: 13, "reload-time": 2.85 },
 		// src: thefinals.wiki/wiki/Charge_'N'_Slam — damage is the initial hit, radius the ground slam
 		"charge-n-slam": { cooldown: 12, damage: 100, duration: 3, radius: 4 },
 		// src: thefinals.wiki/wiki/Chimera-XB
@@ -139,7 +138,7 @@ export const STAT_BASELINE: StatBaseline = {
 		// src: thefinals.wiki/wiki/M134_Minigun
 		"m134-minigun": { damage: 11, "falloff-max-range": 50, "falloff-min-range": 30, "falloff-multiplier": 0.4, "fire-rate": 1500, "headshot-multiplier": 1.33, "magazine-size": 300, "reload-time": 5.25, "unequip-time": 0.25 },
 		// src: thefinals.wiki/wiki/M26_Matter — damage per pellet (×11)
-		"m26-matter": { damage: 11, "falloff-max-range": 25, "falloff-min-range": 15, "falloff-multiplier": 0.65, "fire-rate": 84, "magazine-size": 8, "reload-time": 2.45 },
+		"m26-matter": { damage: 11, "falloff-max-range": 25, "falloff-min-range": 15, "falloff-multiplier": 0.65, "fire-rate": 84, "magazine-size": 8, pellets: 11, "reload-time": 2.45 },
 		// src: thefinals.wiki/wiki/MGL32 — damage is direct hit
 		m32gl: { damage: 83, "fire-rate": 90, "magazine-size": 6, "reload-time": 3.1 },
 		// src: thefinals.wiki/wiki/M60
@@ -147,7 +146,7 @@ export const STAT_BASELINE: StatBaseline = {
 		// src: packages/roulette contestants
 		"medium-contestant": { health: 250 },
 		// src: thefinals.wiki/wiki/Model_1887 — damage per pellet (×9)
-		"model-1887": { damage: 13, "equip-time": 0.3, "falloff-max-range": 30, "falloff-min-range": 20, "falloff-multiplier": 0.65, "fire-rate": 72, "magazine-size": 7, "reload-time": 4.4, "unequip-time": 0.2 },
+		"model-1887": { damage: 13, "equip-time": 0.3, "falloff-max-range": 30, "falloff-min-range": 20, "falloff-multiplier": 0.65, "fire-rate": 72, "magazine-size": 7, pellets: 9, "reload-time": 4.4, "unequip-time": 0.2 },
 		// src: thefinals.wiki/wiki/P90
 		p90: { damage: 14, "falloff-max-range": 24, "falloff-min-range": 18, "falloff-multiplier": 0.62, "fire-rate": 900, "headshot-multiplier": 1.5, "magazine-size": 50, "reload-time": 2.6 },
 		// src: thefinals.wiki/wiki/Pike-556
@@ -167,11 +166,11 @@ export const STAT_BASELINE: StatBaseline = {
 		// src: thefinals.wiki/wiki/RPG-7 — radius is outer
 		"rpg-7": { charges: 1, cooldown: 45, damage: 110, radius: 5.5 },
 		// src: thefinals.wiki/wiki/SA1216 — damage per pellet (×12); magazine 4×4
-		sa1216: { damage: 6, "equip-time": 0.3, "falloff-max-range": 20, "falloff-min-range": 12.5, "falloff-multiplier": 0.62, "fire-rate": 190, "magazine-size": 16, "reload-time": 3.25, "unequip-time": 0.2 },
+		sa1216: { damage: 6, "equip-time": 0.3, "falloff-max-range": 20, "falloff-min-range": 12.5, "falloff-multiplier": 0.62, "fire-rate": 190, "magazine-size": 16, pellets: 12, "reload-time": 3.25, "unequip-time": 0.2 },
 		// src: thefinals.wiki/wiki/SH1900 — damage per pellet (×15)
-		sh1900: { damage: 12, "equip-time": 0.2, "falloff-max-range": 15, "falloff-min-range": 10, "falloff-multiplier": 0.62, "fire-rate": 80, "magazine-size": 2, "reload-time": 2.6, "unequip-time": 0.2 },
+		sh1900: { damage: 12, "equip-time": 0.2, "falloff-max-range": 15, "falloff-min-range": 10, "falloff-multiplier": 0.62, "fire-rate": 80, "magazine-size": 2, pellets: 15, "reload-time": 2.6, "unequip-time": 0.2 },
 		// src: thefinals.wiki/wiki/ShAK-50 — damage per projectile (×2 per shot)
-		"shak-50": { damage: 15, "equip-time": 0.3, "falloff-max-range": 25, "falloff-min-range": 15, "falloff-multiplier": 0.65, "fire-rate": 420, "headshot-multiplier": 1.5, "magazine-size": 20, "reload-time": 3.2 },
+		"shak-50": { damage: 15, "equip-time": 0.3, "falloff-max-range": 25, "falloff-min-range": 15, "falloff-multiplier": 0.65, "fire-rate": 420, "headshot-multiplier": 1.5, "magazine-size": 20, pellets: 2, "reload-time": 3.2 },
 		// src: thefinals.wiki/wiki/Shockwave — duration is the glitch effect (11.7.0)
 		shockwave: { charges: 2, cooldown: 12, duration: 2 },
 		// src: thefinals.wiki/wiki/Sledgehammer — damage is base (glancing) primary; precise 120

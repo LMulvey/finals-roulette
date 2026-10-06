@@ -1,7 +1,7 @@
 import { type StatBaseline, STAT_BASELINE } from "./baseline";
-import { compareVersions, getStatChangesForItem, type TimedStatChange } from "./history";
+import { compareVersions, getItemHistory, getStatChangesForItem, type TimedStatChange } from "./history";
 import { ALL_PATCHES } from "./patches";
-import { isStatKey } from "./stats";
+import { DERIVED_STAT_KEYS, isStatKey } from "./stats";
 import type { Patch, StatChange } from "./types";
 
 export type StatValidationResult = { errors: string[]; warnings: string[] };
@@ -20,6 +20,7 @@ const chainKey = (change: StatChange) => (change.stat === "other" ? `other:${cha
  * Checks the structured stat data a patch-note scrape produces:
  * - every `from` continues the previous `to` for the same item+stat (baseline included as a point at `asOfVersion`);
  * - targets, baseline items and stat keys are all known;
+ * - derived stats (total damage) are never recorded, and "Full shot damage" notes agree with damage × pellets;
  * - numeric "from X to Y" text without matching `changes` is reported as a warning.
  */
 export const validateStatHistory = ({
@@ -48,6 +49,9 @@ export const validateStatHistory = ({
 				if (change.stat === "other" ? !change.label : !isStatKey(change.stat)) {
 					errors.push(`${patch.version} ${note.target}: invalid stat "${change.stat}"`);
 				}
+				if (change.stat !== "other" && DERIVED_STAT_KEYS.includes(change.stat)) {
+					errors.push(`${patch.version} ${note.target}: "${change.stat}" is derived and can't be recorded`);
+				}
 			}
 
 			if (!note.target || note.target === "general" || !known(note.target)) continue;
@@ -66,6 +70,7 @@ export const validateStatHistory = ({
 		if (!known(itemId)) errors.push(`baseline: unknown item "${itemId}"`);
 		for (const stat of Object.keys(values)) {
 			if (!isStatKey(stat)) errors.push(`baseline ${itemId}: invalid stat "${stat}"`);
+			else if (DERIVED_STAT_KEYS.includes(stat)) errors.push(`baseline ${itemId}: "${stat}" is derived`);
 		}
 	}
 
@@ -113,6 +118,24 @@ export const validateStatHistory = ({
 						`${itemId} ${stat}: last change (${previous.where}) ends at ${previous.value} but baseline ${baseline.asOfVersion} is ${baselineValue}`,
 					);
 				}
+			}
+		}
+	}
+
+	// Patch notes sometimes state full-shot damage alongside per-pellet damage; both must agree with the pellet count.
+	for (const itemId of itemIds) {
+		const totals = getItemHistory(itemId, patches, baseline).stats.find((series) => series.stat === "total-damage");
+		for (const { change, patch } of getStatChangesForItem(itemId, patches)) {
+			if (change.stat !== "other" || change.label !== "Full shot damage") continue;
+			const total = [...(totals?.points ?? [])]
+				.reverse()
+				.find((point) => point.date && point.version === patch.version);
+			if (!total) {
+				errors.push(`${itemId} ${patch.version}: full shot damage recorded but no damage × pellets to check it against`);
+			} else if (!sameValue(total.value, change.to)) {
+				errors.push(
+					`${itemId} ${patch.version}: full shot damage ${change.to} ≠ ${total.breakdown?.damage} × ${total.breakdown?.pellets} pellets (${total.value})`,
+				);
 			}
 		}
 	}

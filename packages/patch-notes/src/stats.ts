@@ -20,9 +20,12 @@ export const STAT_DEFINITIONS = {
 	"headshot-multiplier": { label: "Headshot mult.", lowerIsBetter: false, unit: "×" },
 	health: { label: "Health", lowerIsBetter: false, unit: "HP" },
 	"magazine-size": { label: "Magazine", lowerIsBetter: false, unit: "" },
+	pellets: { label: "Pellets", lowerIsBetter: false, unit: "" },
 	radius: { label: "Radius", lowerIsBetter: false, unit: "m" },
 	range: { label: "Range", lowerIsBetter: false, unit: "m" },
 	"reload-time": { label: "Reload", lowerIsBetter: true, unit: "s" },
+	/** Derived: damage × pellets at each patch. Never recorded in `changes` or the baseline. */
+	"total-damage": { label: "Total damage", lowerIsBetter: false, unit: "" },
 	"unequip-time": { label: "Unequip time", lowerIsBetter: true, unit: "s" },
 } as const satisfies Record<string, StatDefinition>;
 
@@ -31,7 +34,9 @@ export type StatKey = keyof typeof STAT_DEFINITIONS;
 /** Display order: headline stats first, handling and utility after. */
 export const STAT_DISPLAY_ORDER: StatKey[] = [
 	"health",
+	"total-damage",
 	"damage",
+	"pellets",
 	"fire-rate",
 	"headshot-multiplier",
 	"magazine-size",
@@ -48,5 +53,8 @@ export const STAT_DISPLAY_ORDER: StatKey[] = [
 	"equip-time",
 	"unequip-time",
 ];
+
+/** Computed from other stats; scrapes and the baseline must not record these. */
+export const DERIVED_STAT_KEYS: readonly StatKey[] = ["total-damage"];
 
 export const isStatKey = (value: string): value is StatKey => Object.hasOwn(STAT_DEFINITIONS, value);

@@ -25,6 +25,12 @@ export const patch990: Patch = {
     {
       adjustmentType: 'buff',
       category: 'weapons',
+      // Numbers aren't stated here; they follow from the notes' own figures. 7.0.0 left it at
+      // 9 per pellet × 11 pellets (full shot 99); 11.6.0 starts from 8 per pellet, full shot 104 → 13 pellets.
+      changes: [
+        { from: 11, stat: 'pellets', to: 13 },
+        { from: 9, stat: 'damage', to: 8 },
+      ],
       note: 'Increased pellet count and overall per-shot potential while normalizing spread consistency.',
       section: 'balance',
       target: 'cerberus',

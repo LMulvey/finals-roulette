@@ -1,8 +1,7 @@
 "use client";
 
 import { ArrowFatDownIcon, ArrowFatUpIcon } from "@phosphor-icons/react";
-import type { StatSeries } from "@repo/patch-notes/history";
-import { STAT_DEFINITIONS } from "@repo/patch-notes/stats";
+import type { StatPoint } from "@repo/patch-notes/history";
 import {
 	CartesianGrid,
 	Line,
@@ -14,13 +13,13 @@ import {
 } from "recharts";
 import { cn } from "@/lib/cvu";
 import {
-	changeDirection,
 	formatNumber,
 	formatPatchDate,
 	formatStatValue,
 } from "@/lib/stat-format";
 
 type ChartPoint = {
+	breakdown: StatPoint["breakdown"];
 	date: Date | null;
 	direction: "buff" | "nerf" | null;
 	key: string;
@@ -41,25 +40,31 @@ const DIRECTION_COLOR = {
  * Points are evenly spaced per patch, not by date. Clicking a patch point jumps to its timeline entry.
  */
 const StatTrendChart = ({
+	current,
+	direction,
+	label,
 	notesByVersion,
 	onSelectVersion,
-	series,
+	points,
+	unit = "",
 }: {
+	readonly current: number;
+	/** Buff/nerf colouring for a step; free-text stats have no known direction and return null. */
+	readonly direction: (from: number, to: number) => "buff" | "nerf" | null;
+	readonly label: string;
 	/** Note text for each patch that changed this stat, keyed by version. */
 	readonly notesByVersion: ReadonlyMap<string, string>;
 	readonly onSelectVersion: (version: string) => void;
-	readonly series: StatSeries;
+	readonly points: StatPoint[];
+	readonly unit?: string;
 }) => {
-	const { label, unit } = STAT_DEFINITIONS[series.stat];
-
-	const data: ChartPoint[] = series.points.map((point, index) => {
-		const previous = series.points[index - 1]?.value;
+	const data: ChartPoint[] = points.map((point, index) => {
+		const previous = points[index - 1]?.value;
 		return {
+			breakdown: point.breakdown,
 			date: point.date,
 			direction:
-				previous === undefined
-					? null
-					: changeDirection(series.stat, previous, point.value),
+				previous === undefined ? null : direction(previous, point.value),
 			key: `${index}`,
 			label: point.label,
 			note: point.date ? notesByVersion.get(point.version) : undefined,
@@ -78,7 +83,7 @@ const StatTrendChart = ({
 			<figcaption className="flex items-baseline justify-between gap-2">
 				<span className="text-xs text-ink-faint">{label}</span>
 				<span className="text-xs font-semibold text-ink tabular-nums">
-					{formatStatValue(series.current, unit)}
+					{formatStatValue(current, unit)}
 				</span>
 			</figcaption>
 			<div className="h-24">
@@ -123,7 +128,7 @@ const StatTrendChart = ({
 							tickCount={3}
 							tickFormatter={(value: number) => formatNumber(value)}
 							tickLine={false}
-							width={32}
+							width={40}
 						/>
 						<Tooltip
 							content={({ active, payload }) =>
@@ -220,6 +225,12 @@ const TrendTooltip = ({
 					</span>
 				) : null}
 			</p>
+			{point.breakdown ? (
+				<p className="mt-0.5 text-xs text-ink-soft tabular-nums">
+					{formatNumber(point.breakdown.damage)} ×{" "}
+					{formatNumber(point.breakdown.pellets)} pellets
+				</p>
+			) : null}
 			<p className="mt-1 text-xs text-ink-faint">
 				{point.label}
 				{point.date ? ` · ${formatPatchDate(point.date)}` : null}
