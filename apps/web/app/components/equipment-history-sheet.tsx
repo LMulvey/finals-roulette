@@ -62,7 +62,15 @@ export const EquipmentHistorySheet = ({
 	return (
 		<Sheet onOpenChange={setOpen} open={open}>
 			<SheetTrigger asChild>{children}</SheetTrigger>
-			<SheetContent aria-describedby={undefined}>
+			<SheetContent
+				aria-describedby={undefined}
+				className="outline-none"
+				// Focus the panel, not its first control — that's the adjustment badge, whose tooltip opens on focus.
+				onOpenAutoFocus={(event) => {
+					event.preventDefault();
+					(event.currentTarget as HTMLElement | null)?.focus();
+				}}
+			>
 				{open ? <HistoryPanel item={item} /> : null}
 			</SheetContent>
 		</Sheet>
@@ -104,7 +112,7 @@ const HistoryPanel = ({ item }: { readonly item: EquipmentItem }) => {
 				</span>
 				<div className="min-w-0 grow">
 					<p className="eyebrow">Patch history</p>
-					<SheetTitle className="truncate font-heading text-3xl leading-none font-extrabold uppercase italic">
+					<SheetTitle className="line-clamp-2 font-heading text-2xl leading-none font-extrabold text-balance break-words uppercase italic md:text-3xl">
 						{item.label}
 					</SheetTitle>
 					<SheetDescription className="mt-1 flex items-center gap-2 text-xs text-ink-faint">

@@ -228,11 +228,12 @@ export const SlotCard = ({
 				<p className="text-xs font-semibold uppercase tracking-wider text-ink-faint">
 					{getEquipmentMeta(item)}
 				</p>
+				{/* Shared size and a reserved two-line box keep every card's text on the same rows, whatever the card width or title length. */}
 				<h3
-					className="text-[clamp(1.5rem,12.5cqi,2.5rem)] leading-none"
+					className="h-[2lh] text-[2.25rem] leading-none lg:text-[1.75rem]"
 					key={item.id}
 				>
-					<span className="inline-block animate-reel">{item.label}</span>
+					<span className="line-clamp-2 animate-reel">{item.label}</span>
 				</h3>
 				{showDescription ? (
 					<p className="mt-2 line-clamp-3 h-[3lh] max-w-[38ch] text-sm leading-snug text-ink-soft">
