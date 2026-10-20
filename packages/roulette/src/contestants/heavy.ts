@@ -2,7 +2,7 @@ import type { ContestantClass, ContestantSpecialization, ContestantWeapon } from
 
 export const heavyClass: ContestantClass = {
 	description: "Durable powerhouse specializing in area control and high damage output.",
-	healthPoints: 350,
+	healthPoints: 325,
 	id: "heavy-contestant",
 	imageUrl: "/images/contestants/heavy.png",
 	label: "Heavy",

@@ -6,6 +6,7 @@ import { ALL_SEASON_EIGHT_PATCHES } from "./season-8";
 import { ALL_SEASON_NINE_PATCHES } from "./season-9";
 import { ALL_SEASON_TEN_PATCHES } from "./season-10";
 import { ALL_SEASON_ELEVEN_PATCHES } from "./season-11";
+import { ALL_SEASON_TWELVE_PATCHES } from "./season-12";
 import type { Patch, PatchNote, PatchNoteTarget } from "./types";
 
 type Season =
@@ -15,9 +16,11 @@ type Season =
 	| "seasonNine"
 	| "seasonSeven"
 	| "seasonSix"
-	| "seasonTen";
+	| "seasonTen"
+	| "seasonTwelve";
 
 export const ALL_PATCHES: Patch[] = [
+	...ALL_SEASON_TWELVE_PATCHES,
 	...ALL_SEASON_ELEVEN_PATCHES,
 	...ALL_SEASON_TEN_PATCHES,
 	...ALL_SEASON_NINE_PATCHES,
@@ -35,6 +38,7 @@ export const PATCHES_BY_SEASON: Record<Season, Patch[]> = {
 	seasonSeven: ALL_SEASON_SEVEN_PATCHES,
 	seasonSix: ALL_SEASON_SIX_PATCHES,
 	seasonTen: ALL_SEASON_TEN_PATCHES,
+	seasonTwelve: ALL_SEASON_TWELVE_PATCHES,
 };
 
 export const getPatchByVersion = (flatVersion: string) => {

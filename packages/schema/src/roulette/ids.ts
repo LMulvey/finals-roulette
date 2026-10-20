@@ -23,6 +23,7 @@ export type GadgetId =
 	| "hover-pad"
 	| "jump-pad"
 	| "lockbolt-launcher"
+	| "mimic-device"
 	| "proximity-sensor"
 	| "pyro-grenade"
 	| "pyro-mine"
@@ -33,6 +34,7 @@ export type GadgetId =
 	| "thermal-bore"
 	| "thermal-vision"
 	| "tracking-dart"
+	| "translocator"
 	| "vanishing-bomb"
 	| "zipline";
 
@@ -47,6 +49,7 @@ export type SpecializationId =
 	| "healing-beam"
 	| "mesh-shield"
 	| "shockwave"
+	| "true-sight"
 	| "winch-claw";
 
 export type WeaponId =

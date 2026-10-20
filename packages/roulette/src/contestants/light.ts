@@ -2,11 +2,11 @@ import type { ContestantClass, ContestantSpecialization, ContestantWeapon } from
 
 export const lightClass: ContestantClass = {
 	description: "Fast and agile contestant specializing in mobility, stealth, and being an annoying little sh*t.",
-	healthPoints: 150,
+	healthPoints: 175,
 	id: "light-contestant",
 	imageUrl: "/images/contestants/light.png",
 	label: "Light",
-	regenerationSeconds: 7,
+	regenerationSeconds: 8,
 	type: "light",
 };
 
@@ -142,5 +142,13 @@ export const lightSpecializations: ContestantSpecialization[] = [
 		id: "grappling-hook",
 		imageUrl: "/images/specializations/grappling-hook.webp",
 		label: "Grappling Hook",
+	},
+	{
+		classType: "light",
+		description:
+			"Reveals opponents through smoke, cloaks and disguises. Thermal Vision's glow-up, and the Infiltrator's worst nightmare.",
+		id: "true-sight",
+		imageUrl: "/images/specializations/true-sight.webp",
+		label: "True Sight",
 	},
 ];

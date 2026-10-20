@@ -15,7 +15,8 @@
 		"charge-n-slam",
 		"goo-gun",
 		"mesh-shield",
-		"winch-claw"
+		"winch-claw",
+		"true-sight"
 	],
 	"WEAPON_CODES": [
 		"93r",
@@ -93,6 +94,8 @@
 		"smoke-grenade",
 		"h-plus-infuser",
 		"healing-emitter",
-		"breach-drill"
+		"breach-drill",
+		"mimic-device",
+		"translocator"
 	]
 }

@@ -31,6 +31,13 @@ export const ALL_GADGETS: ContestantGadget[] = [
 	},
 	{
 		classType: ["light"],
+		description: "Scan any object in the Arena and disguise yourself as it. Yes, that suspiciously sprinting barrel is a Light.",
+		id: "mimic-device",
+		imageUrl: "/images/gadgets/mimic-device.webp",
+		label: "Mimic Device",
+	},
+	{
+		classType: ["light", "medium"],
 		description: "A grenade that pings every few seconds and detects/marks enemy contestants.",
 		id: "sonar-grenade",
 		imageUrl: "/images/gadgets/sonar-grenade.webp",
@@ -49,6 +56,13 @@ export const ALL_GADGETS: ContestantGadget[] = [
 		id: "thermal-bore",
 		imageUrl: "/images/gadgets/thermal-bore.webp",
 		label: "Thermal Bore",
+	},
+	{
+		classType: ["light"],
+		description: "Mark an object nearby, then swap places with it on demand. Now you see me, now I'm behind you.",
+		id: "translocator",
+		imageUrl: "/images/gadgets/translocator.webp",
+		label: "Translocator",
 	},
 	{
 		classType: ["light"],

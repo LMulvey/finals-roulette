@@ -31,6 +31,7 @@ export const SPECIALIZATION_CODES: ReadonlyArray<null | SpecializationId> = [
 	"goo-gun",
 	"mesh-shield",
 	"winch-claw",
+	"true-sight",
 ];
 
 export const WEAPON_CODES: ReadonlyArray<null | WeaponId> = [
@@ -111,4 +112,6 @@ export const GADGET_CODES: ReadonlyArray<GadgetId | null> = [
 	"h-plus-infuser",
 	"healing-emitter",
 	"breach-drill",
+	"mimic-device",
+	"translocator",
 ];
